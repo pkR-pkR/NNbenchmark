@@ -1,0 +1,46 @@
+= Package NNbenchmark =
+- Akshaj Verma, Salabila Mahdi, Patrice Kiener
+- Christophe Dutang, John Nash
+
+
+
+NNbenchmark 1.5 - 2019-06-30
+============================
+- ht(..., l = 3)
+- ht9()
+- NNdatasets
+- prepareZZ(..., scale =) replaces prepareZZ(..., normalize) as 'scale' is the usual word
+- for (mean, standard deviation) adjustment in R. 
+- prepareZZ() now returns the formula y ~ x or y ~ x1 + ... + xn for any number of columns
+
+NNbenchmark 1.4.1 - 2019-06-24
+==============================
+- Function plotNN(, TF) + lipoNN(, TF) replaces if (TRUE/FALSE) plot
+- Examples prepareZZ() rewritten accordingly
+
+NNbenchmark 1.4 - 2019-06-23
+============================
+- Function plotNN() + lipoNN()
+- Examples prepareZZ() rewritten accordingly
+
+NNbenchmark 1.3 - 2019-06-23
+============================
+- Function prepareZZ()
+- timeR: add a column RMSE 
+
+NNbenchmark 1.2 - 2019-06-22
+============================
+- Function prepareZ()
+- DESCRIPTION Suggests: brnn, validann
+
+NNbenchmark 1.1 - 2019-06-17
+============================
+- Functions and classes timeR
+
+NNbenchmark 1.0 - 2019-06-13
+============================
+- Functions cc() and ht()
+- Datasets are now uNNdatasets.rda and mNNdatasets.rda 'dataNNbenchmark'
+- LazyData: true' in DESCRIPTION file
+
+

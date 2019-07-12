@@ -1,0 +1,16 @@
+Package: NNbenchmark
+Title: A Package to Benchmark Neural Network Packages
+Description: Datasets and functions to benchmark neural network functions and training algorithms (convergence, speed, ease of use) in 69 R packages.
+Imports: R6
+Suggests: brnn, validann
+Version: 1.5
+Date: 2019-06-30
+License: GPL-2
+Maintainer: Patrice Kiener <fattailsr@inmodelia.com>
+Author: Salsabila Mahdi [aut, ctb],
+  Akshaj Verma [aut, ctb],
+  Patrice Kiener [aut, cre]
+Encoding: UTF-8
+NeedsCompilation: no
+LazyData: true
+RoxygenNote: 6.1.1
