@@ -12,9 +12,11 @@
 #' plot(uGauss2)
 #' pairs(mIshigami)
 #' ht(NNdatasets, n = 2, l = 6)
+#' @import      R6
 #' @import      graphics
 #' @import      utils
 #' @importFrom  stats  sd  formula
+#' @importFrom  pkgload  unload
 #' @aliases NNbenchmark
 #' @name    NNbenchmark-package
 #' @docType package

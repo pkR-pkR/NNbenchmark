@@ -6,6 +6,10 @@
 #' A R6 Class to represent a timer.
 #'
 #' timer is a R6 Class that represent a timer.
+#' 
+#' \code{getTimer} returns a data frame with all records saved by the timer 
+#' object. Columns in the data.frame are: event, start, end, duration, RMSE, 
+#' MAE, stars, params, comment.
 #'
 #' @docType class
 #' @field time A POSIXct/POSIXlt value of your latest timing.
@@ -31,10 +35,16 @@
 #'   }{Get start time for a selected event.}
 #'   \item{\code{getStopTime()}
 #'   }{Get stop time for a selected event.}
-#'   \item{\code{getTimeElapsed()}
-#'   }{Get time elapsed for a selected event.}
+#'   \item{\code{getDuration()}
+#'   }{Get duration for a selected event.}
 #'   \item{\code{getRMSE()}
 #'   }{Get the RMSE for a selected event.}
+#'   \item{\code{getMAE()}
+#'   }{Get the MAE for a selected event.}
+#'   \item{\code{getStars()}
+#'   }{Get stars for a selected event.}
+#'   \item{\code{getParams()}
+#'   }{Get params for a selected event.}
 #'   \item{\code{getComment()}
 #'   }{Get comment for a selected event.}
 #'   \item{\code{getEventf()}
@@ -46,18 +56,24 @@
 #'   }
 #' @section Private Methods:
 #' \describe{
-#' \item{\code{slprint(msg,flag = self$verbose)}
+#' \item{\code{slprint(msg, flag = self$verbose)}
 #' }{A function that controls whether to print extra message.}
 #' }
 #' @examples
 #' timer <- createTimer()
 #' timer$start("event1")
-#' # put some codes in between
-#' timer$stop("event1")
+#' # put some codes in between, for instance
+#' Sys.sleep(1)
+#' timer$stop("event1", RMSE = 1, MAE = 1.3, stars = "*", 
+#'            params = "maxiter=100, lr=0.01", comment = "OK for 1",  
+#'            printmsg = TRUE)
 #'
 #' timer$start("event2")
-#' # put some codes in between
-#' timer$stop("event2",comment = "event 2 completed")
+#' # put some codes in between, for instance
+#' Sys.sleep(2)
+#' timer$stop("event2", RMSE = 2, MAE = 2.6, stars = "**",  
+#'            params = "maxiter=1000, lr=0.001", comment = "OK for 2",  
+#'            printmsg = FALSE)
 #'
 #' table1 <- getTimer(timer)
 #' timer$toggleVerbose() # set verbose to FALSE as default is TRUE
@@ -67,7 +83,7 @@
 #' # get attributes for selected events
 #' timer$getStartTime("event1")
 #' timer$getStopTime("event1")
-#' timer$getTimeElapsed("event1")
+#' timer$getDuration("event1")
 #' timer$getComment("event1")
 #' timer$getEvent("event1")
 #' @importFrom R6 R6Class
@@ -80,10 +96,13 @@ timeR <- R6::R6Class(
             event = character(),
             start = character(),
             end = character(),
-            timeElapsed = numeric(),
-            stringsAsFactors = FALSE,
+            duration = numeric(),
             RMSE = numeric(),
-            comment = character()
+            MAE  = numeric(),
+            stars = character(),
+            params = character(),
+            comment = character(),
+            stringsAsFactors = FALSE
             ),
         verbose = logical(),
         #initialize timeR
@@ -104,9 +123,12 @@ timeR <- R6::R6Class(
             newRow <- data.frame(event = eventName,
                                  start = current_time,
                                  end = character(1),
-                                 timeElapsed = numeric(1),
+                                 duration = numeric(1),
                                  stringsAsFactors = FALSE,
                                  RMSE = NA_real_,
+                                 MAE  = NA_real_,
+                                 stars = NA_character_,
+                                 params = NA_character_,
                                  comment = NA_character_
                                  )
             #detect ifevent already exist
@@ -126,47 +148,53 @@ timeR <- R6::R6Class(
             invisible(self)
         },
         #stop timeR
-        stop = function(eventName, RMSE=NA_real_, comment=NA_character_){
+        stop = function(eventName, RMSE = NA_real_, MAE = NA_real_, stars = NA_character_, 
+                        params = NA_character_, comment = NA_character_, printmsg = TRUE){
             theTable <- self$eventTable
-            verbose <- self$verbose
+            verbose  <- self$verbose
             current_time <- format(Sys.time(), "%H:%M:%OS")
             # current_time <- as.character(lubridate::now())
             #detect if event already exists
             if (any(theTable$event %in% eventName)){
                 #detect if end time for event already exist
-                end_exist <- !is.na(as.character(
-                    theTable[theTable$event ==eventName,][["end"]]))
-                if (end_exist){
-                    out_msg <- paste0("Event: '",eventName,
-                                      "' already has a record.",
-                                      " Overwriting previous one.\n")
-                    private$slprint(out_msg)
-                }
+                # end_exist <- !is.na(as.character(
+                    # theTable[theTable$event ==eventName,][["end"]]))
+                # if (end_exist){
+                    # out_msg <- paste0("Event: '",eventName,
+                                      # "' already has a record.",
+                                      # " Overwriting previous one.\n")
+                    # private$slprint(out_msg)
+                # }
                 #modify the end anyway
                 isEventRow <- theTable$event == eventName
                 startTime <- self$eventTable[isEventRow, ][["start"]]
-                timeElapsed <- difftime(
+                duration <- round(as.numeric(difftime(
                     strptime(current_time, format = "%H:%M:%OS"),
                     strptime(startTime, format = "%H:%M:%OS"),
                     units = "secs"
-                    )
-                # timeElapsed <- difftime(
+                    )), 3)
+                # duration <- difftime(
                     # lubridate::ymd_hms(current_time,tz = Sys.timezone()),
                     # lubridate::ymd_hms(startTime,tz = Sys.timezone()),
                     # units = "secs"
                     # )
                 self$eventTable[isEventRow, ][["end"]] <- current_time
-                self$eventTable[isEventRow, ][["timeElapsed"]] <- timeElapsed
+                self$eventTable[isEventRow, ][["duration"]] <- duration
                 self$eventTable[isEventRow, ][["RMSE"]] <- RMSE
+                self$eventTable[isEventRow, ][["MAE"]]  <- MAE
+                self$eventTable[isEventRow, ][["stars"]] <- stars
+                self$eventTable[isEventRow, ][["params"]] <- params
                 self$eventTable[isEventRow, ][["comment"]] <- comment
             } else {
                 stop("Event: '",eventName,"'",
                      " doesn't exist. Record won't be created.\n")
             }
-            out_msg <- paste0("For event: '",eventName,
-                              "', ",round(timeElapsed,2),
-                              " seconds elapsed.\n")
-            private$slprint(out_msg)
+            if (printmsg) {
+                out_msg <- paste0("For event: '", eventName,
+                                  "', ", duration,
+                                  " seconds elapsed.\n")
+                private$slprint(out_msg)
+            }
             invisible(self)
         },
         getTimer = function(...){
@@ -207,12 +235,12 @@ timeR <- R6::R6Class(
             result <- self$eventTable[rowIndex,"stop"]
             return(result)
         },
-        getTimeElapsed = function(eventName){
+        getDuration = function(eventName){
             rowIndex <- which(eventName == self$eventTable$event)
             if (length(rowIndex) == 0) {
                 stop("event doesn't exist.")
             }
-            result <- self$eventTable[rowIndex,"timeElapsed"]
+            result <- self$eventTable[rowIndex,"duration"]
             return(result)
         },
         getRMSE = function(eventName){
@@ -221,6 +249,30 @@ timeR <- R6::R6Class(
                 stop("event doesn't exist.")
             }
             result <- self$eventTable[rowIndex,"RMSE"]
+            return(result)
+        },
+        getMAE = function(eventName){
+            rowIndex <- which(eventName == self$eventTable$event)
+            if (length(rowIndex) == 0) {
+                stop("event doesn't exist.")
+            }
+            result <- self$eventTable[rowIndex,"MAE"]
+            return(result)
+        },
+        getStars = function(eventName){
+            rowIndex <- which(eventName == self$eventTable$event)
+            if (length(rowIndex) == 0) {
+                stop("event doesn't exist.")
+            }
+            result <- self$eventTable[rowIndex,"stars"]
+            return(result)
+        },
+        getParams = function(eventName){
+            rowIndex <- which(eventName == self$eventTable$event)
+            if (length(rowIndex) == 0) {
+                stop("event doesn't exist.")
+            }
+            result <- self$eventTable[rowIndex,"params"]
             return(result)
         },
         getComment = function(eventName){

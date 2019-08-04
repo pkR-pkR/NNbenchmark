@@ -7,6 +7,7 @@
 #' data.frame, matrix or vector (numeric), pre-normalization. The output is a list with
 #' the following items:
 #' \itemize{
+#' \item{Zxy: the original or scaled Z in the desired format (data.frame, matrix).}
 #' \item{x: the original or scaled x in the desired format (data.frame, matrix, vector).}
 #' \item{y: the original or scaled y in the desired format (data.frame, matrix, vector).}
 #' \item{xory: the original x or y (as vector).}
@@ -16,7 +17,7 @@
 #' \item{xsd0: the standard deviation(s) of the original x.}
 #' \item{ysd0: the standard deviation of the original y.}
 #' \item{uni: the univariate (TRUE) or multivariate (FALSE) status of x (Z).}
-#' \item{fmla: the formula \code{y ~ x} or \code{y ~ x1 + x2 + .. + xn} where n is the 
+#' \item{fmla: the formula \code{y ~ x} or \code{y ~ x1 + x2 + .. + xn} where n is the 
 #'       number of inputs variables.}
 #' }
 #' The use of \code{attach()} and \code{detach()} gives direct access to the modified 
@@ -27,7 +28,10 @@
 #'                 data.frame, matrix, vector (numeric).
 #' @param  ydmv    character, either "d", "m" or "v". The prefered output format for y: 
 #'                 data.frame, matrix, vector (numeric).
-#' @param  scale   logical. scale x and y with their respective means and standard deviations.
+#' @param  zdm     character, either "d" or "m". The prefered output format for Zxy: 
+#'                 data.frame or matrix.
+#' @param  scale   logical. Scale x, y and Zxy with their respective means and standard  
+#'                 deviations.
 #' 
 #' @examples
 #' library("brnn")
@@ -127,14 +131,14 @@
 #' 
 #' @export
 #' @name prepareZZ
-prepareZZ <- function(Z, xdmv = "m", ydmv = "v", scale = FALSE) {
+prepareZZ <- function(Z, xdmv = "m", ydmv = "v", zdm = "d", scale = FALSE) {
     if (any(c(is.null(dimnames(Z)), lengths(dimnames(Z)) == 0))) { 
         stop("Z must have dimnames.")
     }
-    ncZ  <- ncol(Z) 
-    uni  <- (ncol(Z) == 2)
+    ncZ   <- ncol(Z) 
+    uni   <- (ncol(Z) == 2)
     if (ncZ < 2) stop("Z must have at least 2 columns with y in the last column.")
-    cn   <- colnames(Z)
+    cn    <- colnames(Z)
     if (cn[ncZ] != "y") stop('Last column must be "y".')
     ftxt  <- paste("y ~", paste(cn[!grepl("y", cn)], collapse = " + "))
     fmla  <- stats::formula(ftxt)
@@ -149,20 +153,25 @@ prepareZZ <- function(Z, xdmv = "m", ydmv = "v", scale = FALSE) {
     ym0   <- if (scale) MEAN[ ncZ] else 0
     xsd0  <- if (scale) SD[-ncZ]   else rep(1, ncZ-1)
     ysd0  <- if (scale) SD[ ncZ]   else 1
-    Z     <- if (scale) as.data.frame(scale(Z)) else as.data.frame(Z)
+    Zd    <- if (scale) as.data.frame(scale(Z)) else as.data.frame(Z)
+    Zxy   <- switch(zdm, 
+                "d" = Zd,
+                "m" = as.matrix(Zd),
+                stop('zdm must be either "d" or "m".')
+                ) 
     x <- switch(xdmv, 
-                "d" = Z[, -ncZ, drop = FALSE],
-                "m" = as.matrix( Z[, -ncZ, drop = FALSE]),
-                "v" = as.numeric(Z[, -ncZ, drop = TRUE]),
+                "d" = Zd[, -ncZ, drop = FALSE],
+                "m" = as.matrix( Zd[, -ncZ, drop = FALSE]),
+                "v" = as.numeric(Zd[, -ncZ, drop = TRUE]),
                 stop('xdmv must be either "d", "m" or "v".')
                 ) 
     y <- switch(ydmv, 
-                "d" = Z[, ncZ, drop = FALSE],
-                "m" = as.matrix( Z[, ncZ, drop = FALSE]),
-                "v" = as.numeric(Z[, ncZ, drop = TRUE]),
+                "d" = Zd[, ncZ, drop = FALSE],
+                "m" = as.matrix( Zd[, ncZ, drop = FALSE]),
+                "v" = as.numeric(Zd[, ncZ, drop = TRUE]),
                 stop('ydmv must be either "d", "m" or "v".')
                 )
-    list(x = x, y = y, xory = xory, y0 = y0, 
+    list(Zxy = Zxy, x = x, y = y, xory = xory, y0 = y0, 
          xm0 = xm0, ym0 = ym0, xsd0 = xsd0, ysd0 = ysd0, uni = uni,
          fmla = fmla)
 }

@@ -3,6 +3,55 @@
 - Christophe Dutang, John Nash
 
 
+NNbenchmark 2.0 - 2019-08-04
+============================
+- column 'params' added to the timer table. Columns in the data.frame are:
+- timer$stop(event, start, end, duration, RMSE, MAE, stars, params, comment)
+
+NNbenchmark 1.9 - 2019-08-03
+============================
+- New disk
+- timer$stop(event, RMSE, MAE, stars, comment, printmsg) column 'stars' added to the table
+
+NNbenchmark 1.8.6 - 2019-07-31
+==============================
+- timer$stop(printmsg = TRUE) Use printmsg = FALSE to avoid printing
+
+NNbenchmark 1.8.2 - 2019-07-30
+==============================
+- clearNN(): ZZ is (now) detached from the environments
+- clearNN(): donotdetach now indludes packages rmarkdown, knitr and captioner
+- timer$stop suppress the message on the time elapsed
+
+NNbenchmark 1.8.1 - 2019-07-29
+==============================
+- add2csv(): create a new entry in the documentation different than clearNN (minor bug)
+
+NNbenchmark 1.8 - 2019-07-28
+============================
+- NNdatasets now includes for each dataset the corresponding fmlaNN and nparNN
+- prepareZZ(Zsm = ...) adds has a new item to the final list:
+- Zxy is a scaled or not scaled data.frame or matrix, depending the zmd and scale parameters
+
+NNbenchmark 1.7.2 - 2019-07-25
+==============================
+- DESCRIPTION Imports: pkgload
+- clearNN() => uses pkgload::unload() to unload poperly S4 classes and dll
+
+NNbenchmark 1.7.1 - 2019-07-25
+==============================
+- clearNN() => "tools:rstudio" added to the default packages (NULL) not be detached
+
+NNbenchmark 1.7 - 2019-07-23
+============================
+- add2csv()
+- funRMSE(), funMAE()
+- MAE (Mean absolute Error) added to timer_class and data.frame
+- clearNN() => tryCatch(...) added
+
+NNbenchmark 1.6 - 2019-07-21
+============================
+- clearNN()
 
 NNbenchmark 1.5 - 2019-06-30
 ============================
