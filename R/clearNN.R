@@ -1,4 +1,4 @@
-## clearNN
+## clearNN 2019-08-04
 
 
 #' @title Clean the .GlobalEnv and Detach the Loaded Packages

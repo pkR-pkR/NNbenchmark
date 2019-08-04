@@ -1,4 +1,4 @@
-## funRMSe, funMAE
+## funRMSe, funMAE 2019-08-04
 
 
 #' @title Calculate the RMSE and MAE, Round to 4 digits 

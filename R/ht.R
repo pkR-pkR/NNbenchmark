@@ -1,4 +1,4 @@
-## ht
+## ht 2019-08-04
 
 
 #' @title Concatenates head() and tail() in vector, list, matrix, data.frame
