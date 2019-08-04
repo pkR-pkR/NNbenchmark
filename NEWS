@@ -7,6 +7,7 @@ NNbenchmark 2.0 - 2019-08-04
 ============================
 - column 'params' added to the timer table. Columns in the data.frame are:
 - timer$stop(event, start, end, duration, RMSE, MAE, stars, params, comment)
+- Connect to GitHub
 
 NNbenchmark 1.9 - 2019-08-03
 ============================

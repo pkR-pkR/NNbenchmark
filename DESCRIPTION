@@ -1,6 +1,6 @@
 Package: NNbenchmark
 Title: A Package to Benchmark Neural Network Packages
-Description: Datasets and functions to benchmark neural network functions and training algorithms (convergence, speed, ease of use) in 69 R packages.
+Description: Datasets and functions to benchmark neural network functions and training algorithms (convergence, speed, ease of use) in 70 R packages.
 Imports: R6, pkgload
 Suggests: brnn, validann
 Version: 2.0
