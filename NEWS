@@ -3,6 +3,11 @@
 - Christophe Dutang, John Nash
 
 
+NNbenchmark 2.0.1 - 2019-08-04
+==============================
+- Date 2019-08-04 added at the first line of *.R files
+- Linked to GitHub. Package is rebuilt before commit (to force change in NAMESPACE)
+
 NNbenchmark 2.0 - 2019-08-04
 ============================
 - column 'params' added to the timer table. Columns in the data.frame are:

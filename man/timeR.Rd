@@ -11,6 +11,11 @@ timeR
 \description{
 timer is a R6 Class that represent a timer.
 }
+\details{
+\code{getTimer} returns a data frame with all records saved by the timer 
+object. Columns in the data.frame are: event, start, end, duration, RMSE, 
+MAE, stars, params, comment.
+}
 \section{Fields}{
 
 \describe{
@@ -43,10 +48,16 @@ timer is a R6 Class that represent a timer.
   }{Get start time for a selected event.}
   \item{\code{getStopTime()}
   }{Get stop time for a selected event.}
-  \item{\code{getTimeElapsed()}
-  }{Get time elapsed for a selected event.}
+  \item{\code{getDuration()}
+  }{Get duration for a selected event.}
   \item{\code{getRMSE()}
   }{Get the RMSE for a selected event.}
+  \item{\code{getMAE()}
+  }{Get the MAE for a selected event.}
+  \item{\code{getStars()}
+  }{Get stars for a selected event.}
+  \item{\code{getParams()}
+  }{Get params for a selected event.}
   \item{\code{getComment()}
   }{Get comment for a selected event.}
   \item{\code{getEventf()}
@@ -61,7 +72,7 @@ timer is a R6 Class that represent a timer.
 \section{Private Methods}{
 
 \describe{
-\item{\code{slprint(msg,flag = self$verbose)}
+\item{\code{slprint(msg, flag = self$verbose)}
 }{A function that controls whether to print extra message.}
 }
 }
@@ -69,12 +80,18 @@ timer is a R6 Class that represent a timer.
 \examples{
 timer <- createTimer()
 timer$start("event1")
-# put some codes in between
-timer$stop("event1")
+# put some codes in between, for instance
+Sys.sleep(1)
+timer$stop("event1", RMSE = 1, MAE = 1.3, stars = "*", 
+           params = "maxiter=100, lr=0.01", comment = "OK for 1",  
+           printmsg = TRUE)
 
 timer$start("event2")
-# put some codes in between
-timer$stop("event2",comment = "event 2 completed")
+# put some codes in between, for instance
+Sys.sleep(2)
+timer$stop("event2", RMSE = 2, MAE = 2.6, stars = "**",  
+           params = "maxiter=1000, lr=0.001", comment = "OK for 2",  
+           printmsg = FALSE)
 
 table1 <- getTimer(timer)
 timer$toggleVerbose() # set verbose to FALSE as default is TRUE
@@ -84,7 +101,7 @@ table1 # print all records in a tibble(data frame)
 # get attributes for selected events
 timer$getStartTime("event1")
 timer$getStopTime("event1")
-timer$getTimeElapsed("event1")
+timer$getDuration("event1")
 timer$getComment("event1")
 timer$getEvent("event1")
 }

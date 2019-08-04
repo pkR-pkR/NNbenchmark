@@ -10,10 +10,10 @@ recommanded number of hidden neurons for each neural network model.
 
 \itemize{
   \item{mDette:    5 neurons.}
-  \item{mFriedman: 4 or 5 neurons.}
+  \item{mFriedman: 5 neurons.}
   \item{mIshigami: 10 neurons.}
   \item{mRef153:   3 neurons.}
-  \item{uDmod1:    5 or 6 neurons.}
+  \item{uDmod1:    6 neurons.}
   \item{uDmod2:    5 neurons.}
   \item{uDreyfus1: 3 neurons.}
   \item{uDreyfus2: 3 neurons.}
@@ -23,10 +23,14 @@ recommanded number of hidden neurons for each neural network model.
   \item{uNeuroOne: 3 neurons.}
 }
 
-Each item of the list is itself a list with 3 components:
+Each item of the list is itself a list with 4 components:
 \itemize{
 \item{ds: character. The name of the dataset.}
-\item{neur: integer. The number of hidden neurons in the NN model.}
+\item{neur: integer. The recommanded number of hidden neurons in the NN model and in 
+\code{fmlaNN}.}
+\item{nparNN: integer. The number of parameters in \code{fmlaNN}.}
+\item{fmlaNN: the formula of the corresponding neural network, with tanh() as the
+activation function in the hidden layer.}
 \item{Z: matrix or data.frame. The dataset itself.}
 }
 Using \code{attach()} and \code{detach()} gives a direct access to these items.
@@ -39,6 +43,8 @@ for (i in names(NNdatasets)) {
     attach(DS)
     print(ds)
     print(neur)
+    print(nparNN)
+    print(nparNN)
     print(ht(Z, n = 2))
     cat("\\n")
     ## Type here the code to test the 69 neural network packages.

@@ -4,7 +4,7 @@
 \alias{prepareZZ}
 \title{Prepare a Dataset For All Possible Formats}
 \usage{
-prepareZZ(Z, xdmv = "m", ydmv = "v", scale = FALSE)
+prepareZZ(Z, xdmv = "m", ydmv = "v", zdm = "d", scale = FALSE)
 }
 \arguments{
 \item{Z}{a matrix or a data.frame representing a dataset.}
@@ -15,13 +15,18 @@ data.frame, matrix, vector (numeric).}
 \item{ydmv}{character, either "d", "m" or "v". The prefered output format for y: 
 data.frame, matrix, vector (numeric).}
 
-\item{scale}{logical. scale x and y with their respective means and standard deviations.}
+\item{zdm}{character, either "d" or "m". The prefered output format for Zxy: 
+data.frame or matrix.}
+
+\item{scale}{logical. Scale x, y and Zxy with their respective means and standard
+deviations.}
 }
 \description{
 This function modifies a dataset to the format required by a training function: 
 data.frame, matrix or vector (numeric), pre-normalization. The output is a list with
 the following items:
 \itemize{
+\item{Zxy: the original or scaled Z in the desired format (data.frame, matrix).}
 \item{x: the original or scaled x in the desired format (data.frame, matrix, vector).}
 \item{y: the original or scaled y in the desired format (data.frame, matrix, vector).}
 \item{xory: the original x or y (as vector).}
@@ -31,7 +36,7 @@ the following items:
 \item{xsd0: the standard deviation(s) of the original x.}
 \item{ysd0: the standard deviation of the original y.}
 \item{uni: the univariate (TRUE) or multivariate (FALSE) status of x (Z).}
-\item{fmla: the formula \code{y ~ x} or \code{y ~ x1 + x2 + .. + xn} where n is the 
+\item{fmla: the formula \code{y ~ x} or \code{y ~ x1 + x2 + .. + xn} where n is the 
       number of inputs variables.}
 }
 The use of \code{attach()} and \code{detach()} gives direct access to the modified 
