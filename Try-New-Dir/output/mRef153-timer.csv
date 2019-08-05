@@ -1,0 +1,11 @@
+event,start,end,duration,RMSE,MAE,stars,params,comment
+mRef153_brnn::brnn_gaussNewton_01,13:09:24.22,13:09:24.24,0.02,3.0106,2.0513,.,.,.
+mRef153_brnn::brnn_gaussNewton_02,13:09:24.25,13:09:24.28,0.03,3.0703,2.0427,.,.,.
+mRef153_brnn::brnn_gaussNewton_03,13:09:24.29,13:09:24.31,0.02,3.2436,2.2705,.,.,.
+mRef153_brnn::brnn_gaussNewton_04,13:09:24.34,13:09:24.37,0.03,3.119,2.1501,.,.,.
+mRef153_brnn::brnn_gaussNewton_05,13:09:24.38,13:09:24.63,0.25,3.0761,2.1071,.,.,.
+mRef153_brnn::brnn_gaussNewton_06,13:09:24.64,13:09:24.69,0.05,3.1192,2.1502,.,.,.
+mRef153_brnn::brnn_gaussNewton_07,13:09:24.70,13:09:24.74,0.04,3.1039,2.1548,.,.,.
+mRef153_brnn::brnn_gaussNewton_08,13:09:24.75,13:09:24.78,0.03,3.119,2.1502,.,.,.
+mRef153_brnn::brnn_gaussNewton_09,13:09:24.79,13:09:24.81,0.02,3.119,2.1501,.,.,.
+mRef153_brnn::brnn_gaussNewton_10,13:09:24.82,13:09:24.87,0.05,3.0673,2.0955,.,.,.
