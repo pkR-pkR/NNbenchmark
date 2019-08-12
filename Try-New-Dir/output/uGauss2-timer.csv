@@ -1,0 +1,11 @@
+event,start,end,duration,RMSE,MAE,stars,params,comment
+uGauss2_brnn::brnn_gaussNewton_01,13:09:28.43,13:09:28.47,0.04,2.3917,1.8786,.,.,.
+uGauss2_brnn::brnn_gaussNewton_02,13:09:28.48,13:09:28.51,0.03,2.4316,1.9151,.,.,.
+uGauss2_brnn::brnn_gaussNewton_03,13:09:28.52,13:09:28.56,0.04,2.3786,1.8661,.,.,.
+uGauss2_brnn::brnn_gaussNewton_04,13:09:28.56,13:09:28.60,0.04,2.3978,1.8843,.,.,.
+uGauss2_brnn::brnn_gaussNewton_05,13:09:28.60,13:09:28.64,0.04,3.9133,3.2292,.,.,.
+uGauss2_brnn::brnn_gaussNewton_06,13:09:28.64,13:09:28.66,0.02,11.436,8.1855,.,.,.
+uGauss2_brnn::brnn_gaussNewton_07,13:09:28.67,13:09:28.70,0.03,2.3958,1.8824,.,.,.
+uGauss2_brnn::brnn_gaussNewton_08,13:09:28.70,13:09:28.74,0.04,2.58,2.0692,.,.,.
+uGauss2_brnn::brnn_gaussNewton_09,13:09:28.74,13:09:28.77,0.03,2.4753,1.9604,.,.,.
+uGauss2_brnn::brnn_gaussNewton_10,13:09:28.77,13:09:28.80,0.03,2.5772,2.0501,.,.,.

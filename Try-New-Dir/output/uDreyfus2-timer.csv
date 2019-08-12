@@ -1,0 +1,11 @@
+event,start,end,duration,RMSE,MAE,stars,params,comment
+uDreyfus2_brnn::brnn_gaussNewton_01,13:09:26.99,13:09:27.00,0.01,0.0913,0.073,.,.,.
+uDreyfus2_brnn::brnn_gaussNewton_02,13:09:27.00,13:09:27.01,0.01,0.0913,0.073,.,.,.
+uDreyfus2_brnn::brnn_gaussNewton_03,13:09:27.01,13:09:27.02,0.01,0.0913,0.073,.,.,.
+uDreyfus2_brnn::brnn_gaussNewton_04,13:09:27.02,13:09:27.03,0.01,0.0913,0.073,.,.,.
+uDreyfus2_brnn::brnn_gaussNewton_05,13:09:27.03,13:09:27.04,0.01,0.0913,0.073,.,.,.
+uDreyfus2_brnn::brnn_gaussNewton_06,13:09:27.04,13:09:27.05,0.01,0.0913,0.073,.,.,.
+uDreyfus2_brnn::brnn_gaussNewton_07,13:09:27.05,13:09:27.06,0.01,0.0913,0.073,.,.,.
+uDreyfus2_brnn::brnn_gaussNewton_08,13:09:27.06,13:09:27.08,0.02,0.0913,0.073,.,.,.
+uDreyfus2_brnn::brnn_gaussNewton_09,13:09:27.08,13:09:27.11,0.03,0.0913,0.073,.,.,.
+uDreyfus2_brnn::brnn_gaussNewton_10,13:09:27.12,13:09:27.13,0.01,0.0913,0.073,.,.,.
