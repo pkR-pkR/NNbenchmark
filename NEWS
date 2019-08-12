@@ -3,6 +3,10 @@
 - Christophe Dutang, John Nash 
 
 
+NNbenchmark 2.1 - 2019-08-12
+============================
+- detachNN() (to move library(pkg) out of the loop in NNTemplate)
+
 NNbenchmark 2.0.1 - 2019-08-04
 ==============================
 - Date 2019-08-04 added at the first line of *.R files

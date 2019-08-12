@@ -2,9 +2,12 @@
 % Please edit documentation in R/clearNN.R
 \name{clearNN}
 \alias{clearNN}
+\alias{detachNN}
 \title{Clean the .GlobalEnv and Detach the Loaded Packages}
 \usage{
 clearNN(donotremove, donotdetach = NULL)
+
+detachNN(donotremove, donotdetach = "")
 }
 \arguments{
 \item{donotremove}{a vector of characters representing objects in \code{ls()}.}
@@ -21,15 +24,10 @@ clearNN(donotremove, donotdetach = NULL)
 \code{"Autoloads"}, \code{"package:base"}.}
 }
 \description{
-Clean the first environment \code{ls(.GlobalEnv)} from objects not listed in 
-\code{donotremove} and detach the loaded packages and their dependencies not listed 
-in \code{donotdetach}.
+\code{clearNN} cleans the first environment \code{ls(.GlobalEnv)} from objects 
+not listed in \code{donotremove} and detach the loaded packages and their 
+dependencies not listed in \code{donotdetach}.
 
-\code{clearNN()} replaces
-
-\code{detach(ZZ)} 
-
-\code{detach("package:nameNNpackage", unload = TRUE)} 
-
-\code{remove(list = ls()[!(ls() \%in\% donotremove)])}
+\code{detachNN()} removes \code{ZZ} and all objects in \code{ls(.GlobalEnv)} 
+not listed in \code{donotremove}. It does not detach any packages.
 }

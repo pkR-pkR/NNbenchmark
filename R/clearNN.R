@@ -3,18 +3,13 @@
 
 #' @title Clean the .GlobalEnv and Detach the Loaded Packages
 #' @description
-#' Clean the first environment \code{ls(.GlobalEnv)} from objects not listed in 
-#' \code{donotremove} and detach the loaded packages and their dependencies not listed 
-#' in \code{donotdetach}.
+#' \code{clearNN} cleans the first environment \code{ls(.GlobalEnv)} from objects 
+#' not listed in \code{donotremove} and detach the loaded packages and their 
+#' dependencies not listed in \code{donotdetach}.
 #' 
-#' \code{clearNN()} replaces
-#' 
-#' \code{detach(ZZ)} 
-#' 
-#' \code{detach("package:nameNNpackage", unload = TRUE)} 
-#' 
-#' \code{remove(list = ls()[!(ls() \%in\% donotremove)])}
-#' 
+#' \code{detachNN()} removes \code{ZZ} and all objects in \code{ls(.GlobalEnv)} 
+#' not listed in \code{donotremove}. It does not detach any packages.
+#'  
 #' @param  donotremove  a vector of characters representing objects in \code{ls()}.
 #' @param  donotdetach  a vector of packages and environments that are not detached.
 #'                      \code{donotdetach = NULL} protects the packages and environments 
@@ -36,7 +31,7 @@ clearNN <- function (donotremove, donotdetach = NULL) {
            "tools:rstudio", "package:RWsearch", "package:pacman", 
            "package:stats", "package:graphics", "package:grDevices", "package:utils",
            "package:datasets", "package:methods", "Autoloads", "package:base")           
-    if (!is.element("ZZ",  donotdetach)) {    
+    if (!is.element("ZZ", donotdetach)) {    
         while ("ZZ" %in% search()) detach("ZZ", character.only = TRUE)
     }
     if (length(setdiff(search(), donotdetach)) > 0) {
@@ -51,6 +46,17 @@ clearNN <- function (donotremove, donotdetach = NULL) {
            lapply(setdiff(search(), donotdetach), detach, unload = TRUE, 
                   character.only = TRUE, force = TRUE),
            warning = function(w) {})
+    while (length(setdiff(ls(.GlobalEnv), donotremove)) > 0) remove(           
+           list = setdiff(ls(.GlobalEnv), donotremove), envir = .GlobalEnv)
+}
+
+
+#' @export
+#' @rdname clearNN
+detachNN <- function (donotremove, donotdetach = "") {           
+    if (!is.element("ZZ", donotdetach)) {    
+        while ("ZZ" %in% search()) detach("ZZ", character.only = TRUE)
+    }
     while (length(setdiff(ls(.GlobalEnv), donotremove)) > 0) remove(           
            list = setdiff(ls(.GlobalEnv), donotremove), envir = .GlobalEnv)
 }
