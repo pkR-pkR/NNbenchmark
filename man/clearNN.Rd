@@ -14,9 +14,12 @@ detachNN(donotremove, donotdetach = "")
 
 \item{donotdetach}{a vector of packages and environments that are not detached.
 \code{donotdetach = NULL} protects the packages and environments 
-\code{".GlobalEnv"}, \code{"package:NNbenchmark"}, 
-\code{"package:rmarkdown"}, \code{"package:knitr"}, \code{"package:captioner"},
-\code{"package:pkgload"}, \code{"package:R6"}, \code{"tools:rstudio"}, 
+\code{".GlobalEnv"}, \code{"package:kableExtra"}, 
+\code{"package:dplyr"}, \code{"package:stringr"}, 
+\code{"package:NNbenchmark"}, \code{"package:rmarkdown"}, 
+\code{"package:knitr"}, \code{"package:captioner"},
+\code{"package:pkgload"}, \code{"package:R6"}, 
+\code{"tools:rstudio"}, 
 \code{"package:RWsearch"}, \code{"package:pacman"}, 
 \code{"package:stats"}, \code{"package:graphics"}, 
 \code{"package:grDevices"}, \code{"package:utils"}, 

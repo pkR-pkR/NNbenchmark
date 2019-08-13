@@ -3,6 +3,10 @@
 - Christophe Dutang, John Nash 
 
 
+NNbenchmark 2.1.1 - 2019-08-13
+==============================
+- clearNN() donotdetach now includes kableExtra, dplyr, stringr
+
 NNbenchmark 2.1 - 2019-08-12
 ============================
 - detachNN() (to move library(pkg) out of the loop in NNTemplate)

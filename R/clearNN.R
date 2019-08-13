@@ -13,9 +13,12 @@
 #' @param  donotremove  a vector of characters representing objects in \code{ls()}.
 #' @param  donotdetach  a vector of packages and environments that are not detached.
 #'                      \code{donotdetach = NULL} protects the packages and environments 
-#'                      \code{".GlobalEnv"}, \code{"package:NNbenchmark"}, 
-#'                      \code{"package:rmarkdown"}, \code{"package:knitr"}, \code{"package:captioner"},
-#'                      \code{"package:pkgload"}, \code{"package:R6"}, \code{"tools:rstudio"}, 
+#'                      \code{".GlobalEnv"}, \code{"package:kableExtra"}, 
+#'                      \code{"package:dplyr"}, \code{"package:stringr"}, 
+#'                      \code{"package:NNbenchmark"}, \code{"package:rmarkdown"}, 
+#'                      \code{"package:knitr"}, \code{"package:captioner"},
+#'                      \code{"package:pkgload"}, \code{"package:R6"}, 
+#'                      \code{"tools:rstudio"}, 
 #'                      \code{"package:RWsearch"}, \code{"package:pacman"}, 
 #'                      \code{"package:stats"}, \code{"package:graphics"}, 
 #'                      \code{"package:grDevices"}, \code{"package:utils"}, 
@@ -25,11 +28,13 @@
 #' @export
 #' @name clearNN
 clearNN <- function (donotremove, donotdetach = NULL) { 
-    if (is.null(donotdetach)) donotdetach <- c(".GlobalEnv", "package:rmarkdown",
-           "package:knitr", "package:captioner",
-           "package:NNbenchmark", "package:R6", "package:pkgload", 
-           "tools:rstudio", "package:RWsearch", "package:pacman", 
-           "package:stats", "package:graphics", "package:grDevices", "package:utils",
+    if (is.null(donotdetach)) donotdetach <- c(".GlobalEnv", 
+		   "package:kableExtra", 
+           "package:dplyr", "package:stringr", "package:knitr", 
+           "package:rmarkdown", "package:captioner", "package:NNbenchmark", 
+           "package:R6", "package:pkgload", "tools:rstudio", 
+           "package:RWsearch", "package:pacman", "package:stats", 
+		   "package:graphics", "package:grDevices", "package:utils", 
            "package:datasets", "package:methods", "Autoloads", "package:base")           
     if (!is.element("ZZ", donotdetach)) {    
         while ("ZZ" %in% search()) detach("ZZ", character.only = TRUE)

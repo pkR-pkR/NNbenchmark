@@ -3,8 +3,8 @@ Title: A Package to Benchmark Neural Network Packages
 Description: Datasets and functions to benchmark neural network functions and training algorithms (convergence, speed, ease of use) in 69 R packages.
 Imports: R6, pkgload
 Suggests: brnn, validann
-Version: 2.1
-Date: 2019-08-12
+Version: 2.1.1
+Date: 2019-08-13
 License: GPL-2
 Maintainer: Patrice Kiener <fattailsr@inmodelia.com>
 Author: Patrice Kiener [aut, cre],
