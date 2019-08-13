@@ -3,6 +3,11 @@
 - Christophe Dutang, John Nash 
 
 
+
+NNbenchmark 2.2 - 2019-08-13
+============================
+- NNdataSummary()
+
 NNbenchmark 2.1.1 - 2019-08-13
 ==============================
 - clearNN() donotdetach now includes kableExtra, dplyr, stringr
