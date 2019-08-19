@@ -19,10 +19,10 @@
 #'   \item{uGauss1:   5 neurons.}
 #'   \item{uGauss2:   4 neurons.}
 #'   \item{uGauss3:   4 neurons.}
-#'   \item{uNeuroOne: 3 neurons.}
+#'   \item{uNeuroOne: 2 neurons.}
 #' }
 #' 
-#' Each item of the list is itself a list with 4 components:
+#' Each item of the list is itself a list with 5 components:
 #' \itemize{
 #' \item{ds: character. The name of the dataset.}
 #' \item{neur: integer. The recommanded number of hidden neurons in the NN model and in 
@@ -37,18 +37,7 @@
 #' @examples 
 #' ht(NNdatasets, n = 2, l = 6)
 #' 
-#' for (i in names(NNdatasets)) {
-#'     DS <- NNdatasets[[i]]
-#'     attach(DS)
-#'     print(ds)
-#'     print(neur)
-#'     print(nparNN)
-#'     print(nparNN)
-#'     print(ht(Z, n = 2))
-#'     cat("\n")
-#'     ## Type here the code to test the 69 neural network packages.
-#'     detach(DS)
-#' }
+#' NNdataSummary(NNdatasets)
 #' 
 #' @keywords datasets
 #' @docType data
@@ -59,8 +48,8 @@ NULL
 
 #' @title Dataset mDette
 #' @description
-#' A multivariate dataset (x1, x2, x3, y) of class matrix and dim 500 x 4 to be fitted by 
-#' a neural network with 5 hidden neurons.
+#' A multivariate dataset (x1, x2, x3, y) of class matrix and dim 500 x 4 to be 
+#' fitted by a neural network with 5 hidden neurons (26 parameters).
 #' @examples
 #' ht(mDette)
 #' pairs(mDette)
@@ -79,7 +68,7 @@ NULL
 #' @title Dataset mFriedman
 #' @description
 #' A multivariate dataset (x1, x2, x3, x4, x5, y) of class matrix and dim 500 x 6 to be  
-#' fitted by a neural network with 4 or 5 hidden neurons.
+#' fitted by a neural network with 5 hidden neurons (36 parameters).
 #' @examples
 #' ht(mFriedman)
 #' pairs(mFriedman)
@@ -98,7 +87,7 @@ NULL
 #' @title Dataset mIshigami
 #' @description
 #' A multivariate dataset (x1, x2, x3, y) of class matrix and dim 500 x 4 to be fitted 
-#' by a neural network with 10 hidden neurons.
+#' by a neural network with 10 hidden neurons (51 parameters).
 #' @examples
 #' ht(mIshigami)
 #' pairs(mIshigami)
@@ -118,7 +107,7 @@ NULL
 #' @title Dataset mRef153
 #' @description
 #' A multivariate dataset (x1, x2, x3, x4, x5, y) of class matrix and dim 153 x 6 to be 
-#' fitted by a neural network with 3 or 4 hidden neurons.
+#' fitted by a neural network with 3 hidden neurons (22 parameters).
 #' This dataset was used to teach neural networks at ESPCI from 2003 to 2013 and is 
 #' available in the software Neuro One. 
 #' @references
@@ -136,7 +125,7 @@ NULL
 #' @title Dataset uDmod1
 #' @description
 #' An univariate dataset (x, y) of class data.frame and dim 51 x 2 to be fitted by a 
-#' neural network with 5 or 6 hidden neurons.
+#' neural network with 6 hidden neurons (19 parameters).
 #' The parameters are highly correlated and singular Jacobian matrices often appear. 
 #' A difficult dataset. 
 #' @examples
@@ -152,7 +141,7 @@ NULL
 #' @title Dataset uDmod2
 #' @description
 #' An univariate dataset (x, y) of class data.frame and dim 51 x 2 to be fitted by a 
-#' neural network with 5 hidden neurons.
+#' neural network with 5 hidden neurons (16 parameters).
 #' @examples
 #' ht(uDmod2)
 #' plot(uDmod2)
@@ -166,7 +155,7 @@ NULL
 #' @title Dataset uDreyfus1
 #' @description
 #' An univariate dataset (x, y) of class data.frame and dim 51 x 2 to be fitted by a 
-#' neural network with 3 hidden neurons.
+#' neural network with 3 hidden neurons (10 parameters).
 #' This dataset was used to teach neural networks at ESPCI from 1991 to 2013. It usually
 #' appeared in the very first slides. 
 #' This is a combination of 3 pure tanh() functions without noise. The Jacobian matrix 
@@ -186,7 +175,7 @@ NULL
 #' @title Dataset uDreyfus2
 #' @description
 #' An univariate dataset (x, y) of class data.frame and dim 51 x 2 to be fitted by a 
-#' neural network with 3 hidden neurons.
+#' neural network with 3 hidden neurons (10 parameters).
 #' This dataset was used to teach neural networks at ESPCI from 1991 to 2013. It usually
 #' appeared in the very first slides. 
 #' This is a combination of 3 pure tanh() functions with a small noise. Due to the noise, 
@@ -207,7 +196,7 @@ NULL
 #' @title Dataset uGauss1
 #' @description
 #' An univariate dataset (x, y) of class data.frame and dim 250 x 2 to be fitted by a 
-#' neural network with 5 hidden neurons.
+#' neural network with 5 hidden neurons (16 parameters).
 #' @references
 #' Rust, B., NIST (1996) \url{https://itl.nist.gov/div898/strd/nls/data/gauss1.shtml}
 #' @examples
@@ -223,7 +212,7 @@ NULL
 #' @title Dataset uGauss2
 #' @description
 #' An univariate dataset (x, y) of class data.frame and dim 250 x 2 to be fitted by a 
-#' neural network with 4 hidden neurons.
+#' neural network with 4 hidden neurons (13 parameters).
 #' @references
 #' Rust, B., NIST (1996) \url{https://itl.nist.gov/div898/strd/nls/data/gauss2.shtml}
 #' @examples
@@ -239,7 +228,7 @@ NULL
 #' @title Dataset uGauss3
 #' @description
 #' An univariate dataset (x, y) of class data.frame and dim 250 x 2 to be fitted by a 
-#' neural network with 4 hidden neurons.
+#' neural network with 4 hidden neurons (13 parameters).
 #' @references
 #' Rust, B., NIST (1996) \url{https://itl.nist.gov/div898/strd/nls/data/gauss3.shtml}
 #' @examples
@@ -255,7 +244,7 @@ NULL
 #' @title Dataset uNeuroOne
 #' @description
 #' An univariate dataset (x, y) of class data.frame and dim 51 x 2 to be fitted by a 
-#' neural network with 3 hidden neurons.
+#' neural network with 2 hidden neurons (7 parameters).
 #' This dataset was used to teach neural networks at ESPCI from 1991 to 2013 and is 
 #' available in the software Neuro One. 
 #' @references

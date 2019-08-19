@@ -16,6 +16,9 @@ methods. Default to \code{TRUE}.}
 \item{object}{The name for timer object.}
 }
 \description{
+This is a modified version of the \code{timeR} package for an internal use. 
+Full credit is to Yifu Yan, the author of the \code{timeR} package.
+
 \code{createTimer} creates a timer object.
 
 \code{getTimer} returns a data frame with all records saved by the timer 

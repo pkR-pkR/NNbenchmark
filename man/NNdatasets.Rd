@@ -20,10 +20,10 @@ recommanded number of hidden neurons for each neural network model.
   \item{uGauss1:   5 neurons.}
   \item{uGauss2:   4 neurons.}
   \item{uGauss3:   4 neurons.}
-  \item{uNeuroOne: 3 neurons.}
+  \item{uNeuroOne: 2 neurons.}
 }
 
-Each item of the list is itself a list with 4 components:
+Each item of the list is itself a list with 5 components:
 \itemize{
 \item{ds: character. The name of the dataset.}
 \item{neur: integer. The recommanded number of hidden neurons in the NN model and in 
@@ -38,18 +38,7 @@ Using \code{attach()} and \code{detach()} gives a direct access to these items.
 \examples{
 ht(NNdatasets, n = 2, l = 6)
 
-for (i in names(NNdatasets)) {
-    DS <- NNdatasets[[i]]
-    attach(DS)
-    print(ds)
-    print(neur)
-    print(nparNN)
-    print(nparNN)
-    print(ht(Z, n = 2))
-    cat("\\n")
-    ## Type here the code to test the 69 neural network packages.
-    detach(DS)
-}
+NNdataSummary(NNdatasets)
 
 }
 \keyword{datasets}

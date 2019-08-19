@@ -6,7 +6,7 @@
 \title{Dataset uGauss1}
 \description{
 An univariate dataset (x, y) of class data.frame and dim 250 x 2 to be fitted by a 
-neural network with 5 hidden neurons.
+neural network with 5 hidden neurons (16 parameters).
 }
 \examples{
 ht(uGauss1)

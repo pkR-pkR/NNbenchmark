@@ -6,7 +6,7 @@
 \title{Dataset mFriedman}
 \description{
 A multivariate dataset (x1, x2, x3, x4, x5, y) of class matrix and dim 500 x 6 to be  
-fitted by a neural network with 4 or 5 hidden neurons.
+fitted by a neural network with 5 hidden neurons (36 parameters).
 }
 \examples{
 ht(mFriedman)

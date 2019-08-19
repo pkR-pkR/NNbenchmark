@@ -46,12 +46,12 @@ values of ZZ. See the examples.
 library("brnn")
 library("validann")
 
+maxit <- 200  # increase this number to get more accurate results with validann:ann
+TF    <- TRUE # display the plots
 
 ### UNIVARIATE DATASET
-Z    <- uGauss2
-neur <- 4
-runs <- 10
-TF   <- TRUE
+Z     <- uGauss2
+neur  <- 4
 
 ## brnn
 ZZ <- prepareZZ(Z, xdmv = "m", ydmv= "v", scale = FALSE) ; ht(ZZ) 
@@ -65,19 +65,20 @@ detach(ZZ) ; rm(y_pred)
 ## validann
 ZZ <- prepareZZ(Z, xdmv = "m", ydmv= "v", scale = TRUE) ; ht(ZZ)
 attach(ZZ)
-y_pred <- ym0 + ysd0*predict(validann::ann(x, y, neur))
+y_pred <- ym0 + ysd0*predict(validann::ann(x, y, neur, maxit = maxit))
 lipoNN(xory, y_pred, uni, TF, lwd = 4, col = 3)
 ym0 ; ysd0
 detach(ZZ) ; rm(y_pred)
 
-
-
+\donttest{
 ### UNIVARIATE DATASET + LOOP
+nruns  <- 10
+
 ## brnn
 ZZ <- prepareZZ(Z, xdmv = "m", ydmv= "v", scale = FALSE) ; ht(ZZ) 
 attach(ZZ)
 Zreg <- list() ; Zreg
-for (i in 1:runs) Zreg[[i]] <- brnn::brnn(x, y, neur) 
+for (i in 1:nruns) Zreg[[i]] <- brnn::brnn(x, y, neur) 
 m      <- matrix(sapply(Zreg, function(x) x$Ed) , ncol=1) ; m
 best   <- which(min(m) == m)[1] ; best
 y_pred <- ym0 + ysd0*predict(Zreg[[best]])
@@ -89,19 +90,18 @@ detach(ZZ) ; rm(y_pred)
 ZZ <- prepareZZ(Z, xdmv = "m", ydmv= "v", scale = TRUE) ; ht(ZZ)
 attach(ZZ)
 Zreg <- list()
-for (i in 1:runs) Zreg[[i]] <- validann::ann(x, y, size = neur) 
+for (i in 1:nruns) Zreg[[i]] <- validann::ann(x, y, size = neur, maxit = maxit) 
 m      <- matrix(sapply(Zreg, function(x) x$value), ncol=1) ; m
 best   <- which(min(m) == m)[1] ; best
 y_pred <- ym0 + ysd0*predict(Zreg[[best]])
 lipoNN(xory, y_pred, uni, TF, lwd = 4, col = 4)
 detach(ZZ) ; rm(y_pred)
-
+}
 
 
 ### MULTIVARIATE DATASET
 Z    <- mDette
-neur <- 4
-runs <- 10
+neur <- 5
 
 ## brnn
 ZZ <- prepareZZ(Z, xdmv = "m", ydmv= "v", scale = FALSE) ; ht(ZZ)
@@ -115,7 +115,7 @@ detach(ZZ) ; rm(y_pred)
 ## validann
 ZZ <- prepareZZ(Z, xdmv = "m", ydmv= "v", scale = TRUE) ; ht(ZZ)
 attach(ZZ)
-y_pred <- ym0 + ysd0*predict(validann::ann(x, y, neur))
+y_pred <- ym0 + ysd0*predict(validann::ann(x, y, neur, maxit = maxit))
 lipoNN(xory, y_pred, uni, TF, lwd = 4, col = 3)
 ym0 ; ysd0
 detach(ZZ) ; rm(y_pred)

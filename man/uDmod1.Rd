@@ -6,7 +6,7 @@
 \title{Dataset uDmod1}
 \description{
 An univariate dataset (x, y) of class data.frame and dim 51 x 2 to be fitted by a 
-neural network with 5 or 6 hidden neurons.
+neural network with 6 hidden neurons (19 parameters).
 The parameters are highly correlated and singular Jacobian matrices often appear. 
 A difficult dataset.
 }

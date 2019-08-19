@@ -6,7 +6,7 @@
 \title{Dataset uDreyfus2}
 \description{
 An univariate dataset (x, y) of class data.frame and dim 51 x 2 to be fitted by a 
-neural network with 3 hidden neurons.
+neural network with 3 hidden neurons (10 parameters).
 This dataset was used to teach neural networks at ESPCI from 1991 to 2013. It usually
 appeared in the very first slides. 
 This is a combination of 3 pure tanh() functions with a small noise. Due to the noise, 

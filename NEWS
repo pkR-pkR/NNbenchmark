@@ -4,6 +4,15 @@
 
 
 
+NNbenchmark 2.3 - 2019-08-19
+============================
+- NNdatasets: Change uNeuroOne from 3 to 2 neurons and 10 to 7 parameters
+- NNdatasets: mRef153: correct a typo in the number of neurons (from 4 to 3)
+- u+mNNdatasets: Update the documentation with the number of parameters for each dataset
+- prepareZZ: rearrange the examples with donttest to run less than 5 seconds
+- DESCRIPTION: Yifu Yan as author of the timeR function + class (timeR package)
+- Test CRAN check and prepare the upload to CRAN
+
 NNbenchmark 2.2 - 2019-08-13
 ============================
 - NNdataSummary()

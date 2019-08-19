@@ -6,7 +6,7 @@
 \title{Dataset uNeuroOne}
 \description{
 An univariate dataset (x, y) of class data.frame and dim 51 x 2 to be fitted by a 
-neural network with 3 hidden neurons.
+neural network with 2 hidden neurons (7 parameters).
 This dataset was used to teach neural networks at ESPCI from 1991 to 2013 and is 
 available in the software Neuro One.
 }

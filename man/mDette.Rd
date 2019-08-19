@@ -5,8 +5,8 @@
 \alias{mDette}
 \title{Dataset mDette}
 \description{
-A multivariate dataset (x1, x2, x3, y) of class matrix and dim 500 x 4 to be fitted by 
-a neural network with 5 hidden neurons.
+A multivariate dataset (x1, x2, x3, y) of class matrix and dim 500 x 4 to be 
+fitted by a neural network with 5 hidden neurons (26 parameters).
 }
 \examples{
 ht(mDette)

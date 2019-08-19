@@ -5,7 +5,9 @@
 
 #' A R6 Class to represent a timer.
 #'
-#' timer is a R6 Class that represent a timer.
+#' timer is a R6 Class that represent a timer. This is a modified version of the 
+#' \code{timeR} package for an internal use. Full credit is to Yifu Yan, the author 
+#' of the \code{timeR} package.
 #' 
 #' \code{getTimer} returns a data frame with all records saved by the timer 
 #' object. Columns in the data.frame are: event, start, end, duration, RMSE, 

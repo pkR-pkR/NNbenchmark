@@ -7,11 +7,12 @@
 \title{Package NNbenchmark}
 \description{
 Datasets and functions to benchmark neural network functions and training algorithms 
-(convergence, speed, ease of use) in 69 R packages.
+(convergence, speed, ease of use) of R packages.
 }
 \examples{
 ds <- grep("^[m,u]", ls("package:NNbenchmark"), value = TRUE); ds
-t(sapply(ds, function(x) dim(get(x))))
+t(sapply(ds, function(x) dim(get(x)))) 
+NNdataSummary(NNdatasets)
 plot(uGauss2)
 pairs(mIshigami)
 ht(NNdatasets, n = 2, l = 6)
