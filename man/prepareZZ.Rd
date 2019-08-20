@@ -96,7 +96,6 @@ best   <- which(min(m) == m)[1] ; best
 y_pred <- ym0 + ysd0*predict(Zreg[[best]])
 lipoNN(xory, y_pred, uni, TF, lwd = 4, col = 4)
 detach(ZZ) ; rm(y_pred)
-}
 
 
 ### MULTIVARIATE DATASET
@@ -121,7 +120,6 @@ ym0 ; ysd0
 detach(ZZ) ; rm(y_pred)
 
 
-
 ### INSIDE A FUNCTION
 plotds <- function(Z, xdmv = "m", ydmv = "v", scale = FALSE, neurons = 3, col = 2) {
     ZZ <- prepareZZ(Z, xdmv = xdmv, ydmv= ydmv, scale = scale) 
@@ -136,6 +134,7 @@ plotds(uNeuroOne, scale = FALSE, neurons = 2, col = 2)
 plotds(uNeuroOne, scale = TRUE,  neurons = 3, col = 3)
 
 plotds(mFriedman, scale = TRUE,  neurons = 5, col = 4)
+}
 
 
 }
