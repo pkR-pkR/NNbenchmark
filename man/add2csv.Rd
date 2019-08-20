@@ -2,7 +2,7 @@
 % Please edit documentation in R/add2csv.R
 \name{add2csv}
 \alias{add2csv}
-\title{Create or Append a data.frame To a csv File}
+\title{Create or Append a data.frame to a csv File}
 \usage{
 add2csv(x, file = "results.csv")
 }
@@ -16,10 +16,11 @@ Create or append a data.frame to a csv file. Column names are added at creation 
 ignored at the append steps.
 }
 \examples{
-x <- data.frame(a = 1:4, b = 5:8)  
-add2csv(x) 
-add2csv(x) 
-add2csv(x)
-read.csv("results.csv")
+results_csv <- tempfile("results", fileext = ".csv")
+x <- data.frame(a = 1:3, b = 4:6) 
+add2csv(x, file = results_csv) 
+add2csv(x*10, file = results_csv) 
+add2csv(x*100, file = results_csv) 
+read.csv(file = results_csv) 
 
 }
