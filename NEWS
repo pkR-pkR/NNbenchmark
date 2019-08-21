@@ -3,8 +3,12 @@
 - Christophe Dutang, John Nash 
 
 
-NNbenchmark 2.3.3 - 2019-08-21 - sent to CRAN
+NNbenchmark 2.3.4 - 2019-08-21 - sent to CRAN
 =============================================
+- DESCRIPTION: Modify the title to match title case recommanded by CRAN
+
+NNbenchmark 2.3.3 - 2019-08-21
+==============================
 - DESCRIPTION: Modify the title 
 - All files: Add value to Rd files (return in roxygen comments) for every functions
 

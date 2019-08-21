@@ -1,9 +1,9 @@
 Package: NNbenchmark
-Title: Datasets and Functions To Benchmark Neural Network Packages
+Title: Datasets and Functions to Benchmark Neural Network Packages
 Description: Datasets and functions to benchmark (convergence, speed, ease of use) R packages dedicated to regression with neural networks (no classification in this version).
 Imports: R6, pkgload
 Suggests: brnn, validann
-Version: 2.3.3
+Version: 2.3.4
 Date: 2019-08-21
 License: GPL-2
 Maintainer: Patrice Kiener <fattailsr@inmodelia.com>
