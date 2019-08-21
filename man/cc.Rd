@@ -11,6 +11,9 @@ cc(char, ...)
 
 \item{...}{basic R objects: character, vectors, list, data.frame.}
 }
+\value{
+A list with the objects concatenated.
+}
 \description{
 An intermediate function between \code{c()} and \code{list()}. 
 Combine all terms in one single list. The result can be used by \code{do.call()}.

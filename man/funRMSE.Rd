@@ -16,6 +16,9 @@ funMAE(y_pred, y0, dgts = 4)
 
 \item{dgts}{integer. The rounding.}
 }
+\value{
+A numeric value, either the RMSE or the MAE.
+}
 \description{
 Calculate the Root Means Square Error (RMSE) and the Mean Absoluter Error (MAE)
 and round the result, by default to 4 digits. Apply \code{na.rm = TRUE}

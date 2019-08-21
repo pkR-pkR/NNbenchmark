@@ -16,6 +16,9 @@
 #' @param  verbose  A parameter to control whether to print messages while using
 #'                  methods. Default to \code{TRUE}.
 #' @param  object   The name for timer object.
+#' @return
+#' An (invisible) object of R6 class for \code{createTimer}. A data.frame for 
+#' \code{getTimer}.
 #' 
 #' @examples
 #' ## Create a timer object. Record events. Get all records.

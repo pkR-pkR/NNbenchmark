@@ -24,6 +24,8 @@
 #'                      \code{"package:grDevices"}, \code{"package:utils"}, 
 #'                      \code{"package:datasets"}, \code{"package:methods"}, 
 #'                      \code{"Autoloads"}, \code{"package:base"}.
+#' @return  
+#' NULL
 #' 
 #' @export
 #' @name clearNN

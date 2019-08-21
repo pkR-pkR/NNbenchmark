@@ -25,13 +25,15 @@ Equivalent to \code{if (TRUE/FALSE) plot()}.}
 
 \item{y_pred}{vector of numeric. The values returned by the \code{predict()} function.}
 }
+\value{
+NULL in the console. An initial plot or some added lines/points.
+}
 \description{
 \code{plotNN} uses the parameter \code{uni} to launch the \code{plot()} function either 
 for a univariate dataset (x, y_pred) or for a multivariate dataset (y, y_pred).
 
 \code{lipoNN} uses the parameter \code{uni} to launch either \code{lines()} for an
 univariate dataset or \code{points()} for a multivariate dataset.
-
 
 See the examples in \code{\link{prepareZZ}}.
 }

@@ -4,8 +4,10 @@
 #' @title A Summary (in data.frame format) of NNdatasets
 #' @description
 #' \code{NNdataSummary} summarizes the information of the 12 datasets
-#' listed in \code{NNdatasets}: name, n_rows, n_inputs, n_neurons, 
-#' n_parameters. 
+#' listed in \code{NNdatasets}.
+#' @return   
+#' A data.frame with 12 rows and 5 columns: (dataset) name, n_rows, n_inputs, 
+#' n_neurons, n_parameters. 
 #' 
 #' @param   NNdatasets   the NNdatasets list.
 #' @examples 

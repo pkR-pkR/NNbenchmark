@@ -4,8 +4,8 @@
 
 #' @title Package NNbenchmark
 #' @description
-#' Datasets and functions to benchmark neural network functions and training algorithms 
-#' (convergence, speed, ease of use) of R packages.
+#' Datasets and functions to benchmark (convergence, speed, ease of use) R packages 
+#' dedicated to regression with neural networks (no classification in this version).
 #' @examples
 #' ds <- grep("^[m,u]", ls("package:NNbenchmark"), value = TRUE); ds
 #' t(sapply(ds, function(x) dim(get(x)))) 

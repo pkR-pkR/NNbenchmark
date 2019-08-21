@@ -11,7 +11,9 @@
 #'                 and data.frame) of the resulting object.
 #' @param   m      integer. Half-number of columns (for matrix and data.frame) of the 
 #'                 resulting object. \code{m = Inf} prevents any extraction. 
-#' @param   l      integer. Half-length of the list of the resulting object.  
+#' @param   l      integer. Half-length of the list of the resulting object. 
+#' @return  
+#' An object of the same class than x but much shorter. 
 #' 
 #' @examples
 #' ### ht

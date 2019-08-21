@@ -21,10 +21,8 @@ data.frame or matrix.}
 \item{scale}{logical. Scale x, y and Zxy with their respective means and standard
 deviations.}
 }
-\description{
-This function modifies a dataset to the format required by a training function: 
-data.frame, matrix or vector (numeric), pre-normalization. The output is a list with
-the following items:
+\value{
+The output is a list, usually named \code{ZZ}, with the following items:
 \itemize{
 \item{Zxy: the original or scaled Z in the desired format (data.frame, matrix).}
 \item{x: the original or scaled x in the desired format (data.frame, matrix, vector).}
@@ -41,6 +39,10 @@ the following items:
 }
 The use of \code{attach()} and \code{detach()} gives direct access to the modified 
 values of ZZ. See the examples.
+}
+\description{
+This function modifies a dataset to the format required by a training function: 
+data.frame, matrix or vector (numeric), pre-normalization.
 }
 \examples{
 library("brnn")

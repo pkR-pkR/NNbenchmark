@@ -9,10 +9,13 @@ NNdataSummary(NNdatasets)
 \arguments{
 \item{NNdatasets}{the NNdatasets list.}
 }
+\value{
+A data.frame with 12 rows and 5 columns: (dataset) name, n_rows, n_inputs, 
+n_neurons, n_parameters.
+}
 \description{
 \code{NNdataSummary} summarizes the information of the 12 datasets
-listed in \code{NNdatasets}: name, n_rows, n_inputs, n_neurons, 
-n_parameters.
+listed in \code{NNdatasets}.
 }
 \examples{
 NNdataSummary(NNdatasets)

@@ -9,6 +9,7 @@
 #' \code{timeR} package for an internal use. Full credit is to Yifu Yan, the author 
 #' of the \code{timeR} package.
 #' 
+#' @return
 #' \code{getTimer} returns a data frame with all records saved by the timer 
 #' object. Columns in the data.frame are: event, start, end, duration, RMSE, 
 #' MAE, stars, params, comment.
@@ -64,14 +65,14 @@
 #' @examples
 #' timer <- createTimer()
 #' timer$start("event1")
-#' # put some codes in between, for instance
+#' ## put some codes in between, for instance
 #' Sys.sleep(1)
 #' timer$stop("event1", RMSE = 1, MAE = 1.3, stars = "*", 
 #'            params = "maxiter=100, lr=0.01", comment = "OK for 1",  
 #'            printmsg = TRUE)
 #'
 #' timer$start("event2")
-#' # put some codes in between, for instance
+#' ## put some codes in between, for instance
 #' Sys.sleep(2)
 #' timer$stop("event2", RMSE = 2, MAE = 2.6, stars = "**",  
 #'            params = "maxiter=1000, lr=0.001", comment = "OK for 2",  
@@ -79,15 +80,15 @@
 #'
 #' table1 <- getTimer(timer)
 #' timer$toggleVerbose() # set verbose to FALSE as default is TRUE
-#'
-#' table1 # print all records in a tibble(data frame)
-#'
-#' # get attributes for selected events
+#' table1 # print all records in a data frame
+#' 
+#' ## get attributes for selected events
 #' timer$getStartTime("event1")
 #' timer$getStopTime("event1")
 #' timer$getDuration("event1")
 #' timer$getComment("event1")
 #' timer$getEvent("event1")
+#' 
 #' @importFrom R6 R6Class
 #' @export
 timeR <- R6::R6Class(

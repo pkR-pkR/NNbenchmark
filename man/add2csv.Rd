@@ -4,12 +4,18 @@
 \alias{add2csv}
 \title{Create or Append a data.frame to a csv File}
 \usage{
-add2csv(x, file = "results.csv")
+add2csv(x, file = "results.csv", dir = ".")
 }
 \arguments{
 \item{x}{a data.frame or a matrix.}
 
 \item{file}{character. The filename.}
+
+\item{dir}{character. The directory in which the file is written. 
+Default value \code{"."} is the current directory.}
+}
+\value{
+Nothing in the console. A csv file on the disk.
 }
 \description{
 Create or append a data.frame to a csv file. Column names are added at creation and 

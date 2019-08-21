@@ -8,7 +8,9 @@
 #' 
 #' @param   y_pred  vector of numeric. The predicted values.
 #' @param   y0      vector of numeric. The original values. 
-#' @param   dgts    integer. The rounding.  
+#' @param   dgts    integer. The rounding.
+#' @return  
+#' A numeric value, either the RMSE or the MAE.
 #' 
 #' @examples
 #' y0 <- 1:19

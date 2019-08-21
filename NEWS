@@ -3,10 +3,14 @@
 - Christophe Dutang, John Nash 
 
 
-
-NNbenchmark 2.3.2 - 2019-08-20 - sent to CRAN
+NNbenchmark 2.3.3 - 2019-08-21 - sent to CRAN
 =============================================
-- prepareZZ: extend donttest to most examples to run them in less than 5 seconds
+- DESCRIPTION: Modify the title 
+- All files: Add value to Rd files (return in roxygen comments) for every functions
+
+NNbenchmark 2.3.2 - 2019-08-20
+==============================
+- prepareZZ: extend donttest to run examples in less than 5 seconds
 
 NNbenchmark 2.3.1 - 2019-08-20
 ==============================

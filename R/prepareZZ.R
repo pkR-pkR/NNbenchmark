@@ -4,8 +4,9 @@
 #' @title Prepare a Dataset For All Possible Formats
 #' @description
 #' This function modifies a dataset to the format required by a training function: 
-#' data.frame, matrix or vector (numeric), pre-normalization. The output is a list with
-#' the following items:
+#' data.frame, matrix or vector (numeric), pre-normalization.
+#' @return
+#' The output is a list, usually named \code{ZZ}, with the following items:
 #' \itemize{
 #' \item{Zxy: the original or scaled Z in the desired format (data.frame, matrix).}
 #' \item{x: the original or scaled x in the desired format (data.frame, matrix, vector).}

@@ -10,7 +10,6 @@
 #' \code{lipoNN} uses the parameter \code{uni} to launch either \code{lines()} for an
 #' univariate dataset or \code{points()} for a multivariate dataset.
 #' 
-#' 
 #' See the examples in \code{\link{prepareZZ}}.
 #' 
 #' @param   xory     vector of numeric. The original x values for an univariate dataset 
@@ -22,6 +21,8 @@
 #'                   Equivalent to \code{if (TRUE/FALSE) plot()}.
 #' @param   ...      parameters passed to \code{plot()}, \code{lines()} or \code{points()}.
 #' @param   y_pred   vector of numeric. The values returned by the \code{predict()} function.
+#' @return
+#' NULL in the console. An initial plot or some added lines/points.
 #' 
 #' @export
 #' @name plotNN

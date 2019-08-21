@@ -20,6 +20,9 @@ resulting object. \code{m = Inf} prevents any extraction.}
 
 \item{l}{integer. Half-length of the list of the resulting object.}
 }
+\value{
+An object of the same class than x but much shorter.
+}
 \description{
 Concatenates \code{head(n)} and \code{tail(n)} rows and subset with m columns. 
 Works also with list.

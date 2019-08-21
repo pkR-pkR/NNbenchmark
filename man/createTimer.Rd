@@ -15,6 +15,10 @@ methods. Default to \code{TRUE}.}
 
 \item{object}{The name for timer object.}
 }
+\value{
+An (invisible) object of R6 class for \code{createTimer}. A data.frame for 
+\code{getTimer}.
+}
 \description{
 This is a modified version of the \code{timeR} package for an internal use. 
 Full credit is to Yifu Yan, the author of the \code{timeR} package.

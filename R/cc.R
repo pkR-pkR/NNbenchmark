@@ -8,6 +8,8 @@
 #' 
 #' @param   char      a vector of named objects, except a list.
 #' @param   ...       basic R objects: character, vectors, list, data.frame.
+#' @return  
+#' A list with the objects concatenated.
 #' 
 #' @examples
 #' lst <- list(yaxt = "s", side = 2, col = 1:3) ; lst
