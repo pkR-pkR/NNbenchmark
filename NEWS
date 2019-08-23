@@ -3,9 +3,13 @@
 - Christophe Dutang, John Nash 
 
 
+NNbenchmark 2.3.5 - 2019-08-22
+==============================
+- DESCRIPTION and a_intro.R: add the html links to GitHub and AkshajVerma.com
+
 NNbenchmark 2.3.4 - 2019-08-21 - sent to CRAN
 =============================================
-- DESCRIPTION: Modify the title to match title case recommanded by CRAN
+- DESCRIPTION: Modify the title to match title case (recommanded by CRAN)
 
 NNbenchmark 2.3.3 - 2019-08-21
 ==============================
