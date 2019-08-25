@@ -5,13 +5,13 @@ in 69 Neural Network R packages available on CRAN to date. Neural networks must 
 
 
 The purpose of this project is to verify the quality of the training algorithms in R packages that provide neural network of perceptron type (one input layer, one normalized layer, one hidden layer with nonlinear activation function usually tanh(), 
-one normalized layer, one output output layer) for regression purpose i.e. $NN(X1, ..., Xn) = E[Y]$ .
+one normalized layer, one output output layer) for regression purpose i.e. NN(X1, ..., Xn) = E[Y].
 
 
 
 # Packages Tested  
 
-is GSoC project will conduct a comprehensive survey of all packages that have the “neural network” keyword in thepackage title or in the package description. There are currently 69 packages on CRAN with this keyword.  
+This GSoC project will conduct a comprehensive survey of all packages that have the “neural network” keyword in thepackage title or in the package description. There are currently 69 packages on CRAN with this keyword.  
 
 
 |    []()       |               |               |               |               |               |
