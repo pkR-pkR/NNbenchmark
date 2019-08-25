@@ -35,7 +35,7 @@ This GSoC project will conduct a comprehensive survey of all packages that have 
 ***
 The algorithms were tested on 12 regression datasets (both univariate and multivariate) of varying complexity.  
 
-he score for each package was based on the following parameters:  
+The score for each package was based on the following parameters:  
 
 * Documentation (0-3 stars or a binary value of 0/1)
 * UtilFunction (0-3 stars or a binary value of 0/1)
