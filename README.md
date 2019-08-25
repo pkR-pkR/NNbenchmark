@@ -1,8 +1,8 @@
 # NNbenchmark
 
 NNbenchmark was created during the Google Summer of Code, 2019 as a part of The R Project for Statistical Computing, to verify the convergence of the training algorithms provided
-in 69 Neural Network R packages available on CRAN to date. Neural networks must be trained with second order algorithms and 
-not with first order algorithms as many packages seem to do. 
+in 69 Neural Network R packages available on CRAN to date. Neural networks must be trained with second order algorithms and not with first order algorithms as many packages seem to do. 
+
 
 The purpose of this project is to verify the quality of the training algorithms in R packages that provide neural network of perceptron type (one input layer, one normalized layer, one hidden layer with nonlinear activation function usually tanh(), 
 one normalized layer, one output output layer) for regression purpose i.e. $NN(X1, ..., Xn) = E[Y]$ .
