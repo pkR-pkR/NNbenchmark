@@ -56,6 +56,6 @@ To obtain the final rating, we take a weighted average of these 4 columns (givin
 
 ## Mentors:
 
-- Patrice Keiner  
+- Patrice Kiener  
 - Christophe Dutang
 - John C. Nash
