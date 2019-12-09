@@ -49,7 +49,7 @@ To obtain the final rating, we take a weighted average of these 4 columns (givin
 
 # Authors  
 
-## Students:
+## Selected Students:
 
 - Akshaj Verma
 - Salsabila Mahdi
