@@ -43,7 +43,7 @@ The score for each package was based on the following parameters:
 * ConvergenceTime (0-3 stars based on percentile method)
 
 
-To obtain the final rating, we take a weighted average of these 4 columns (giving more weight to ConvergenceQuality and ConvergenceTIme).
+To obtain the final rating, we take a weighted average of these 4 columns (giving more weight to ConvergenceQuality and ConvergenceTime).
 
 
 

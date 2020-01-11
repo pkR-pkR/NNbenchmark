@@ -6,6 +6,7 @@
 NNbenchmark 2.3.6 - 2020-01-11
 ==============================
 - ht() and ht9() fully rewritten. Accept now array and data.frame with matrices inside
+- README.md added
 
 NNbenchmark 2.3.5 - 2019-08-22
 ==============================
