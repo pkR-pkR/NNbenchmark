@@ -3,6 +3,10 @@
 - Christophe Dutang, John Nash 
 
 
+NNbenchmark 2.3.6 - 2020-01-11
+==============================
+- ht() and ht9() fully rewritten. Accept now array and data.frame with matrices inside
+
 NNbenchmark 2.3.5 - 2019-08-22
 ==============================
 - DESCRIPTION and a_intro.R: add the html links to GitHub and AkshajVerma.com

@@ -3,47 +3,71 @@
 \name{ht}
 \alias{ht}
 \alias{ht9}
-\title{Concatenates head() and tail() in vector, list, matrix, data.frame}
+\title{Concatenates head() and tail() in vector, list, matrix, data.frame, array}
 \usage{
-ht(x, n = 3, m = 4, l = 2)
+ht(x, n = 3, m = 4, p = 2, l = 2, names = TRUE, LTT = c("x",
+  "L", "N", "M", "P", "Q", "R", "S", "T"))
 
-ht9(x, n = 3, m = 999, l = 2)
+ht9(x, n = 3, m = 9999, p = 2, l = 2, names = TRUE,
+  LTT = c("x", "L", "N", "M", "P", "Q", "R", "S", "T"))
 }
 \arguments{
-\item{x}{vectors, matrix, data.frame or list.}
+\item{x}{vector, matrix, data.frame, array or list.}
 
-\item{n}{integer. Half-Length of vector or half-numer of lines (for matrix 
-and data.frame) of the resulting object.}
+\item{n}{integer. Cut in the first dimension.}
 
-\item{m}{integer. Half-number of columns (for matrix and data.frame) of the 
-resulting object. \code{m = Inf} prevents any extraction.}
+\item{m}{integer. Cut in the second dimension.}
 
-\item{l}{integer. Half-length of the list of the resulting object.}
+\item{p}{integer. Cut in the third and the next dimensions.}
+
+\item{l}{integer. Cut for a list and for data.frame with matrix inside.}
+
+\item{names}{logical. Provide names and numbers for undefined dimnames.}
+
+\item{LTT}{character. The letter used in each dimension (vector, list, array).}
 }
 \value{
 An object of the same class than x but much shorter.
 }
 \description{
 Concatenates \code{head(n)} and \code{tail(n)} rows and subset with m columns. 
-Works also with list.
+Works also with array, list and matrix in data.frame.
 }
 \examples{
-### ht
-vec <- 1:19
-ht(vec)
 
-dfr <- data.frame(A=1:19, B=21:39)
-ht(dfr)
+### Vector, data.frame, array
+ht(1:100, names = FALSE)
+ht(1:100, LTT = "z")
 
-mat <- matrix(1:200, ncol = 20)
-ht9(mat)
+ht9(mtcars); dim(mtcars)
 
+arr4 <- array(1:1680, c(8,7,6,5))
+ht(arr4, n=1, p=1, names = FALSE)
+ht(arr4, n=1, p=1, names = TRUE, LTT = c("x","L","X","Y","Z","T"))
 
-lst <- list(A = 11:13, B = 21:59, C = 31:69, 
-            D = 41:43, E = 51:88, G = 61:99, 
-            H = matrix(1:300, ncol = 15, dimnames = list(1:20, 1:15)))
-ht(lst)
-ht(lst, n = 2, m = 3, l = 2)
-ht9(lst, l = 2)
+### List of matrices
+lstmat <- rep(list(matrix(1:100, 10)), 8)
+for (i in seq_along(lstmat)) lstmat[[i]] <- lstmat[[i]] *i
+lstmat
+ht(lstmat, n = 2, m = 2, l = 2, names = FALSE)
+ht(lstmat, n = 2, m = 3, l = 1, names = TRUE)
+ht(lstmat, n = 2, m = 3, l = 1, LTT = c("x","L","X","Y","Z"))
+
+### Data.frame with matrices inside.
+### See For instance data("gasoline", package = "pls")
+
+## Colnames on matrix B but not on matrix C. Protected data.frame.
+B <- matrix(101:160, 10); colnames(B) <- paste0(1:6, "b"); B
+C <- matrix(101:160, 10); C
+dfrmat <- data.frame(A = 1:10, B = I(B), C = I(C), D = 11:20); dfrmat
+colnames(dfrmat)
+
+## Matrix columns are controlled by m.
+## Unnamed C matrix columns have old values but new names. Be aware!
+ht(dfrmat, n = 2, m = 1, l = 2, names = FALSE) # Original C.6 is now C.2
+ht(dfrmat, n = 2, m = 1, l = 2, names = TRUE)  # Names keep original ranks
+
+## Data.frame columns are controlled by l.
+ht(dfrmat, n = 3, m = 2, l = 1, names = TRUE)
 
 }
