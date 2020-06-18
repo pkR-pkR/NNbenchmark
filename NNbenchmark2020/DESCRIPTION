@@ -1,0 +1,17 @@
+Package: NNbenchmark
+Title: Datasets and Functions to Benchmark Neural Network Packages
+Description: Datasets and functions to benchmark (convergence, speed, ease of use) R packages dedicated to regression with neural networks (no classification in this version). The templates for the tested packages are available in R, Rmd and html formats at <https://github.com/pkR-pkR/NNbenchmarkTemplates> and <https://akshajverma.com/NNbenchmarkWeb>.
+Imports: R6, pkgload
+Suggests: brnn, validann
+Version: 2.3.6
+Date: 2020-01-11
+License: GPL-2
+Maintainer: Patrice Kiener <fattailsr@inmodelia.com>
+Author: Patrice Kiener [aut, cre],
+  Salsabila Mahdi [aut, ctb],
+  Akshaj Verma [aut, ctb],
+  Yifu Yan [aut]
+Encoding: UTF-8
+NeedsCompilation: no
+LazyData: true
+RoxygenNote: 6.1.1
