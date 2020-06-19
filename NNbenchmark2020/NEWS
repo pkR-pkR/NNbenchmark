@@ -2,6 +2,10 @@
 - Akshaj Verma, Salabila Mahdi, Patrice Kiener
 - Christophe Dutang, John Nash 
 
+NNbenchmark 2.3.7 - 2020-06-19
+==============================
+- Added MSE and WAE to funRMSE.R
+- Made a new R file: NNSummary.R for 2020 code
 
 NNbenchmark 2.3.6 - 2020-01-11
 ==============================

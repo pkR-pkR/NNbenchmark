@@ -5,11 +5,25 @@
 \alias{ht9}
 \title{Concatenates head() and tail() in vector, list, matrix, data.frame, array}
 \usage{
-ht(x, n = 3, m = 4, p = 2, l = 2, names = TRUE, LTT = c("x",
-  "L", "N", "M", "P", "Q", "R", "S", "T"))
+ht(
+  x,
+  n = 3,
+  m = 4,
+  p = 2,
+  l = 2,
+  names = TRUE,
+  LTT = c("x", "L", "N", "M", "P", "Q", "R", "S", "T")
+)
 
-ht9(x, n = 3, m = 9999, p = 2, l = 2, names = TRUE,
-  LTT = c("x", "L", "N", "M", "P", "Q", "R", "S", "T"))
+ht9(
+  x,
+  n = 3,
+  m = 9999,
+  p = 2,
+  l = 2,
+  names = TRUE,
+  LTT = c("x", "L", "N", "M", "P", "Q", "R", "S", "T")
+)
 }
 \arguments{
 \item{x}{vector, matrix, data.frame, array or list.}

@@ -2,31 +2,40 @@
 % Please edit documentation in R/funRMSE.R
 \name{funRMSE}
 \alias{funRMSE}
+\alias{funMSE}
 \alias{funMAE}
-\title{Calculate the RMSE and MAE, Round to 4 digits}
+\alias{funWAE}
+\title{Calculate the RMSE, MSE, MAE, and WAE Rounded to 4 digits}
 \usage{
 funRMSE(y_pred, y0, dgts = 4)
 
+funMSE(y_pred, y0, dgts = 4)
+
 funMAE(y_pred, y0, dgts = 4)
+
+funWAE(y_pred, y0, dgts = 4)
 }
 \arguments{
-\item{y_pred}{vector of numeric. The predicted values.}
+\item{y_pred}{numeric vector of the predicted values}
 
-\item{y0}{vector of numeric. The original values.}
+\item{y0}{numeric vector of the observed values}
 
-\item{dgts}{integer. The rounding.}
+\item{dgts}{integer value for how many digits to round to}
 }
 \value{
-A numeric value, either the RMSE or the MAE.
+A numeric value, either the RMSE, MSE, MAE, or WAE.
 }
 \description{
-Calculate the Root Means Square Error (RMSE) and the Mean Absoluter Error (MAE)
-and round the result, by default to 4 digits. Apply \code{na.rm = TRUE}
+Calculate the Root Mean Squared Error (RMSE), the Mean Squared Error (MSE), 
+the Mean Absoluter Error (MAE), and the Worst Absolute Error (WAE). The
+result is rounded to 4 digits by default. Apply \code{na.rm = TRUE}
 }
 \examples{
 y0 <- 1:19
 y_pred <- y0 + rnorm(length(y0), sd = 0.3)
 funRMSE(y_pred, y0)
+funMSE( y_pred, y0)
 funMAE( y_pred, y0)
+funWAE( y_pred, y0)
 
 }
