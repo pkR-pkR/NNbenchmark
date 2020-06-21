@@ -53,8 +53,8 @@ clearNN <- function (donotremove, donotdetach = NULL) {
            lapply(setdiff(search(), donotdetach), detach, unload = TRUE, 
                   character.only = TRUE, force = TRUE),
            warning = function(w) {})
-    while (length(setdiff(ls(.GlobalEnv), donotremove)) > 0) remove(           
-           list = setdiff(ls(.GlobalEnv), donotremove), envir = .GlobalEnv)
+#    while (length(setdiff(ls(.GlobalEnv), donotremove)) > 0) remove(           
+#          list = setdiff(ls(.GlobalEnv), donotremove), envir = .GlobalEnv)
 }
 
 
@@ -64,8 +64,8 @@ detachNN <- function (donotremove, donotdetach = "") {
     if (!is.element("ZZ", donotdetach)) {    
         while ("ZZ" %in% search()) detach("ZZ", character.only = TRUE)
     }
-    while (length(setdiff(ls(.GlobalEnv), donotremove)) > 0) remove(           
-           list = setdiff(ls(.GlobalEnv), donotremove), envir = .GlobalEnv)
+#    while (length(setdiff(ls(.GlobalEnv), donotremove)) > 0) remove(           
+#          list = setdiff(ls(.GlobalEnv), donotremove), envir = .GlobalEnv)
 }
 
 
