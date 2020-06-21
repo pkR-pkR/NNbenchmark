@@ -4,7 +4,7 @@ Description: Datasets and functions to benchmark (convergence, speed, ease of us
 Imports: R6, pkgload
 Suggests: brnn, validann
 Version: 3.0.0
-Date: 2020-06-19
+Date: 2020-06-21
 License: GPL-2
 Maintainer: Patrice Kiener <fattailsr@inmodelia.com>
 Author: Patrice Kiener [aut, cre],
