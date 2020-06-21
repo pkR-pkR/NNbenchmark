@@ -1,10 +1,16 @@
-## ht 2019-08-04. Rewritten in 2020-11-01
+## ht 2019-08-04. Rewritten in 2020-11-01 and in 2020-04-10
+
+
+## ht -> Voir package matsindf: Matrices in data frames
 
 
 #' @title Concatenates head() and tail() in vector, list, matrix, data.frame, array
+#' 
 #' @description
 #' Concatenates \code{head(n)} and \code{tail(n)} rows and subset with m columns. 
-#' Works also with array, list and matrix in data.frame.
+#' Works also with array, list and matrix in data.frame. 
+#' Keeps the data.table format (and add a timezone by default). 
+#' See the matsindf package for matrix(ces) in tibble.
 #' 
 #' @param   x      vector, matrix, data.frame, array or list.
 #' @param   n      integer. Cut in the first dimension.
@@ -82,11 +88,14 @@ ht <- function (x, n = 3, m = 4, p = 2, l = 2, names = TRUE,
 		## DATA.FRAME WITH MATRIX INSIDE
 			rn  <- rownames(x)
 			rnn <- rn[fun_ij(length(rn), n)]
-			message(cat("Matrix in data.frame with colnames", colnames(x)))
+			# message(cat("Matrix in data.frame with colnames", colnames(x)))
+			message(paste0("Matrix in data.frame. Colnames are: ", 
+			               paste(colnames(x), collapse=", "), 
+						   "."))
 			data.frame(ht(as.list(x), n=n, m=m, p=p, l=l, names=names, LTT=LTT),
 			           row.names = rnn)
         } else {
-		## MATRIX, ARRAY AND STANDARD DATA.FRAME
+		## MATRIX, ARRAY AND STANDARD DATA.FRAME. DATA.TABLE since 2020-04-10.
 			dd  <- dim(x)
 			LT3 <- LTT[-c(1,2)]
 			stopifnot(length(dd) <= length(LT3))
@@ -97,7 +106,11 @@ ht <- function (x, n = 3, m = 4, p = 2, l = 2, names = TRUE,
 			nmp    <- c(n, m, rep(p, length(dd)-2))
 			lstdc2 <- mapply(fun_ij, dd, nmp, SIMPLIFY = FALSE)
 			listx  <- c(list(x), lstdc2, drop = FALSE)
-			do.call(`[`, listx)
+			if (inherits(x, "data.table")) {
+				print(subset(x, select = lstdc2[[2]]), topn = n, timezone = TRUE)
+			} else { 
+				do.call(`[`, listx)
+			}
 		}
     }
 }
