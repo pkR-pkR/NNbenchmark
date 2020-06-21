@@ -22,8 +22,8 @@ A vector of RMSE, MSE, MAE, WAE, and time values for a single training.
 Summarize measures of fit and time for a single training. Measures of fit 
 include the Root Mean Squared Error (RMSE), the Mean Squared Error (MSE), 
 the Mean Absolute Error (MAE), and the Worst Absolute Error (WAE) rounded
-by default to 4 digits and set to \code{na.rm = TRUE}. See more at \code{funRMSE}. 
-The summary can also include the results of time from \code{getTimer} in
+by default to 4 digits and set to \code{na.rm = TRUE}. See more at \code{\link{funRMSE}}. 
+The summary can also include the results of time from \code{\link{getTimer}} in
 NNbenchmark or results of time from other functions/packages
 }
 \examples{

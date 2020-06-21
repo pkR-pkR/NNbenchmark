@@ -2,10 +2,14 @@
 - Akshaj Verma, Salabila Mahdi, Patrice Kiener
 - Christophe Dutang, John Nash 
 
+NNbenchmark 3.0.0 - 2020-06-21
+==============================
+- NNTrain_Predict.R for NEW 2020 code do.call() implementation to train and predict NNs
+
 NNbenchmark 2.3.7 - 2020-06-19
 ==============================
 - Added MSE and WAE to funRMSE.R
-- Made a new R file: NNSummary.R for 2020 code
+- Made a new R file: NNSummary.R for 2020 summary function
 
 NNbenchmark 2.3.6 - 2020-01-11
 ==============================

@@ -14,4 +14,4 @@ Author: Patrice Kiener [aut, cre],
 Encoding: UTF-8
 NeedsCompilation: no
 LazyData: true
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.0
