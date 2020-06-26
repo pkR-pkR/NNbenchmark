@@ -3,7 +3,7 @@
 \name{timestart}
 \alias{timestart}
 \alias{timediff}
-\title{Collect the difftime between 2 intervals}
+\title{Collect the difftime between two events}
 \usage{
 timestart()
 
@@ -13,7 +13,14 @@ timediff()
 A single numeric value that represents a duration in seconds.
 }
 \description{
+\code{timestart} starts the timer and saved the value in an object named 
+\code{time0} stored in \code{.GlobalEnv}.
 
+\code{timediff} stops the timer, remove the \code{time0} objet from \code{.GlobalEnv}
+and prints the duration in seconds between the two events.
+
+\code{timestart} and \code{timediff} are fully independant from  the R6 class
+\code{timeR} and the objects \code{createTimer} or \code{getTimer}.
 }
 \examples{
 timestart()
