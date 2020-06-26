@@ -4,10 +4,13 @@
 
 
 
+NNbenchmark 3.0.1 - 2020-06-26
+==============================
+- DESCRIPTION: Roxygen: list(old_usage = TRUE)
 
 
 NNbenchmark 3.0.0 - 2020-06-21 (Bila + Patrice)
-=====================================
+===============================================
 - NNTrain_Predict.R for NEW 2020 code do.call() implementation to train and predict NNs
 - Move NNbenchmark2020 to top directory. This is new NNbenchmark
 - Move NNbenchmark2019 to a new directory
