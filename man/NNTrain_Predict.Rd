@@ -6,46 +6,16 @@
 \alias{train_predict_1data}
 \title{Generic Functions for Training and Predicting}
 \usage{
-train_predict_1mth_1data(
-  dset,
-  method,
-  trainFUN,
-  hyperparamFUN,
-  predictFUN,
-  summaryFUN,
-  prepareZZ.arg = list(),
-  nrep = 5,
-  doplot = FALSE,
-  plot.arg = list(col1 = 1:nrep, lwd1 = 1, col2 = 4, lwd2 = 3),
-  pkgname,
-  pkgfun,
-  rdafile = FALSE,
-  odir = "~/",
-  echo = FALSE,
-  echoreport = 1,
-  ...
-)
+train_predict_1mth_1data(dset, method, trainFUN, hyperparamFUN, predictFUN,
+  summaryFUN, prepareZZ.arg = list(), nrep = 5, doplot = FALSE,
+  plot.arg = list(col1 = 1:nrep, lwd1 = 1, col2 = 4, lwd2 = 3), pkgname,
+  pkgfun, rdafile = FALSE, odir = "~/", echo = FALSE, echoreport = 1,
+  ...)
 
-train_predict_1data(
-  dset,
-  methodlist,
-  trainFUN,
-  hyperparamFUN,
-  predictFUN,
-  summaryFUN,
-  closeFUN,
-  startNN = NA,
-  prepareZZ.arg = list(),
-  nrep = 5,
-  doplot = FALSE,
-  plot.arg = list(),
-  pkgname = "pkg",
-  pkgfun = "train",
-  rdafile = FALSE,
-  odir = "~/",
-  echo = FALSE,
-  ...
-)
+train_predict_1data(dset, methodlist, trainFUN, hyperparamFUN, predictFUN,
+  summaryFUN, closeFUN, startNN = NA, prepareZZ.arg = list(), nrep = 5,
+  doplot = FALSE, plot.arg = list(), pkgname = "pkg", pkgfun = "train",
+  rdafile = FALSE, odir = "~/", echo = FALSE, ...)
 }
 \arguments{
 \item{dset}{a number or string indicating which dataset to use, see \code{\link{NNdataSummary}}}

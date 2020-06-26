@@ -7,6 +7,7 @@
 NNbenchmark 3.0.1 - 2020-06-26
 ==============================
 - DESCRIPTION: Roxygen: list(old_usage = TRUE)
+- timestart(), timediff()
 
 
 NNbenchmark 3.0.0 - 2020-06-21 (Bila + Patrice)

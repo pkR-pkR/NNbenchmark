@@ -158,15 +158,9 @@ timer$getEvent("event1")
 \if{latex}{\out{\hypertarget{method-stop}{}}}
 \subsection{Method \code{stop()}}{
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{timeR$stop(
-  eventName,
-  RMSE = NA_real_,
-  MAE = NA_real_,
-  stars = NA_character_,
-  params = NA_character_,
-  comment = NA_character_,
-  printmsg = TRUE
-)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{timeR$stop(eventName, RMSE = NA_real_, MAE = NA_real_,
+  stars = NA_character_, params = NA_character_, comment = NA_character_,
+  printmsg = TRUE)}\if{html}{\out{</div>}}
 }
 
 }
