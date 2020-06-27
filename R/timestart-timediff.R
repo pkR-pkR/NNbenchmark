@@ -13,6 +13,7 @@
 #' \code{timestart} and \code{timediff} are fully independant from  the R6 class
 #' \code{timeR} and the objects \code{createTimer} or \code{getTimer}. 
 #' 
+#' @param   dgts    integer. The number of digits left after rounding.
 #' @return   
 #' A single numeric value that represents a duration in seconds. 
 #' 
@@ -31,11 +32,11 @@ timestart <- function() {
 
 #' @export
 #' @rdname timestart
-timediff <- function() {
+timediff <- function(dgts = 2) {
    t1 <- proc.time()["elapsed"]
    t0 <- get("time0", envir = .GlobalEnv)
    remove("time0", envir = .GlobalEnv)
-   unname(t1 - t0)
+   unname(round(t1 - t0, dgts))
 }
 
 
