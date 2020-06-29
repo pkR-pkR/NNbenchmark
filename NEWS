@@ -2,12 +2,15 @@
 - Akshaj Verma, Salabila Mahdi, Patrice Kiener
 - Christophe Dutang, John Nash 
 
+NNbenchmark 3.0.2 - 2020-06-29
+==============================
+- adjusted NNtrainPredict and NNsummary functions to new timing functions
 
 
 NNbenchmark 3.0.1 - 2020-06-27
 ==============================
 - DESCRIPTION: Roxygen: list(old_usage = TRUE)
-- timestart(), timediff(dgts = 2)
+- timestart(), timediff()
 
 
 NNbenchmark 3.0.0 - 2020-06-21 (Bila + Patrice)

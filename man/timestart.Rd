@@ -20,7 +20,8 @@ A single numeric value that represents a duration in seconds.
 and prints the duration in seconds between the two events.
 
 \code{timestart} and \code{timediff} are fully independant from  the R6 class
-\code{timeR} and the objects \code{createTimer} or \code{getTimer}.
+\code{timeR} and the objects \code{createTimer} or \code{getTimer}. They use
+\code{\link{proc.time}} instead.
 }
 \examples{
 timestart()

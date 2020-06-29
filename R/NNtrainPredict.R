@@ -6,11 +6,11 @@
 #' An implementation of \code{do.call} so any neural network function that fits 
 #' the format can be tested. 
 #' 
-#' In \code{train_predict_1mth_1data}, a neural network is trained on one dataset
+#' In \code{trainPredict_1mth1data}, a neural network is trained on one dataset
 #' and then used for predictions, with several functionalities. Then, the performance 
 #' of the neural network is summarized.
 #' 
-#' \code{train_predict_1data} serves a wrapper function for \code{train_predict_1mth_1data} 
+#' \code{trainPredict_1data} serves as a wrapper function for \code{trainPredict_1mth1data} 
 #' for multiple methods.
 #' 
 #' 
@@ -20,11 +20,11 @@
 #' @param   trainFUN        the training function used
 #' @param   hyperparamFUN   the function resulting in parameters needed for training
 #' @param   predictFUN      the prediction function used
-#' @param   summaryFUN      measure performance by observed and predicted y values, \code{\link{NNSummary}} is ready to use 
+#' @param   summaryFUN      measure performance by observed and predicted y values, \code{\link{NNsummary}} is ready to use 
 #' @param   closeFUN        a function to detach packages or other necessary environment clearing
 #' @param   startNN         a function to start needed outside libraries, for example, h2o
 #' @param   prepareZZ.arg   list of arguments for \code{\link{prepareZZ}}
-#' @param   nrep            a number for how many times a neural network should be trained
+#' @param   nrep            a number for how many times a neural network should be trained with a package/function
 #' @param   doplot          logical value, TRUE executes plots and FALSE does not
 #' @param   plot.arg        list of arguments for plots
 #' @param   pkgname         package name
@@ -35,15 +35,15 @@
 #' @param   echoreport      separates training between packages with some text
 #' @param   ...             additional arguments
 #' @return  
-#' A vector as in NNSummary for train_predict_1mth_1data and an array for train_predict_1data
+#' A vector as in NNsummary for trainPredict_1mth1data and an array for trainPredict_1data
 #' 
 #' @example 
-#' Available at 
+#' #Available at 
 #'
 #' @importFrom stats lm
 #' @export
-#' @name NNTrain_Predict
-train_predict_1mth_1data <- function(dset, method, trainFUN, hyperparamFUN, predictFUN, summaryFUN,
+#' @name NNtrainPredict
+trainPredict_1mth1data <- function(dset, method, trainFUN, hyperparamFUN, predictFUN, summaryFUN,
                                      prepareZZ.arg=list(),
                                      nrep=5, doplot=FALSE, plot.arg=list(col1=1:nrep, lwd1=1, col2=4, lwd2=3),
                                      pkgname, pkgfun, rdafile=FALSE, odir="~/", echo=FALSE, echoreport=1, ...)
@@ -60,8 +60,6 @@ train_predict_1mth_1data <- function(dset, method, trainFUN, hyperparamFUN, pred
     stop(paste("function", trainFUN, "does not exist"))
   if(!exists(predictFUN))
     stop(paste("function", predictFUN, "does not exist"))
-  
-  timer  <- createTimer(verbose = FALSE)
   
   ds     <- NNbenchmark::NNdatasets[[dset]]$ds
   Z      <- NNbenchmark::NNdatasets[[dset]]$Z
@@ -89,7 +87,7 @@ train_predict_1mth_1data <- function(dset, method, trainFUN, hyperparamFUN, pred
   allsummary <- list()
   for(i in 1:nrep)
   {
-    timer$start(descr)
+    timestart()
     tempfit <- tryCatch(
       do.call(trainFUN, list(ZZ$x, ZZ$y, ZZ$Zxy, ZZ$fmla, neur, method,  hyperparamFUN, fmlaNN, nparNN)),
       error = function(y) {lm(y ~ 0, data = ZZ$Zxy)}
@@ -134,11 +132,11 @@ train_predict_1mth_1data <- function(dset, method, trainFUN, hyperparamFUN, pred
         Ypred[[i]] <- rep(ZZ$ym0, length.out=NROW(ZZ$x))
       
     }
-    timer$stop(descr, RMSE = NA, MAE = NA, params = NA, printmsg = FALSE)
-    allsummary[[i]] <- summaryFUN(Ypred[[i]], ZZ$y0, 4, round(getTimer(timer)[ ,4], 5))
+    time <- timediff()
+    allsummary[[i]] <- summaryFUN(Ypred[[i]], ZZ$y0, time, 4)
     
     if(echo && i %% 5 == 0)
-      cat(pkgname, pkgfun, method, "i", i, "summary statistics", allsummary[[i]][1:3], "time", allsummary[[i]]["time"], "\n")
+      cat(pkgname, pkgfun, method, "i", i, "summary statistics", allsummary[[i]][1:4], "time", allsummary[[i]]["time"], "\n")
     
   }
   names(Ypred) <- names(allsummary) <- paste0("replicate", 1:nrep)
@@ -183,8 +181,8 @@ train_predict_1mth_1data <- function(dset, method, trainFUN, hyperparamFUN, pred
 }
 
 #' @export
-#' @rdname NNTrain_Predict
-train_predict_1data <- function(dset, methodlist, trainFUN, hyperparamFUN, predictFUN, summaryFUN, 
+#' @rdname NNtrainPredict
+trainPredict_1data <- function(dset, methodlist, trainFUN, hyperparamFUN, predictFUN, summaryFUN, 
                                 closeFUN, startNN=NA, prepareZZ.arg=list(),
                                 nrep=5, doplot=FALSE, plot.arg=list(),
                                 pkgname="pkg", pkgfun="train", rdafile=FALSE, odir="~/", echo=FALSE, ...)
@@ -241,7 +239,7 @@ train_predict_1data <- function(dset, methodlist, trainFUN, hyperparamFUN, predi
     }
     
     resallmethod <- sapply(1:length(methodlist), function(i)
-      train_predict_1mth_1data(dset=dset, method=methodlist[i], trainFUN=trainFUN, hyperparamFUN=hyperparamFUN, 
+      trainPredict_1mth1data(dset=dset, method=methodlist[i], trainFUN=trainFUN, hyperparamFUN=hyperparamFUN, 
                                    predictFUN=predictFUN, summaryFUN=summaryFUN, 
                                    prepareZZ.arg=prepareZZ.arg, nrep=nrep, doplot=doplot,
                                    pkgname=pkgname, pkgfun=pkgfun, rdafile=rdafile, odir=odir, 
@@ -280,7 +278,7 @@ train_predict_1data <- function(dset, methodlist, trainFUN, hyperparamFUN, predi
         require(pkgname[j], character.only = TRUE)
       
       resallmethod <- sapply(1:length(mymethod), function(i)
-        train_predict_1mth_1data(dset=dset, method=mymethod[i], trainFUN=trainFUN[j], hyperparamFUN=hyperparamFUN[j], 
+        trainPredict_1mth1data(dset=dset, method=mymethod[i], trainFUN=trainFUN[j], hyperparamFUN=hyperparamFUN[j], 
                                      predictFUN=predictFUN[j], 
                                      summaryFUN=summaryFUN, prepareZZ.arg=prepareZZ.arg[[j]], 
                                      nrep=nrep, doplot=doplot, pkgname=pkgname[j], pkgfun=pkgfun[j], rdafile=rdafile, 

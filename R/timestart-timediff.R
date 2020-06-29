@@ -11,9 +11,9 @@
 #' and prints the duration in seconds between the two events.
 #' 
 #' \code{timestart} and \code{timediff} are fully independant from  the R6 class
-#' \code{timeR} and the objects \code{createTimer} or \code{getTimer}. 
+#' \code{timeR} and the objects \code{createTimer} or \code{getTimer}. They use
+#' \code{\link{proc.time}} instead.
 #' 
-#' @param   dgts    integer. The number of digits left after rounding.
 #' @return   
 #' A single numeric value that represents a duration in seconds. 
 #' 
@@ -32,11 +32,11 @@ timestart <- function() {
 
 #' @export
 #' @rdname timestart
-timediff <- function(dgts = 2) {
+timediff <- function() {
    t1 <- proc.time()["elapsed"]
    t0 <- get("time0", envir = .GlobalEnv)
    remove("time0", envir = .GlobalEnv)
-   unname(round(t1 - t0, dgts))
+   unname(t1 - t0)
 }
 
 

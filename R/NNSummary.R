@@ -8,16 +8,17 @@
 #' the Mean Absolute Error (MAE), and the Worst Absolute Error (WAE) rounded
 #' by default to 4 digits and set to \code{na.rm = TRUE}. See more at \code{\link{funRMSE}}. 
 #' The summary can also include the results of time from \code{\link{getTimer}} in
-#' NNbenchmark or results of time from other functions/packages
+#' NNbenchmark or the result of \code{\link{timediff}}.
 #' 
 #' @param   y_pred  numeric vector of the predicted values
-#' @param   y0      numeric vector of the observed values 
-#' @param   dgts    integer value for how many digits to round to
-#' @param   time    numeric value of time
+#' @param   y0      numeric vector of the observed values
+#' @param   time    numeric value of time 
+#' @param   dgts    integer value for how many digits to round to for measures of fit
 #' @return  
-#' A vector of RMSE, MSE, MAE, WAE, and time values for a single training.
+#' A vector of RMSE, MSE, MAE, WAE, and time values for a single iteration.
 #' 
 #' @examples
+#' #with legacy code, no longer usable with 2020 trainPredict
 #' options("digits.secs" = 4)
 #' timeTT <- createTimer()
 #' 
@@ -28,11 +29,19 @@
 #' 
 #' time <- getTimer(timeTT)
 #' 
-#' NNSummary(y_pred, y0, 4, time[,4])
+#' NNsummary(y_pred, y0, time[,4], 4)
 #' 
+#' #with 2020 code
+#' timestart()
+#' y0 <- 1:19
+#' y_pred <- y0 + rnorm(length(y0), sd = 0.3)
+#' time <- timediff()
+#'
+#' NNsummary(y_pred, y0, time, 4)
+#'   
 #' @export
-#' @name NNSummary
-NNSummary <- function(y_pred, y0, dgts = 4, time) {
+#' @name NNsummary
+NNsummary <- function(y_pred, y0, time, dgts = 4) {
   c(RMSE = funRMSE(y_pred, y0, dgts), 
     MSE  = funMSE( y_pred, y0, dgts), 
     MAE  = funMAE( y_pred, y0, dgts), 
