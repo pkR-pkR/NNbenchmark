@@ -28,25 +28,27 @@
 #' @param   doplot          logical value, TRUE executes plots and FALSE does not
 #' @param   plot.arg        list of arguments for plots
 #' @param   pkgname         package name
-#' @param   pkgfun          package function to train neural network
-#' @param   rdafile         logical value, 
-#' @param   odir            directory
-#' @param   echo            logical value, print summary if TRUE
-#' @param   echoreport      separates training between packages with some text
+#' @param   pkgfun          name of the package function to train neural network
+#' @param   csvfile         logical value, adds summary to csv files per dataset if TRUE
+#' @param   rdafile         logical value, outputs rdafile of predictions and summary if TRUE
+#' @param   odir            output directory
+#' @param   echo            logical value, separates training between packages with some text and enables echoreport if TRUE
+#' @param   echoreport      logical value, detailed reports are printed (such as model summaries and str(data)) if TRUE, will not work if echo is FALSE
 #' @param   ...             additional arguments
 #' @return  
-#' A vector as in NNsummary for trainPredict_1mth1data and an array for trainPredict_1data
+#' An array with values as in NNsummary including each repetition, with options for plots and output files
 #' 
 #' @example 
-#' #Available at 
+#' #Available at the template repo
 #'
 #' @importFrom stats lm
 #' @export
 #' @name NNtrainPredict
 trainPredict_1mth1data <- function(dset, method, trainFUN, hyperparamFUN, predictFUN, summaryFUN,
-                                     prepareZZ.arg=list(),
-                                     nrep=5, doplot=FALSE, plot.arg=list(col1=1:nrep, lwd1=1, col2=4, lwd2=3),
-                                     pkgname, pkgfun, rdafile=FALSE, odir="~/", echo=FALSE, echoreport=1, ...)
+                                   prepareZZ.arg=list(),
+                                   nrep=5, doplot=FALSE, plot.arg=list(col1=1:nrep, lwd1=1, col2=4, lwd2=3),
+                                   pkgname, pkgfun, csvfile=FALSE, rdafile=FALSE, odir="~/", 
+                                   echo=FALSE, echoreport=1, ...)
 {
   method <- method[1]
   if(!is.list(plot.arg) || any(!names(plot.arg) %in% c("col1", "lwd1", "col2", "lwd2")))
@@ -152,7 +154,13 @@ trainPredict_1mth1data <- function(dset, method, trainFUN, hyperparamFUN, predic
     }
   allsummary <- simplify2array(allsummary)
   
-  best <- which.min(allsummary["RMSE",])
+  #adds outputs to csv files for results
+  if(csvfile){
+    descr  <- paste0(ds, "_", pkgname, "::", pkgfun, "_", method)
+    event <- c(paste0(descr, sprintf("_%.2d", 1:nrep)))
+    csvsummary <- cbind.data.frame(event, t(allsummary))
+    add2csv(csvsummary, file = paste0(odir, ds, "-results.csv"))
+  }
   
   #outputs to file
   if(rdafile)
@@ -171,13 +179,14 @@ trainPredict_1mth1data <- function(dset, method, trainFUN, hyperparamFUN, predic
     for (i in 1:nrep) 
       lipoNN(ZZ$xory, Ypred[,i], ZZ$uni, doplot, col = plot.arg$col1[i], lwd = plot.arg$lwd1)
     
+    best <- which.min(allsummary["RMSE",])
     plotNN(ZZ$xory, ZZ$y0, ZZ$uni, doplot, main = descr)
     lipoNN(ZZ$xory, Ypred[,best], ZZ$uni, doplot, col = plot.arg$col2, lwd = plot.arg$lwd2)
     par(op)
   }
   if(echo)
     cat("\n")
-  allsummary[,best]
+  allsummary
 }
 
 #' @export
@@ -185,7 +194,7 @@ trainPredict_1mth1data <- function(dset, method, trainFUN, hyperparamFUN, predic
 trainPredict_1data <- function(dset, methodlist, trainFUN, hyperparamFUN, predictFUN, summaryFUN, 
                                 closeFUN, startNN=NA, prepareZZ.arg=list(),
                                 nrep=5, doplot=FALSE, plot.arg=list(),
-                                pkgname="pkg", pkgfun="train", rdafile=FALSE, odir="~/", echo=FALSE, ...)
+                                pkgname="pkg", pkgfun="train", csvfile = FALSE, rdafile=FALSE, odir="~/", echo=FALSE, ...)
 {
   nbpkg <- length(pkgname)
   #sanity check
@@ -242,7 +251,7 @@ trainPredict_1data <- function(dset, methodlist, trainFUN, hyperparamFUN, predic
       trainPredict_1mth1data(dset=dset, method=methodlist[i], trainFUN=trainFUN, hyperparamFUN=hyperparamFUN, 
                                    predictFUN=predictFUN, summaryFUN=summaryFUN, 
                                    prepareZZ.arg=prepareZZ.arg, nrep=nrep, doplot=doplot,
-                                   pkgname=pkgname, pkgfun=pkgfun, rdafile=rdafile, odir=odir, 
+                                   pkgname=pkgname, pkgfun=pkgfun, csvfile=csvfile, rdafile=rdafile, odir=odir, 
                                    echo=echo, ...))
     
     if(!exists(closeFUN))
@@ -281,7 +290,8 @@ trainPredict_1data <- function(dset, methodlist, trainFUN, hyperparamFUN, predic
         trainPredict_1mth1data(dset=dset, method=mymethod[i], trainFUN=trainFUN[j], hyperparamFUN=hyperparamFUN[j], 
                                      predictFUN=predictFUN[j], 
                                      summaryFUN=summaryFUN, prepareZZ.arg=prepareZZ.arg[[j]], 
-                                     nrep=nrep, doplot=doplot, pkgname=pkgname[j], pkgfun=pkgfun[j], rdafile=rdafile, 
+                                     nrep=nrep, doplot=doplot, pkgname=pkgname[j], pkgfun=pkgfun[j], 
+                                     csvfile = csvfile, rdafile=rdafile, 
                                      odir=odir, echo=echo, ...))
       
       if(!exists(closeFUN[j]))

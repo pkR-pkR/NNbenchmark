@@ -13,7 +13,7 @@ NNsummary(y_pred, y0, time, dgts = 4)
 
 \item{time}{numeric value of time}
 
-\item{dgts}{integer value for how many digits to round to for measures of fit}
+\item{dgts}{integer value for how many digits to round to, see \code{\link{round}}}
 }
 \value{
 A vector of RMSE, MSE, MAE, WAE, and time values for a single iteration.

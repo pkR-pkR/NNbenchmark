@@ -2,6 +2,11 @@
 - Akshaj Verma, Salabila Mahdi, Patrice Kiener
 - Christophe Dutang, John Nash 
 
+NNbenchmark 3.0.3 - 2020-06-29
+==============================
+- NNtrainPredict now has the options for csv outputs, same as 2019 legacy code
+- round time objects in NNsummary
+
 NNbenchmark 3.0.2 - 2020-06-29
 ==============================
 - adjusted NNtrainPredict and NNsummary functions to new timing functions

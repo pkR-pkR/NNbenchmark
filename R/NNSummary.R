@@ -13,7 +13,7 @@
 #' @param   y_pred  numeric vector of the predicted values
 #' @param   y0      numeric vector of the observed values
 #' @param   time    numeric value of time 
-#' @param   dgts    integer value for how many digits to round to for measures of fit
+#' @param   dgts    integer value for how many digits to round to, see \code{\link{round}}
 #' @return  
 #' A vector of RMSE, MSE, MAE, WAE, and time values for a single iteration.
 #' 
@@ -46,7 +46,7 @@ NNsummary <- function(y_pred, y0, time, dgts = 4) {
     MSE  = funMSE( y_pred, y0, dgts), 
     MAE  = funMAE( y_pred, y0, dgts), 
     WAE  = funWAE( y_pred, y0, dgts), 
-    time = time)
+    time = round(time, dgts))
 }
 
 

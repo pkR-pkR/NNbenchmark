@@ -9,13 +9,13 @@
 trainPredict_1mth1data(dset, method, trainFUN, hyperparamFUN, predictFUN,
   summaryFUN, prepareZZ.arg = list(), nrep = 5, doplot = FALSE,
   plot.arg = list(col1 = 1:nrep, lwd1 = 1, col2 = 4, lwd2 = 3), pkgname,
-  pkgfun, rdafile = FALSE, odir = "~/", echo = FALSE, echoreport = 1,
-  ...)
+  pkgfun, csvfile = FALSE, rdafile = FALSE, odir = "~/", echo = FALSE,
+  echoreport = 1, ...)
 
 trainPredict_1data(dset, methodlist, trainFUN, hyperparamFUN, predictFUN,
   summaryFUN, closeFUN, startNN = NA, prepareZZ.arg = list(), nrep = 5,
   doplot = FALSE, plot.arg = list(), pkgname = "pkg", pkgfun = "train",
-  rdafile = FALSE, odir = "~/", echo = FALSE, ...)
+  csvfile = FALSE, rdafile = FALSE, odir = "~/", echo = FALSE, ...)
 }
 \arguments{
 \item{dset}{a number or string indicating which dataset to use, see \code{\link{NNdataSummary}}}
@@ -40,15 +40,17 @@ trainPredict_1data(dset, methodlist, trainFUN, hyperparamFUN, predictFUN,
 
 \item{pkgname}{package name}
 
-\item{pkgfun}{package function to train neural network}
+\item{pkgfun}{name of the package function to train neural network}
 
-\item{rdafile}{logical value,}
+\item{csvfile}{logical value, adds summary to csv files per dataset if TRUE}
 
-\item{odir}{directory}
+\item{rdafile}{logical value, outputs rdafile of predictions and summary if TRUE}
 
-\item{echo}{logical value, print summary if TRUE}
+\item{odir}{output directory}
 
-\item{echoreport}{separates training between packages with some text}
+\item{echo}{logical value, separates training between packages with some text and enables echoreport if TRUE}
+
+\item{echoreport}{logical value, detailed reports are printed (such as model summaries and str(data)) if TRUE, will not work if echo is FALSE}
 
 \item{...}{additional arguments}
 
@@ -59,7 +61,7 @@ trainPredict_1data(dset, methodlist, trainFUN, hyperparamFUN, predictFUN,
 \item{startNN}{a function to start needed outside libraries, for example, h2o}
 }
 \value{
-A vector as in NNsummary for trainPredict_1mth1data and an array for trainPredict_1data
+An array with values as in NNsummary including each repetition, with options for plots and output files
 }
 \description{
 An implementation of \code{do.call} so any neural network function that fits 
