@@ -2,6 +2,12 @@
 - Akshaj Verma, Salabila Mahdi, Patrice Kiener
 - Christophe Dutang, John Nash 
 
+NNbenchmark 3.0.4 - 2020-07-03
+==============================
+- remove commented traces
+- add an argument to trainPredict_1mth1data()
+- add mWoodG1 rda file (Simon Wood's GAM test file for Gaussian family)
+
 NNbenchmark 3.0.3 - 2020-06-29
 ==============================
 - NNtrainPredict now has the options for csv outputs, same as 2019 legacy code
@@ -41,7 +47,7 @@ NNbenchmark 2.3.5 - 2019-08-22
 
 NNbenchmark 2.3.4 - 2019-08-21 - sent to CRAN
 =============================================
-- DESCRIPTION: Modify the title to match title case (recommanded by CRAN)
+- DESCRIPTION: Modify the title to match title case (recommended by CRAN)
 
 NNbenchmark 2.3.3 - 2019-08-21
 ==============================

@@ -1,9 +1,9 @@
-## NNTrain_Predict 2020-06-19
+## NNTrain_Predict 2020-07-03
 
 
 #' @title Generic Functions for Training and Predicting
 #' @description
-#' An implementation of \code{do.call} so any neural network function that fits 
+#' An implementation with \code{\link{do.call}} so that any neural network function that fits 
 #' the format can be tested. 
 #' 
 #' In \code{trainPredict_1mth1data}, a neural network is trained on one dataset
@@ -13,10 +13,15 @@
 #' \code{trainPredict_1data} serves as a wrapper function for \code{trainPredict_1mth1data} 
 #' for multiple methods.
 #' 
+#' \code{trainPredict_1pkg} serves as a wrapper function for \code{trainPredict_1mth1data} 
+#' for multiple datasets.
+#' 
 #' 
 #' @param   dset            a number or string indicating which dataset to use, see \code{\link{NNdataSummary}} 
+#' @param   dsetnum         a vector of numbers indicating which dataset to use in \code{\link{NNdataSummary}} 
 #' @param   method          a method for a particular function
 #' @param   methodlist      list of methods per package/function
+#' @param   methodvect      vector of methods per package/function
 #' @param   trainFUN        the training function used
 #' @param   hyperparamFUN   the function resulting in parameters needed for training
 #' @param   predictFUN      the prediction function used
@@ -34,6 +39,7 @@
 #' @param   odir            output directory
 #' @param   echo            logical value, separates training between packages with some text and enables echoreport if TRUE
 #' @param   echoreport      logical value, detailed reports are printed (such as model summaries and str(data)) if TRUE, will not work if echo is FALSE
+#' @param   appendcsv       logical value, if \code{TRUE}, the csv output is appended to the csv file. 
 #' @param   ...             additional arguments
 #' @return  
 #' An array with values as in NNsummary including each repetition, with options for plots and output files
@@ -48,7 +54,7 @@ trainPredict_1mth1data <- function(dset, method, trainFUN, hyperparamFUN, predic
                                    prepareZZ.arg=list(),
                                    nrep=5, doplot=FALSE, plot.arg=list(col1=1:nrep, lwd1=1, col2=4, lwd2=3),
                                    pkgname, pkgfun, csvfile=FALSE, rdafile=FALSE, odir="~/", 
-                                   echo=FALSE, echoreport=1, ...)
+                                   echo=FALSE, echoreport=1, appendcsv=TRUE, ...)
 {
   method <- method[1]
   if(!is.list(plot.arg) || any(!names(plot.arg) %in% c("col1", "lwd1", "col2", "lwd2")))
@@ -159,7 +165,13 @@ trainPredict_1mth1data <- function(dset, method, trainFUN, hyperparamFUN, predic
     descr  <- paste0(ds, "_", pkgname, "::", pkgfun, "_", method)
     event <- c(paste0(descr, sprintf("_%.2d", 1:nrep)))
     csvsummary <- cbind.data.frame(event, t(allsummary))
-    add2csv(csvsummary, file = paste0(odir, ds, "-results.csv"))
+    
+    if(appendcsv)
+      fname <- paste0(odir, ds, "-results.csv")
+    else
+      fname <- paste0(odir, ds, "_", pkgname, "_", pkgfun, "_", method, "-results.csv")
+    
+    add2csv(csvsummary, file = fname)
   }
   
   #outputs to file
@@ -239,8 +251,6 @@ trainPredict_1data <- function(dset, methodlist, trainFUN, hyperparamFUN, predic
       do.call(startNN, list())
     }else
     {
-      #cat("blii\n")
-      #print(pkgname[1])
       #print(search())
       x <- require(pkgname[1], character.only = TRUE)
       #print(search())
@@ -310,4 +320,79 @@ trainPredict_1data <- function(dset, methodlist, trainFUN, hyperparamFUN, predic
 }
 
 
+
+#' @export
+#' @rdname NNtrainPredict
+trainPredict_1pkg <- function(dsetnum, pkgname="pkg", pkgfun="train", methodvect, prepareZZ.arg=list(),
+                              summaryFUN, nrep=5, doplot=FALSE, plot.arg=list(),
+                              csvfile = FALSE, rdafile=FALSE, odir="~/", echo=FALSE, 
+                              appendcsv=TRUE, ...)
+{
+  #sanity check
+  if(length(pkgname) != 1 )
+    stop("wrong pkgname")
+  
+  trainFUN <- paste("NNtrain", pkgname, sep=".")
+  hyperparamFUN <- paste("hyperParams", pkgname, sep=".")
+  predictFUN <- paste("NNpredict", pkgname, sep=".")
+  closeFUN <- paste("NNclose", pkgname, sep=".")
+  startNN <- paste("NNstart", pkgname, sep=".")
+  if(missing(summaryFUN))
+    summaryFUN <- NNsummary
+
+  if(!exists(trainFUN))
+    stop(paste(trainFUN, "does not exist"))
+  if(!exists(hyperparamFUN))
+    stop(paste(hyperparamFUN, "does not exist"))
+  if(!exists(predictFUN))
+    stop(paste(predictFUN, "does not exist"))
+  if(!exists(startNN))
+    startNN <- NA
+  if(!is.na(startNN))
+  {
+    if(!exists(startNN))
+      stop(paste("function", startNN, "does not exist"))
+    do.call(startNN, list())
+  }else
+  {
+    #print(search())
+    x <- require(pkgname[1], character.only = TRUE)
+    #print(search())
+    #print(x)
+  }
+  if(!exists(closeFUN))
+    stop(paste("function", closeFUN, "does not exist"))
+  
+  nbdata <- length(dsetnum)
+  #sanity check 
+  if(nbdata <= 0)
+    stop("no dataset to be tested")
+  
+  resallmethod <- function(j)
+  {
+    res <- lapply(1:length(methodvect), function(i)
+      trainPredict_1mth1data(dset=dsetnum[j], method=methodvect[i], trainFUN=trainFUN, hyperparamFUN=hyperparamFUN, 
+                           predictFUN=predictFUN, summaryFUN=summaryFUN, 
+                           prepareZZ.arg=prepareZZ.arg, nrep=nrep, doplot=doplot,
+                           pkgname=pkgname, pkgfun=pkgfun, csvfile=csvfile, rdafile=rdafile, odir=odir, 
+                           echo=echo, appendcsv=appendcsv, ...))
+    if(is.list(res))
+    {
+      names(res) <- methodvect
+      res <- simplify2array(res)
+    }
+    return(res)
+  }
+  res <- lapply(1:nbdata, resallmethod)
+  mydatanames <- c("mDette","mFriedman","mIshigami","mRef153","uDmod1",   
+    "uDmod2","uDreyfus1","uDreyfus2","uGauss1","uGauss2","uGauss3","uNeuroOne")
+  names(res) <- mydatanames[dsetnum]
+  res <- simplify2array(res)
+  if(is.list(res))
+    res <- simplify2array(res)
+    
+  do.call(closeFUN, list())
+  
+  return(res)
+}
 

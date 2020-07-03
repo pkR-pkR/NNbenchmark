@@ -4,18 +4,24 @@
 \alias{NNtrainPredict}
 \alias{trainPredict_1mth1data}
 \alias{trainPredict_1data}
+\alias{trainPredict_1pkg}
 \title{Generic Functions for Training and Predicting}
 \usage{
 trainPredict_1mth1data(dset, method, trainFUN, hyperparamFUN, predictFUN,
   summaryFUN, prepareZZ.arg = list(), nrep = 5, doplot = FALSE,
   plot.arg = list(col1 = 1:nrep, lwd1 = 1, col2 = 4, lwd2 = 3), pkgname,
   pkgfun, csvfile = FALSE, rdafile = FALSE, odir = "~/", echo = FALSE,
-  echoreport = 1, ...)
+  echoreport = 1, appendcsv = TRUE, ...)
 
 trainPredict_1data(dset, methodlist, trainFUN, hyperparamFUN, predictFUN,
   summaryFUN, closeFUN, startNN = NA, prepareZZ.arg = list(), nrep = 5,
   doplot = FALSE, plot.arg = list(), pkgname = "pkg", pkgfun = "train",
   csvfile = FALSE, rdafile = FALSE, odir = "~/", echo = FALSE, ...)
+
+trainPredict_1pkg(dsetnum, pkgname = "pkg", pkgfun = "train", methodvect,
+  prepareZZ.arg = list(), summaryFUN, nrep = 5, doplot = FALSE,
+  plot.arg = list(), csvfile = FALSE, rdafile = FALSE, odir = "~/",
+  echo = FALSE, appendcsv = TRUE, ...)
 }
 \arguments{
 \item{dset}{a number or string indicating which dataset to use, see \code{\link{NNdataSummary}}}
@@ -52,6 +58,8 @@ trainPredict_1data(dset, methodlist, trainFUN, hyperparamFUN, predictFUN,
 
 \item{echoreport}{logical value, detailed reports are printed (such as model summaries and str(data)) if TRUE, will not work if echo is FALSE}
 
+\item{appendcsv}{logical value, if \code{TRUE}, the csv output is appended to the csv file.}
+
 \item{...}{additional arguments}
 
 \item{methodlist}{list of methods per package/function}
@@ -59,12 +67,16 @@ trainPredict_1data(dset, methodlist, trainFUN, hyperparamFUN, predictFUN,
 \item{closeFUN}{a function to detach packages or other necessary environment clearing}
 
 \item{startNN}{a function to start needed outside libraries, for example, h2o}
+
+\item{dsetnum}{a vector of numbers indicating which dataset to use in \code{\link{NNdataSummary}}}
+
+\item{methodvect}{vector of methods per package/function}
 }
 \value{
 An array with values as in NNsummary including each repetition, with options for plots and output files
 }
 \description{
-An implementation of \code{do.call} so any neural network function that fits 
+An implementation with \code{\link{do.call}} so that any neural network function that fits 
 the format can be tested. 
 
 In \code{trainPredict_1mth1data}, a neural network is trained on one dataset
@@ -73,4 +85,7 @@ of the neural network is summarized.
 
 \code{trainPredict_1data} serves as a wrapper function for \code{trainPredict_1mth1data} 
 for multiple methods.
+
+\code{trainPredict_1pkg} serves as a wrapper function for \code{trainPredict_1mth1data} 
+for multiple datasets.
 }
