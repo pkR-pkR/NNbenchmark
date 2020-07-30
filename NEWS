@@ -2,6 +2,12 @@
 - Akshaj Verma, Salabila Mahdi, Patrice Kiener
 - Christophe Dutang, John Nash 
 
+NNbenchmark 3.0.5 - 2020-07-30
+==============================
+- allow for nrep = 1
+- added examples to NNtrainPredict
+- changed echoreport to logical
+
 NNbenchmark 3.0.4 - 2020-07-03
 ==============================
 - remove commented traces

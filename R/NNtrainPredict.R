@@ -44,8 +44,66 @@
 #' @return  
 #' An array with values as in NNsummary including each repetition, with options for plots and output files
 #' 
-#' @example 
-#' #Available at the template repo
+#' 
+#' @examples 
+#' nrep <- 2       
+#' odir <- getwd()
+#' 
+#' ### Package with one method/optimization algorithm
+#' library("brnn")
+#' brnn.method <- "gaussNewton"
+#' hyperParams.brnn <- function(optim_method, ...) {
+#'   return(list(iter = 200))
+#'   }
+#' brnn.prepareZZ <- list(xdmv = "m", ydmv = "v", zdm = "d", scale = TRUE)
+#' 
+#' NNtrain.brnn   <- function(x, y, dataxy, formula, neur, optim_method, hyperParams,...) {
+#'   hyper_params <- do.call(hyperParams.brnn, list(brnn.method))
+#'   iter  <- hyper_params$iter
+#'   
+#'   NNreg <- brnn::brnn(x, y, neur, normalize = FALSE, epochs = iter, verbose = FALSE)
+#'   return(NNreg)
+#'   }
+#' NNpredict.brnn <- function(object, x, ...) { predict(object, x) }
+#' NNclose.brnn <- function(){
+#'   if("package:brnn" %in% search())
+#'     detach("package:brnn", unload=TRUE)
+#'   }
+#' 
+#' res <- trainPredict_1pkg(1:2, pkgname = "brnn", pkgfun = "brnn", brnn.method,
+#'                          prepareZZ.arg = brnn.prepareZZ, nrep = nrep, doplot = TRUE,
+#'                          csvfile = FALSE, rdafile = FALSE, odir = odir, echo = FALSE)
+#'                          
+#' ### Package with more than one method/optimization algorithm
+#' library(validann)
+#' validann.method <- c("Nelder-Mead", "BFGS", "CG", "L-BFGS-B", "SANN")
+#' hyperParams.validann <- function(optim_method, ...) {
+#'   if(optim_method == "Nelder-Mead")  { maxiter <- 10000 } 
+#'   if(optim_method == "BFGS")         { maxiter <- 200   }
+#'   if(optim_method == "CG")           { maxiter <- 1000  }
+#'   if(optim_method == "L-BFGS-B")     { maxiter <- 200   }
+#'   if(optim_method == "SANN")         { maxiter <- 1000  }
+#'   return(list(iter = maxiter, method = optim_method, params))
+#'   }
+#' validann.prepareZZ <- list(xdmv = "m", ydmv = "m", zdm = "d", scale = TRUE)
+#' 
+#' NNtrain.validann <- function(x, y, dataxy, formula, neur, optim_method, hyperParams, ...) {
+#'   hyper_params <- do.call(hyperParams, list(optim_method, ...))
+#'   iter <- hyper_params$iter
+#'   method <- hyper_params$method
+#'   
+#'   NNreg <- validann::ann(x, y, size = neur, method = method, maxit = iter)
+#'   return (NNreg)
+#'   }
+#' NNpredict.validann <- function(object, x, ...) { predict(object, x) }
+#' NNclose.validann <- function() {
+#'   if("package:validann" %in% search())
+#'   detach("package:validann", unload=TRUE)
+#'   }
+#'
+#' res <- trainPredict_1pkg(1:2, pkgname = "validann", pkgfun = "ann", validann.method,
+#'                          repareZZ.arg = validann.prepareZZ, nrep = nrep, doplot = FALSE,
+#'                          csvfile = TRUE, rdafile = TRUE, odir = odir, echo = FALSE)
 #'
 #' @importFrom stats lm
 #' @export
@@ -54,13 +112,11 @@ trainPredict_1mth1data <- function(dset, method, trainFUN, hyperparamFUN, predic
                                    prepareZZ.arg=list(),
                                    nrep=5, doplot=FALSE, plot.arg=list(col1=1:nrep, lwd1=1, col2=4, lwd2=3),
                                    pkgname, pkgfun, csvfile=FALSE, rdafile=FALSE, odir="~/", 
-                                   echo=FALSE, echoreport=1, appendcsv=TRUE, ...)
+                                   echo=FALSE, echoreport=FALSE, appendcsv=TRUE, ...)
 {
   method <- method[1]
   if(!is.list(plot.arg) || any(!names(plot.arg) %in% c("col1", "lwd1", "col2", "lwd2")))
     plot.arg <- list(col1=1:nrep, lwd1=1, col2=4, lwd2=3)
-  
-  plot.arg$col1 <- rep(plot.arg$col1, length.out=nrep)
   
   if(!exists(hyperparamFUN))
     stop(paste("function", hyperparamFUN, "does not exist"))
@@ -85,7 +141,7 @@ trainPredict_1mth1data <- function(dset, method, trainFUN, hyperparamFUN, predic
     prepareZZ.arg <- list(xdmv = "d", ydmv = "v", zdm = "d", scale = TRUE)
   ZZ <- do.call("prepareZZ", c(list(Z), prepareZZ.arg))    
   
-  if(echo && echoreport > 1)
+  if(echo && echoreport == TRUE)
   {
     cat("prepareZZ\n")
     print(str(ZZ))
@@ -100,7 +156,7 @@ trainPredict_1mth1data <- function(dset, method, trainFUN, hyperparamFUN, predic
       do.call(trainFUN, list(ZZ$x, ZZ$y, ZZ$Zxy, ZZ$fmla, neur, method,  hyperparamFUN, fmlaNN, nparNN)),
       error = function(y) {lm(y ~ 0, data = ZZ$Zxy)}
     ) 
-    if(echo && echoreport > 1)
+    if(echo && echoreport == TRUE)
     {
       cat("\n\t\t--- debug : structure of fitted model ***\n")
       print(str(tempfit))
@@ -110,7 +166,7 @@ trainPredict_1mth1data <- function(dset, method, trainFUN, hyperparamFUN, predic
     }
     if(inherits(tempfit, "lm") || inherits(tempfit, "try-error"))
     {
-      if(echo && echoreport > 1)
+      if(echo && echoreport == TRUE)
       {
         cat("\n--- \tdebug : training lead to error \t***\n")
         cat(pkgname, "::", pkgfun, "_", method, "\n")
@@ -119,9 +175,9 @@ trainPredict_1mth1data <- function(dset, method, trainFUN, hyperparamFUN, predic
       Ypred[[i]] <- rep(ZZ$ym0, length.out=NROW(ZZ$x))
     }else
     {
-      if(echo && echoreport > 1)
+      if(echo && echoreport == TRUE)
       {
-        localpred <- try(do.call(predictFUN, list(tempfit, head(ZZ$x), head(ZZ$xy))), silent=echoreport > 2)
+        localpred <- try(do.call(predictFUN, list(tempfit, head(ZZ$x), head(ZZ$xy))), silent = echoreport)
         if(!inherits(localpred, "try-error"))
         {
           cat("\n\t\t--- debug : first predictions ***\n")
@@ -133,7 +189,7 @@ trainPredict_1mth1data <- function(dset, method, trainFUN, hyperparamFUN, predic
           print(localpred)
         }
       }
-      temppred <- try(do.call(predictFUN, list(tempfit, ZZ$x, ZZ$Zxy)), silent=echoreport > 2)
+      temppred <- try(do.call(predictFUN, list(tempfit, ZZ$x, ZZ$Zxy)), silent = echoreport)
       if(!inherits(temppred, "try-error"))
         Ypred[[i]] <- ZZ$ym0 + ZZ$ysd0 * temppred
       else
@@ -160,7 +216,7 @@ trainPredict_1mth1data <- function(dset, method, trainFUN, hyperparamFUN, predic
     }
   allsummary <- simplify2array(allsummary)
   
-  #adds outputs to csv files for results
+  #outputs to csv files
   if(csvfile){
     descr  <- paste0(ds, "_", pkgname, "::", pkgfun, "_", method)
     event <- c(paste0(descr, sprintf("_%.2d", 1:nrep)))
@@ -173,29 +229,33 @@ trainPredict_1mth1data <- function(dset, method, trainFUN, hyperparamFUN, predic
     
     add2csv(csvsummary, file = fname)
   }
-  
-  #outputs to file
+  #outputs to rda files
   if(rdafile)
   {
     descr <- paste0(ds, "_", pkgname, "_", pkgfun, "_", method)
     myfile <- paste0(odir, descr, ".RData")
     save(Ypred, allsummary, file=myfile)
   }
+  
   #plot
   if(doplot)
   {
     #shorter description
     descr  <- paste0(ds, "_", pkgname, "::", pkgfun, "_", method)
-    op <- par(mfcol = c(1,2))
     plotNN(ZZ$xory, ZZ$y0, ZZ$uni, doplot, main = descr)
-    for (i in 1:nrep) 
-      lipoNN(ZZ$xory, Ypred[,i], ZZ$uni, doplot, col = plot.arg$col1[i], lwd = plot.arg$lwd1)
-    
-    best <- which.min(allsummary["RMSE",])
-    plotNN(ZZ$xory, ZZ$y0, ZZ$uni, doplot, main = descr)
-    lipoNN(ZZ$xory, Ypred[,best], ZZ$uni, doplot, col = plot.arg$col2, lwd = plot.arg$lwd2)
-    par(op)
+    if(nrep == 1) {
+      lipoNN(ZZ$xory, Ypred, ZZ$uni, doplot, col = plot.arg$col1, lwd = plot.arg$lwd1)
+    } else {
+      op <- par(mfcol = c(1,2))
+      for (i in 1:nrep)
+        lipoNN(ZZ$xory, Ypred[,i], ZZ$uni, doplot, col = plot.arg$col1[i], lwd = plot.arg$lwd1)
+      best <- which.min(allsummary["RMSE",])
+      plotNN(ZZ$xory, ZZ$y0, ZZ$uni, doplot, main = descr)
+      lipoNN(ZZ$xory, Ypred[,best], ZZ$uni, doplot, col = plot.arg$col2, lwd = plot.arg$lwd2)
+      par(op)
+    }
   }
+  
   if(echo)
     cat("\n")
   allsummary

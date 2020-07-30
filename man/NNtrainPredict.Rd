@@ -11,7 +11,7 @@ trainPredict_1mth1data(dset, method, trainFUN, hyperparamFUN, predictFUN,
   summaryFUN, prepareZZ.arg = list(), nrep = 5, doplot = FALSE,
   plot.arg = list(col1 = 1:nrep, lwd1 = 1, col2 = 4, lwd2 = 3), pkgname,
   pkgfun, csvfile = FALSE, rdafile = FALSE, odir = "~/", echo = FALSE,
-  echoreport = 1, appendcsv = TRUE, ...)
+  echoreport = FALSE, appendcsv = TRUE, ...)
 
 trainPredict_1data(dset, methodlist, trainFUN, hyperparamFUN, predictFUN,
   summaryFUN, closeFUN, startNN = NA, prepareZZ.arg = list(), nrep = 5,
@@ -88,4 +88,65 @@ for multiple methods.
 
 \code{trainPredict_1pkg} serves as a wrapper function for \code{trainPredict_1mth1data} 
 for multiple datasets.
+}
+\examples{
+nrep <- 2       
+odir <- getwd()
+
+### Package with one method/optimization algorithm
+library("brnn")
+brnn.method <- "gaussNewton"
+hyperParams.brnn <- function(optim_method, ...) {
+  return(list(iter = 200))
+  }
+brnn.prepareZZ <- list(xdmv = "m", ydmv = "v", zdm = "d", scale = TRUE)
+
+NNtrain.brnn   <- function(x, y, dataxy, formula, neur, optim_method, hyperParams,...) {
+  hyper_params <- do.call(hyperParams.brnn, list(brnn.method))
+  iter  <- hyper_params$iter
+  
+  NNreg <- brnn::brnn(x, y, neur, normalize = FALSE, epochs = iter, verbose = FALSE)
+  return(NNreg)
+  }
+NNpredict.brnn <- function(object, x, ...) { predict(object, x) }
+NNclose.brnn <- function(){
+  if("package:brnn" \%in\% search())
+    detach("package:brnn", unload=TRUE)
+  }
+
+res <- trainPredict_1pkg(1:2, pkgname = "brnn", pkgfun = "brnn", brnn.method,
+                         prepareZZ.arg = brnn.prepareZZ, nrep = nrep, doplot = TRUE,
+                         csvfile = FALSE, rdafile = FALSE, odir = odir, echo = FALSE)
+                         
+### Package with more than one method/optimization algorithm
+library(validann)
+validann.method <- c("Nelder-Mead", "BFGS", "CG", "L-BFGS-B", "SANN")
+hyperParams.validann <- function(optim_method, ...) {
+  if(optim_method == "Nelder-Mead")  { maxiter <- 10000 } 
+  if(optim_method == "BFGS")         { maxiter <- 200   }
+  if(optim_method == "CG")           { maxiter <- 1000  }
+  if(optim_method == "L-BFGS-B")     { maxiter <- 200   }
+  if(optim_method == "SANN")         { maxiter <- 1000  }
+  return(list(iter = maxiter, method = optim_method, params))
+  }
+validann.prepareZZ <- list(xdmv = "m", ydmv = "m", zdm = "d", scale = TRUE)
+
+NNtrain.validann <- function(x, y, dataxy, formula, neur, optim_method, hyperParams, ...) {
+  hyper_params <- do.call(hyperParams, list(optim_method, ...))
+  iter <- hyper_params$iter
+  method <- hyper_params$method
+  
+  NNreg <- validann::ann(x, y, size = neur, method = method, maxit = iter)
+  return (NNreg)
+  }
+NNpredict.validann <- function(object, x, ...) { predict(object, x) }
+NNclose.validann <- function() {
+  if("package:validann" \%in\% search())
+  detach("package:validann", unload=TRUE)
+  }
+
+res <- trainPredict_1pkg(1:2, pkgname = "validann", pkgfun = "ann", validann.method,
+                         repareZZ.arg = validann.prepareZZ, nrep = nrep, doplot = FALSE,
+                         csvfile = TRUE, rdafile = TRUE, odir = odir, echo = FALSE)
+
 }
