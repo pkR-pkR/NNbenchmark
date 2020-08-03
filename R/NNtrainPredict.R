@@ -242,11 +242,12 @@ trainPredict_1mth1data <- function(dset, method, trainFUN, hyperparamFUN, predic
   {
     #shorter description
     descr  <- paste0(ds, "_", pkgname, "::", pkgfun, "_", method)
-    plotNN(ZZ$xory, ZZ$y0, ZZ$uni, doplot, main = descr)
     if(nrep == 1) {
+      plotNN(ZZ$xory, ZZ$y0, ZZ$uni, doplot, main = descr)
       lipoNN(ZZ$xory, Ypred, ZZ$uni, doplot, col = plot.arg$col1, lwd = plot.arg$lwd1)
     } else {
       op <- par(mfcol = c(1,2))
+      plotNN(ZZ$xory, ZZ$y0, ZZ$uni, doplot, main = descr)
       for (i in 1:nrep)
         lipoNN(ZZ$xory, Ypred[,i], ZZ$uni, doplot, col = plot.arg$col1[i], lwd = plot.arg$lwd1)
       best <- which.min(allsummary["RMSE",])
