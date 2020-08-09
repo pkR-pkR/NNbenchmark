@@ -1,4 +1,4 @@
-## NNTrain_Predict 2020-07-03
+## NNTrain_Predict 2020-07-03 | 08-09 added large datasets
 
 
 #' @title Generic Functions for Training and Predicting
@@ -125,11 +125,20 @@ trainPredict_1mth1data <- function(dset, method, trainFUN, hyperparamFUN, predic
   if(!exists(predictFUN))
     stop(paste("function", predictFUN, "does not exist"))
   
-  ds     <- NNbenchmark::NNdatasets[[dset]]$ds
-  Z      <- NNbenchmark::NNdatasets[[dset]]$Z
-  neur   <- NNbenchmark::NNdatasets[[dset]]$neur
-  nparNN <- NNbenchmark::NNdatasets[[dset]]$nparNN
-  fmlaNN <- NNbenchmark::NNdatasets[[dset]]$fmlaNN
+  if(dset > 12 || dset=="mWoodN1"){
+    dset   <- 12 - dset
+    ds     <- NNbenchmark::NNlargedatasets[[dset]]$ds
+    Z      <- NNbenchmark::NNlargedatasets[[dset]]$Z
+    neur   <- NNbenchmark::NNlargedatasets[[dset]]$neur
+    nparNN <- NNbenchmark::NNlargedatasets[[dset]]$nparNN
+    fmlaNN <- NNbenchmark::NNlargedatasets[[dset]]$fmlaNN 
+  } else {
+    ds     <- NNbenchmark::NNdatasets[[dset]]$ds
+    Z      <- NNbenchmark::NNdatasets[[dset]]$Z
+    neur   <- NNbenchmark::NNdatasets[[dset]]$neur
+    nparNN <- NNbenchmark::NNdatasets[[dset]]$nparNN
+    fmlaNN <- NNbenchmark::NNdatasets[[dset]]$fmlaNN 
+  }
   
   descr <- paste0(ds, "_", pkgname, "::", pkgfun, "_", method)
   if(echo)
@@ -446,7 +455,7 @@ trainPredict_1pkg <- function(dsetnum, pkgname="pkg", pkgfun="train", methodvect
   }
   res <- lapply(1:nbdata, resallmethod)
   mydatanames <- c("mDette","mFriedman","mIshigami","mRef153","uDmod1",   
-    "uDmod2","uDreyfus1","uDreyfus2","uGauss1","uGauss2","uGauss3","uNeuroOne")
+    "uDmod2","uDreyfus1","uDreyfus2","uGauss1","uGauss2","uGauss3","uNeuroOne","mWoodN1")
   names(res) <- mydatanames[dsetnum]
   res <- simplify2array(res)
   if(is.list(res))

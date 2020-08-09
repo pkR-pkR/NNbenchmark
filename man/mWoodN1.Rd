@@ -5,7 +5,7 @@
 \alias{mWoodN1}
 \title{Dataset mWoodN1}
 \description{
-A multivariate dataset (x1, x2, x3, x4, x5, x6, y) of class matrix and dim 20000 
+A multivariate dataset (x1, x2, x3, x4, x5, x6, y) of class data.frame and dim 20000 
 x 7 to be fitted by a neural network with 5 hidden neurons (41 parameters).
 }
 \examples{
