@@ -5,7 +5,7 @@
 #' @title All Datasets in One List
 #' @description
 #' \code{NNdatasets} is a list with the 12 datasets presented in this package and the 
-#' recommanded number of hidden neurons for each neural network model. 
+#' recommended number of hidden neurons for each neural network model. 
 #' 
 #' \itemize{
 #'   \item{mDette:    5 neurons.}
@@ -42,6 +42,39 @@
 #' @keywords datasets
 #' @docType data
 #' @name NNdatasets
+NULL
+
+
+
+#' @title Large Datasets in One list (2020)
+#' @description
+#' \code{NNlargedatasets} is a list with the ?? datasets presented in this package and the 
+#' recommended number of hidden neurons for each neural network model. 
+#' 
+#' \itemize{
+#'   \item{mWoodN1:    5 neurons.}
+#' }
+#' 
+#' Each item of the list is itself a list with 5 components:
+#' \itemize{
+#' \item{ds: character. The name of the dataset.}
+#' \item{neur: integer. The recommanded number of hidden neurons in the NN model and in 
+#' \code{fmlaNN}.}
+#' \item{nparNN: integer. The number of parameters in \code{fmlaNN}.}
+#' \item{fmlaNN: the formula of the corresponding neural network, with tanh() as the
+#' activation function in the hidden layer.}
+#' \item{Z: matrix or data.frame. The dataset itself.}
+#' }
+#' Using \code{attach()} and \code{detach()} gives a direct access to these items. 
+#' 
+#' @examples 
+#' ht(NNlargedatasets)
+#' 
+#' NNdataSummary(NNlargedatasets)
+#' 
+#' @keywords datasets
+#' @docType data
+#' @name NNlargedatasets
 NULL
 
 
@@ -257,6 +290,24 @@ NULL
 #' @keywords datasets
 #' @docType data
 #' @name uNeuroOne
+NULL
+
+#' @title Dataset mWoodN1
+#' @description 
+#' A multivariate dataset (x1, x2, x3, x4, x5, x6, y) of class matrix and dim 20000 
+#' x 7 to be fitted by a neural network with 5 hidden neurons (41 parameters).
+#' @references
+#' Inspired by page 29 of Wood, S. N. (2011). Fast stable restricted maximum 
+#' likelihood and marginal likelihood estimation of semiparametric generalized linear 
+#' models. Journal of the Royal Statistical Society: Series B (Statistical Methodology), 
+#' 73(1), 3-36. 
+#' \url{https://people.bath.ac.uk/man54/SAMBa/ITTs/ITT2/EDF/REMLWood2009.pdf}
+#' @examples
+#' ht(mWoodN1)
+#' pairs(mWoodN1)
+#' @keywords datasets
+#' @docType data
+#' @name mWoodN1
 NULL
 
 
