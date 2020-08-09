@@ -126,7 +126,7 @@ trainPredict_1mth1data <- function(dset, method, trainFUN, hyperparamFUN, predic
     stop(paste("function", predictFUN, "does not exist"))
   
   if(dset > 12 || dset=="mWoodN1"){
-    dset   <- 12 - dset
+    dset   <- dset - 12
     ds     <- NNbenchmark::NNlargedatasets[[dset]]$ds
     Z      <- NNbenchmark::NNlargedatasets[[dset]]$Z
     neur   <- NNbenchmark::NNlargedatasets[[dset]]$neur
