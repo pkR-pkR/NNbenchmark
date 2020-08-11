@@ -46,13 +46,13 @@ NULL
 
 
 
-#' @title Large Datasets in One list (2020)
+#' @title Big Datasets in One list (2020)
 #' @description
-#' \code{NNlargedatasets} is a list with the ?? datasets presented in this package and the 
+#' \code{NNbigdatasets} is a list with the big datasets presented in this package and the 
 #' recommended number of hidden neurons for each neural network model. 
 #' 
 #' \itemize{
-#'   \item{mWoodN1:    5 neurons.}
+#'   \item{bWoodN1:    5 neurons.}
 #' }
 #' 
 #' Each item of the list is itself a list with 5 components:
@@ -68,13 +68,13 @@ NULL
 #' Using \code{attach()} and \code{detach()} gives a direct access to these items. 
 #' 
 #' @examples 
-#' ht(NNlargedatasets)
+#' ht(NNbigdatasets)
 #' 
-#' NNdataSummary(NNlargedatasets)
+#' NNdataSummary(NNbigdatasets)
 #' 
 #' @keywords datasets
 #' @docType data
-#' @name NNlargedatasets
+#' @name NNbigdatasets
 NULL
 
 
@@ -292,7 +292,7 @@ NULL
 #' @name uNeuroOne
 NULL
 
-#' @title Dataset mWoodN1
+#' @title Dataset bWoodN1
 #' @description 
 #' A multivariate dataset (x1, x2, x3, x4, x5, x6, y) of class data.frame and dim 20000 
 #' x 7 to be fitted by a neural network with 5 hidden neurons (41 parameters).
@@ -303,11 +303,10 @@ NULL
 #' 73(1), 3-36. 
 #' \url{https://people.bath.ac.uk/man54/SAMBa/ITTs/ITT2/EDF/REMLWood2009.pdf}
 #' @examples
-#' ht(mWoodN1)
-#' pairs(mWoodN1)
+#' ht(bWoodN1)
 #' @keywords datasets
 #' @docType data
-#' @name mWoodN1
+#' @name bWoodN1
 NULL
 
 

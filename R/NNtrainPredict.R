@@ -125,13 +125,13 @@ trainPredict_1mth1data <- function(dset, method, trainFUN, hyperparamFUN, predic
   if(!exists(predictFUN))
     stop(paste("function", predictFUN, "does not exist"))
   
-  if(dset > 12 || dset=="mWoodN1"){
+  if(dset > 12 || dset=="bWoodN1"){
     dset   <- dset - 12
-    ds     <- NNbenchmark::NNlargedatasets[[dset]]$ds
-    Z      <- NNbenchmark::NNlargedatasets[[dset]]$Z
-    neur   <- NNbenchmark::NNlargedatasets[[dset]]$neur
-    nparNN <- NNbenchmark::NNlargedatasets[[dset]]$nparNN
-    fmlaNN <- NNbenchmark::NNlargedatasets[[dset]]$fmlaNN 
+    ds     <- NNbenchmark::NNbigdatasets[[dset]]$ds
+    Z      <- NNbenchmark::NNbigdatasets[[dset]]$Z
+    neur   <- NNbenchmark::NNbigdatasets[[dset]]$neur
+    nparNN <- NNbenchmark::NNbigdatasets[[dset]]$nparNN
+    fmlaNN <- NNbenchmark::NNbigdatasets[[dset]]$fmlaNN 
   } else {
     ds     <- NNbenchmark::NNdatasets[[dset]]$ds
     Z      <- NNbenchmark::NNdatasets[[dset]]$Z
@@ -381,10 +381,7 @@ trainPredict_1data <- function(dset, methodlist, trainFUN, hyperparamFUN, predic
       resallmethod
     }
     res <- sapply(1:nbpkg, res1pkg)
-    resfinal <- res[[1]]
-    for(i in 2:nbpkg)
-      resfinal <- cbind(resfinal, res[[i]])    
-    return(resfinal)
+    return(res)
   }
   
 }
@@ -455,7 +452,7 @@ trainPredict_1pkg <- function(dsetnum, pkgname="pkg", pkgfun="train", methodvect
   }
   res <- lapply(1:nbdata, resallmethod)
   mydatanames <- c("mDette","mFriedman","mIshigami","mRef153","uDmod1",   
-    "uDmod2","uDreyfus1","uDreyfus2","uGauss1","uGauss2","uGauss3","uNeuroOne","mWoodN1")
+    "uDmod2","uDreyfus1","uDreyfus2","uGauss1","uGauss2","uGauss3","uNeuroOne","bWoodN1")
   names(res) <- mydatanames[dsetnum]
   res <- simplify2array(res)
   if(is.list(res))

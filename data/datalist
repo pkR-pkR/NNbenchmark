@@ -1,5 +1,5 @@
 NNdatasets: NNdatasets
 mNNdatasets: mDette, mFriedman, mIshigami, mRef153
 uNNdatasets: uDmod1, uDmod2, uDreyfus1, uDreyfus2, uGauss1, uGauss2, uGauss3, uNeuroOne
-bWoodN1: mWoodN1
-NNlargedatasets: mWoodN1
+bNNdatasets: bWoodN1
+NNbigdatasets: NNbigdatasets
