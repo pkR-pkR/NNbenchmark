@@ -14,7 +14,7 @@ one normalized layer, one output output layer) for regression purpose i.e. NN(X1
 This GSoC project will conduct a comprehensive survey of all packages that have the “neural network” keyword in thepackage title or in the package description. There are currently 69 packages on CRAN with this keyword.  
 
 
-|    []()       |               |               |               |               |               |
+|    Packages   |               |               |               |               |               |
 |:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|:-------------:| 
 |   AMORE       |    ANN2       |  appnn        | autoencoder   | automl        | BNN           |
 |   brnn        |    Buddle     |  CaDENCE      |   cld2        | cld3          | condmixt      |

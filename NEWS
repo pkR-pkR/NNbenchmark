@@ -4,11 +4,12 @@
 
 
 
-NNbenchmark 3.0.6 - 2020-08-24 - submitted to CRAN
+NNbenchmark 3.0.7 - 2020-08-24 - submitted to CRAN
 ==================================================
 - simplify clearNN()
 - Christophe Dutang added as author
 - Email address: rpackages--@--inmodelia
+- false link replaced by the table header "Packages" in README.md
 
 NNbenchmark 3.0.5 - 2020-07-30
 ==============================
