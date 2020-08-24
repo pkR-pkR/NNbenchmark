@@ -4,12 +4,13 @@
 
 
 
-NNbenchmark 3.0.7 - 2020-08-24 - submitted to CRAN
-==================================================
+NNbenchmark 3.0.7 - 2020-08-24
+==============================
 - simplify clearNN()
 - Christophe Dutang added as author
 - Email address: rpackages--@--inmodelia
 - false link replaced by the table header "Packages" in README.md
+- NNtrainPredict.R: odir <- tempdir() rather than getwd()
 
 NNbenchmark 3.0.5 - 2020-07-30
 ==============================
