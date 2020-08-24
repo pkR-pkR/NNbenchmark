@@ -54,6 +54,7 @@
 #' ym0 ; ysd0
 #' detach(ZZ) ; rm(y_pred)
 #' 
+#' \donttest{
 #' ## validann
 #' ZZ <- prepareZZ(Z, xdmv = "m", ydmv= "v", scale = TRUE) ; ht(ZZ)
 #' attach(ZZ)
@@ -62,7 +63,7 @@
 #' ym0 ; ysd0
 #' detach(ZZ) ; rm(y_pred)
 #' 
-#' \donttest{
+#' 
 #' ### UNIVARIATE DATASET + LOOP
 #' nruns  <- 10
 #' 

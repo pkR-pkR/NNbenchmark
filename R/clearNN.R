@@ -9,6 +9,8 @@
 #' 
 #' \code{detachNN()} removes \code{ZZ} and all objects in \code{ls(.GlobalEnv)} 
 #' not listed in \code{donotremove}. It does not detach any packages.
+#' 
+#' These functions were not exported to comply with CRAN's Repository Policy.
 #'  
 #' @param  donotremove  a vector of characters representing objects in \code{ls()}.
 #' @param  donotdetach  a vector of packages and environments that are not detached.
@@ -27,7 +29,6 @@
 #' @return  
 #' NULL
 #' 
-#' @export
 #' @name clearNN
 clearNN <- function (donotremove, donotdetach = NULL) { 
     if (is.null(donotdetach)) donotdetach <- c(".GlobalEnv", 
@@ -58,7 +59,6 @@ clearNN <- function (donotremove, donotdetach = NULL) {
 }
 
 
-#' @export
 #' @rdname clearNN
 detachNN <- function (donotremove, donotdetach = "") {           
     if (!is.element("ZZ", donotdetach)) {    

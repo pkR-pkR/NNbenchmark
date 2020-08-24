@@ -114,6 +114,7 @@ NNclose.brnn <- function(){
     detach("package:brnn", unload=TRUE)
   }
 
+\donttest{
 res <- trainPredict_1pkg(1:2, pkgname = "brnn", pkgfun = "brnn", brnn.method,
                          prepareZZ.arg = brnn.prepareZZ, nrep = nrep, doplot = TRUE,
                          csvfile = FALSE, rdafile = FALSE, odir = odir, echo = FALSE)
@@ -148,5 +149,6 @@ NNclose.validann <- function() {
 res <- trainPredict_1pkg(1:2, pkgname = "validann", pkgfun = "ann", validann.method,
                          repareZZ.arg = validann.prepareZZ, nrep = nrep, doplot = FALSE,
                          csvfile = TRUE, rdafile = TRUE, odir = odir, echo = FALSE)
+}                        
 
 }

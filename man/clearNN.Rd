@@ -33,4 +33,6 @@ dependencies not listed in \code{donotdetach}.
 
 \code{detachNN()} removes \code{ZZ} and all objects in \code{ls(.GlobalEnv)} 
 not listed in \code{donotremove}. It does not detach any packages.
+
+These functions were not exported to comply with CRAN's Repository Policy.
 }
