@@ -7,8 +7,8 @@
 #' Datasets and functions to benchmark (convergence, speed, ease of use) R packages 
 #' dedicated to regression with neural networks (no classification in this version).
 #' The templates for the tested packages are available at 
-#' <https://github.com/pkR-pkR/NNbenchmarkTemplates/tree/master/R> and 
-#' <https://akshajverma.com/NNbenchmarkWeb>.
+#' <https://github.com/pkR-pkR/NNbenchmarkTemplates> and 
+#' <https://akshajverma.com/NNbenchmarkWeb/index.html>.
 #' @examples
 #' ds <- grep("^[m,u]", ls("package:NNbenchmark"), value = TRUE); ds
 #' t(sapply(ds, function(x) dim(get(x)))) 

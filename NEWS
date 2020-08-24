@@ -2,6 +2,14 @@
 - Akshaj Verma, Salabila Mahdi, Patrice Kiener
 - Christophe Dutang, John Nash 
 
+
+
+NNbenchmark 3.0.6 - 2020-08-24 - submitted to CRAN
+==================================================
+- simplify clearNN()
+- Christophe Dutang added as author
+- Email address: rpackages--@--inmodelia
+
 NNbenchmark 3.0.5 - 2020-07-30
 ==============================
 - allow for nrep = 1

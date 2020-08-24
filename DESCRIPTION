@@ -4,14 +4,14 @@ Description: Datasets and functions to benchmark (convergence, speed, ease of us
 Imports: R6, pkgload
 Suggests: brnn, validann
 Depends: R (>= 3.5.0)
-Version: 3.0.5
-Date: 2020-07-30
+Version: 3.0.6
+Date: 2020-08-24
 License: GPL-2
-Maintainer: Patrice Kiener <fattailsr@inmodelia.com>
+Maintainer: Patrice Kiener <rpackages@inmodelia.com>
 Author: Patrice Kiener [aut, cre],
-  Salsabila Mahdi [aut, ctb],
-  Akshaj Verma [aut, ctb],
-  Yifu Yan [aut]
+  Salsabila Mahdi [aut],
+  Akshaj Verma [aut],
+  Christophe Dutang [aut]
 Encoding: UTF-8
 NeedsCompilation: no
 LazyData: true
