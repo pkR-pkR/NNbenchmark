@@ -91,7 +91,7 @@ for multiple datasets.
 }
 \examples{
 nrep <- 2       
-odir <- getwd()
+odir <- tempdir()
 
 ### Package with one method/optimization algorithm
 library("brnn")
