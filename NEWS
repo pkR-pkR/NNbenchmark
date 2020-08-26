@@ -4,9 +4,14 @@
 
 
 
+NNbenchmark 3.1.1 - 2020-08-26
+==============================
+- DESCRIPTION: add Authors@R
+- clearNN() and detachNN() further simplified
+
 NNbenchmark 3.1.0 - 2020-08-24 - Submitted to CRAN
 ==================================================
--chenge version number and sent to CRAN
+- change version number and sent to CRAN
 
 NNbenchmark 3.0.7 - 2020-08-24
 ==============================

@@ -3,11 +3,11 @@
 \name{clearNN}
 \alias{clearNN}
 \alias{detachNN}
-\title{Clean the .GlobalEnv and Detach the Loaded Packages}
+\title{Detach the Loaded Packages and the ZZ object}
 \usage{
 clearNN(donotremove, donotdetach = NULL)
 
-detachNN(donotremove, donotdetach = "")
+detachNN()
 }
 \arguments{
 \item{donotremove}{a vector of characters representing objects in \code{ls()}.}
@@ -27,12 +27,7 @@ detachNN(donotremove, donotdetach = "")
 \code{"Autoloads"}, \code{"package:base"}.}
 }
 \description{
-\code{clearNN} cleans the first environment \code{ls(.GlobalEnv)} from objects 
-not listed in \code{donotremove} and detach the loaded packages and their 
-dependencies not listed in \code{donotdetach}.
+\code{clearNN} detachs \code{ZZ} and the packages loaded for the evaluation. 
 
-\code{detachNN()} removes \code{ZZ} and all objects in \code{ls(.GlobalEnv)} 
-not listed in \code{donotremove}. It does not detach any packages.
-
-These functions were not exported to comply with CRAN's Repository Policy.
+\code{detachNN} detachs \code{ZZ}.
 }
