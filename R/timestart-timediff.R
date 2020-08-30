@@ -35,22 +35,10 @@ timestart <- function() {
 timediff <- function() {
    t1 <- proc.time()["elapsed"]
    t0 <- get("time0", envir = .GlobalEnv)
-   remove("time0", envir = .GlobalEnv)
+   # remove("time0", envir = .GlobalEnv)
+   time0 <<- NA
    unname(t1 - t0)
 }
-
-# timediff2 <- function() {
-   # t1 <- proc.time()["elapsed"]
-   # t0 <- get("time0", envir = .GlobalEnv)
-   # unname(t1 - t0)
-# }
-
-# timediff3 <- function() {
-   # t1 <- proc.time()["elapsed"]
-   # t0 <- get("time0", envir = .GlobalEnv)
-   # time0 <<- NA
-   # unname(t1 - t0)
-# }
 
 
 

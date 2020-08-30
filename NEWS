@@ -4,6 +4,11 @@
 
 
 
+NNbenchmark 3.1.3 - 2020-08-30
+==============================
+- timediff() updated time0 <<- NA
+- NNSummary() and NNtrainPredict() cat(), print() modified
+
 NNbenchmark 3.1.1 - 2020-08-26
 ==============================
 - DESCRIPTION: add Authors@R
