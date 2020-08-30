@@ -19,7 +19,7 @@
 #' 
 #' @examples
 #' #with legacy code, no longer usable with 2020 trainPredict
-#' options("digits.secs" = 4)
+#' old <- options("digits.secs" = 4)
 #' timeTT <- createTimer()
 #' 
 #' timeTT$start("event")
@@ -38,6 +38,8 @@
 #' time <- timediff()
 #'
 #' NNsummary(y_pred, y0, time, 4)
+#'
+#' options(old)      
 #'   
 #' @export
 #' @name NNsummary
