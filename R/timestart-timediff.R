@@ -36,7 +36,8 @@ timediff <- function() {
    t1 <- proc.time()["elapsed"]
    t0 <- get("time0", envir = .GlobalEnv)
    # remove("time0", envir = .GlobalEnv)
-   time0 <<- NA
+   time0  <- NA
+   time0 <<- time0
    unname(t1 - t0)
 }
 

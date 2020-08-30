@@ -4,17 +4,17 @@ Description: Datasets and functions to benchmark (convergence, speed, ease of us
 Imports: R6, pkgload
 Suggests: brnn, validann
 Depends: R (>= 3.5.0)
-Version: 3.1.3
-Date: 2020-08-26
+Version: 3.1.4
+Date: 2020-08-30
 License: GPL-2
 Maintainer: Patrice Kiener <rpackages@inmodelia.com>
-Author: Patrice Kiener [aut, cre],
-  Christophe Dutang [aut],
+Author: Patrice Kiener [aut, cre] (<https://orcid.org/0000-0002-0505-9920>),
+  Christophe Dutang [aut] (<https://orcid.org/0000-0001-6732-1501>),
   Salsabila Mahdi [aut],
   Akshaj Verma [aut],
   Yifu Yan [ctb]
 Authors@R: c(
-    person("Patrice", "Kiener", role = c("aut", "cre"), email = "fattailsr@inmodelia.com", comment = c(ORCID = "0000-0002-0505-9920")),
+    person("Patrice", "Kiener", role = c("aut", "cre"), email = "rpackages@inmodelia.com", comment = c(ORCID = "0000-0002-0505-9920")),
     person("Christophe", "Dutang", role = "aut", email = "christophe.dutang@ensimag.fr", comment = c(ORCID = "0000-0001-6732-1501")),
     person("Salsabila", "Mahdi", role = "aut", email = "bila.mahdi@mhs.unsyiah.ac.id"),
     person("Akshaj", "Verma", role = "aut", email = "akshajverma7@gmail.com"),
