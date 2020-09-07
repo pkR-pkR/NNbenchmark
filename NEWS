@@ -3,9 +3,11 @@
 - Christophe Dutang, John Nash 
 
 
-NNbenchmark 3.1.5 - 2020-09-07 - Submitted to CRAN
+
+NNbenchmark 3.1.6 - 2020-09-07 - Submitted to CRAN
 ==================================================
-- Package resubmitted with a new version number as the previous version got lost
+- v_3.1.5 erased since mixed with 2019 code
+- v_3.1.6 copied from v_3.1.4
 
 NNbenchmark 3.1.4 - 2020-08-30
 ==============================

@@ -4,7 +4,7 @@ Description: Datasets and functions to benchmark (convergence, speed, ease of us
 Imports: R6, pkgload
 Suggests: brnn, validann
 Depends: R (>= 3.5.0)
-Version: 3.1.5
+Version: 3.1.6
 Date: 2020-09-07
 License: GPL-2
 Maintainer: Patrice Kiener <rpackages@inmodelia.com>
@@ -25,4 +25,4 @@ NeedsCompilation: no
 LazyData: true
 RoxygenNote: 7.1.1
 Roxygen: list(old_usage = TRUE)
-Packaged: 2020-09-07 09:36:44 UTC; patrice
+Packaged: 2020-08-30 16:07:40 UTC; Patrice
