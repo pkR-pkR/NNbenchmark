@@ -27,7 +27,7 @@ The summary can also include the results of time from \code{\link{getTimer}} in
 NNbenchmark or the result of \code{\link{timediff}}.
 }
 \examples{
-#with legacy code, no longer usable with 2020 trainPredict
+## With 2019 legacy code, no longer usable with 2020 trainPredict
 old <- options("digits.secs" = 4)
 timeTT <- createTimer()
 
@@ -40,7 +40,7 @@ time <- getTimer(timeTT)
 
 NNsummary(y_pred, y0, time[,4], 4)
 
-#with 2020 code
+## With 2020 code
 timestart()
 y0 <- 1:19
 y_pred <- y0 + rnorm(length(y0), sd = 0.3)
