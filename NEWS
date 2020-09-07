@@ -3,6 +3,10 @@
 - Christophe Dutang, John Nash 
 
 
+NNbenchmark 3.1.5 - 2020-09-07 - Submitted to CRAN
+==================================================
+- Package resubmitted with a new version number as the previous version got lost
+
 NNbenchmark 3.1.4 - 2020-08-30
 ==============================
 - timediff() updated time0 <- NA ; time0 <<- time0 detected by CRAN
