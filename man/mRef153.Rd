@@ -15,6 +15,6 @@ ht(mRef153)
 pairs(mRef153)
 }
 \references{
-Neuro One \url{http://www.inmodelia.com/software.html}
+Neuro One \url{https://www.inmodelia.com/software.html}
 }
 \keyword{datasets}

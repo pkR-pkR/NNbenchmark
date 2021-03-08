@@ -16,6 +16,6 @@ pairs(mDette)
 Dette, H., & Pepelyshev, A. (2010). Generalized Latin hypercube design for computer 
 experiments. Technometrics, 52(4). 
 
-See also \url{http://www.sfu.ca/~ssurjano/detpep10curv.html}
+See also \url{https://www.sfu.ca/~ssurjano/detpep10curv.html}
 }
 \keyword{datasets}

@@ -16,6 +16,6 @@ pairs(mFriedman)
 Friedman, J. H., Grosse, E., & Stuetzle, W. (1983). Multidimensional additive spline 
 approximation. SIAM Journal on Scientific and Statistical Computing, 4(2), 291-301. 
 
-See also \url{http://www.sfu.ca/~ssurjano/fried.html}
+See also \url{https://www.sfu.ca/~ssurjano/fried.html}
 }
 \keyword{datasets}

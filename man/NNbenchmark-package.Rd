@@ -10,7 +10,8 @@ Datasets and functions to benchmark (convergence, speed, ease of use) R packages
 dedicated to regression with neural networks (no classification in this version).
 The templates for the tested packages are available at 
 <https://github.com/pkR-pkR/NNbenchmarkTemplates> and 
-<https://akshajverma.com/NNbenchmarkWeb/index.html>.
+<https://theairbend3r.github.io/NNbenchmarkWeb/index.html>. The submitted article 
+to the R-Journal can be read at <https://www.inmodelia.com/gsoc2020.html>.
 }
 \examples{
 ds <- grep("^[m,u]", ls("package:NNbenchmark"), value = TRUE); ds

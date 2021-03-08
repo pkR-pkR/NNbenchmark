@@ -90,7 +90,7 @@ NULL
 #' Dette, H., & Pepelyshev, A. (2010). Generalized Latin hypercube design for computer 
 #' experiments. Technometrics, 52(4). 
 #' 
-#' See also \url{http://www.sfu.ca/~ssurjano/detpep10curv.html}
+#' See also \url{https://www.sfu.ca/~ssurjano/detpep10curv.html}
 #' @keywords datasets
 #' @docType data
 #' @name mDette
@@ -109,7 +109,7 @@ NULL
 #' Friedman, J. H., Grosse, E., & Stuetzle, W. (1983). Multidimensional additive spline 
 #' approximation. SIAM Journal on Scientific and Statistical Computing, 4(2), 291-301. 
 #' 
-#' See also \url{http://www.sfu.ca/~ssurjano/fried.html}
+#' See also \url{https://www.sfu.ca/~ssurjano/fried.html}
 #' @keywords datasets
 #' @docType data
 #' @name mFriedman
@@ -129,7 +129,7 @@ NULL
 #' uncertainty analysis for computer models. In Uncertainty Modeling and Analysis, 1990. 
 #' Proceedings., First International Symposium on (pp. 398-403). IEEE. 
 #' 
-#' See also \url{http://www.sfu.ca/~ssurjano/ishigami.html}
+#' See also \url{https://www.sfu.ca/~ssurjano/ishigami.html}
 #' @keywords datasets
 #' @docType data
 #' @name mIshigami
@@ -144,7 +144,7 @@ NULL
 #' This dataset was used to teach neural networks at ESPCI from 2003 to 2013 and is 
 #' available in the software Neuro One. 
 #' @references
-#' Neuro One \url{http://www.inmodelia.com/software.html}
+#' Neuro One \url{https://www.inmodelia.com/software.html}
 #' @examples
 #' ht(mRef153)
 #' pairs(mRef153)
@@ -231,7 +231,8 @@ NULL
 #' An univariate dataset (x, y) of class data.frame and dim 250 x 2 to be fitted by a 
 #' neural network with 5 hidden neurons (16 parameters).
 #' @references
-#' Rust, B., NIST (1996) \url{https://itl.nist.gov/div898/strd/nls/data/gauss1.shtml}
+#' Rust, B., NIST (1996) \url{https://www.inmodelia.com/gsoc2020-redirection.html}
+#' with redirection to the (slow) NIST page.
 #' @examples
 #' ht(uGauss1)
 #' plot(uGauss1)
@@ -247,7 +248,8 @@ NULL
 #' An univariate dataset (x, y) of class data.frame and dim 250 x 2 to be fitted by a 
 #' neural network with 4 hidden neurons (13 parameters).
 #' @references
-#' Rust, B., NIST (1996) \url{https://itl.nist.gov/div898/strd/nls/data/gauss2.shtml}
+#' Rust, B., NIST (1996) \url{https://www.inmodelia.com/gsoc2020-redirection.html}
+#' with redirection to the (slow) NIST page.
 #' @examples
 #' ht(uGauss2)
 #' plot(uGauss2)
@@ -263,7 +265,8 @@ NULL
 #' An univariate dataset (x, y) of class data.frame and dim 250 x 2 to be fitted by a 
 #' neural network with 4 hidden neurons (13 parameters).
 #' @references
-#' Rust, B., NIST (1996) \url{https://itl.nist.gov/div898/strd/nls/data/gauss3.shtml}
+#' Rust, B., NIST (1996) \url{https://www.inmodelia.com/gsoc2020-redirection.html}
+#' with redirection to the (slow) NIST page.
 #' @examples
 #' ht(uGauss3)
 #' plot(uGauss3)
@@ -283,7 +286,7 @@ NULL
 #' @references
 #' Dreyfus, G., ESPCI \url{https://www.neurones.espci.fr}
 #' 
-#' Neuro One \url{http://www.inmodelia.com/software.html}
+#' Neuro One \url{https://www.inmodelia.com/software.html}
 #' @examples
 #' ht(uNeuroOne)
 #' plot(uNeuroOne)

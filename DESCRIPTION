@@ -1,28 +1,28 @@
 Package: NNbenchmark
 Title: Datasets and Functions to Benchmark Neural Network Packages
-Description: Datasets and functions to benchmark (convergence, speed, ease of use) R packages dedicated to regression with neural networks (no classification in this version). The templates for the tested packages are available in the format of R, R Markdown and HTML files at <https://github.com/pkR-pkR/NNbenchmarkTemplates> and <https://akshajverma.com/NNbenchmarkWeb/index.html>.
+Description: Datasets and functions to benchmark (convergence, speed, ease of use) R packages dedicated to regression with neural networks (no classification in this version). The templates for the tested packages are available in the R, R Markdown and HTML formats at <https://github.com/pkR-pkR/NNbenchmarkTemplates> and <https://theairbend3r.github.io/NNbenchmarkWeb/index.html>. The submitted article to the R-Journal can be read at <https://www.inmodelia.com/gsoc2020.html>.
+Depends: R (>= 3.5.0)
 Imports: R6, pkgload
 Suggests: brnn, validann
-Depends: R (>= 3.5.0)
-Version: 3.1.6
-Date: 2020-09-07
-License: GPL-2
-Maintainer: Patrice Kiener <rpackages@inmodelia.com>
+Version: 3.1.7
+Date: 2021-03-08
 Author: Patrice Kiener [aut, cre] (<https://orcid.org/0000-0002-0505-9920>),
   Christophe Dutang [aut] (<https://orcid.org/0000-0001-6732-1501>),
-  Salsabila Mahdi [aut],
-  Akshaj Verma [aut],
+  Salsabila Mahdi [aut] (<https://orcid.org/0000-0002-2559-4154>),
+  Akshaj Verma [aut] (<https://orcid.org/0000-0002-3936-0033>),
   Yifu Yan [ctb]
 Authors@R: c(
     person("Patrice", "Kiener", role = c("aut", "cre"), email = "rpackages@inmodelia.com", comment = c(ORCID = "0000-0002-0505-9920")),
     person("Christophe", "Dutang", role = "aut", email = "christophe.dutang@ensimag.fr", comment = c(ORCID = "0000-0001-6732-1501")),
-    person("Salsabila", "Mahdi", role = "aut", email = "bila.mahdi@mhs.unsyiah.ac.id"),
-    person("Akshaj", "Verma", role = "aut", email = "akshajverma7@gmail.com"),
+    person("Salsabila", "Mahdi", role = "aut", email = "bila.mahdi@mhs.unsyiah.ac.id", comment = c(ORCID = "0000-0002-2559-4154")),
+    person("Akshaj", "Verma", role = "aut", email = "akshajverma7@gmail.com", comment = c(ORCID = "0000-0002-3936-0033")),
     person("Yifu", "Yan", role = "ctb", email = "yanyifu94@hotmail.com")
-    ) 
+    )
+Maintainer: Patrice Kiener <rpackages@inmodelia.com>
+URL: https://github.com/pkR-pkR/NNbenchmark
+License: GPL-2
 Encoding: UTF-8
-NeedsCompilation: no
 LazyData: true
+NeedsCompilation: no
 RoxygenNote: 7.1.1
 Roxygen: list(old_usage = TRUE)
-Packaged: 2020-08-30 16:07:40 UTC; Patrice

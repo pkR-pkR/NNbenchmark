@@ -17,6 +17,6 @@ plot(uNeuroOne)
 \references{
 Dreyfus, G., ESPCI \url{https://www.neurones.espci.fr}
 
-Neuro One \url{http://www.inmodelia.com/software.html}
+Neuro One \url{https://www.inmodelia.com/software.html}
 }
 \keyword{datasets}

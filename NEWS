@@ -4,6 +4,14 @@
 
 
 
+NNbenchmark 3.1.7 - 2021-03-08 - Submitted to CRAN
+==================================================
+- DESCRIPTION: Orcid numbers added to Akshaj and Bila
+- DESCRIPTION: New link to NNbenchmarkWeb
+- DESCRIPTION: New links to Github and InModelia
+- datasets.R: http replaced by https
+- datasets.R: NIST pages replaced by a redirection from InModelia's website
+
 NNbenchmark 3.1.6 - 2020-09-07 - Submitted to CRAN
 ==================================================
 - v_3.1.5 erased since mixed with 2019 code

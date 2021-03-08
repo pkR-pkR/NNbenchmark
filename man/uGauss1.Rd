@@ -13,6 +13,7 @@ ht(uGauss1)
 plot(uGauss1)
 }
 \references{
-Rust, B., NIST (1996) \url{https://itl.nist.gov/div898/strd/nls/data/gauss1.shtml}
+Rust, B., NIST (1996) \url{https://www.inmodelia.com/gsoc2020-redirection.html}
+with redirection to the (slow) NIST page.
 }
 \keyword{datasets}
