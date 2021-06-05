@@ -1,4 +1,4 @@
-## NNTrain_Predict 2020-07-03 | 08-09 added large datasets
+## NNTrain_Predict 2020-07-03 | 08-09 added large datasets | 2021-06-05 file.path + odir
 
 
 #' @title Generic Functions for Training and Predicting
@@ -110,11 +110,12 @@
 #' @importFrom stats lm
 #' @export
 #' @name NNtrainPredict
-trainPredict_1mth1data <- function(dset, method, trainFUN, hyperparamFUN, predictFUN, summaryFUN,
-                                   prepareZZ.arg=list(),
-                                   nrep=5, doplot=FALSE, plot.arg=list(col1=1:nrep, lwd1=1, col2=4, lwd2=3),
-                                   pkgname, pkgfun, csvfile=FALSE, rdafile=FALSE, odir="~/", 
-                                   echo=FALSE, echoreport=FALSE, appendcsv=TRUE, ...)
+trainPredict_1mth1data <- function(
+           dset, method, trainFUN, hyperparamFUN, predictFUN, summaryFUN,
+           prepareZZ.arg=list(),
+           nrep=5, doplot=FALSE, plot.arg=list(col1=1:nrep, lwd1=1, col2=4, lwd2=3),
+           pkgname, pkgfun, csvfile=FALSE, rdafile=FALSE, odir=".", 
+           echo=FALSE, echoreport=FALSE, appendcsv=TRUE, ...)
 {
   method <- method[1]
   if(!is.list(plot.arg) || any(!names(plot.arg) %in% c("col1", "lwd1", "col2", "lwd2")))
@@ -218,8 +219,7 @@ trainPredict_1mth1data <- function(dset, method, trainFUN, hyperparamFUN, predic
   Ypred <- simplify2array(Ypred)
   
   if(length(dim(Ypred)) >= 2)
-    if(dim(Ypred)[2] == 1)
-    {
+    if(dim(Ypred)[2] == 1) {
       if(length(dim(Ypred)) == 3)
         Ypred <- Ypred[,1,]
       else if(length(dim(Ypred)) == 2)
@@ -233,24 +233,25 @@ trainPredict_1mth1data <- function(dset, method, trainFUN, hyperparamFUN, predic
     event <- c(paste0(descr, sprintf("_%.2d", 1:nrep)))
     csvsummary <- cbind.data.frame(event, t(allsummary))
     
-    if(appendcsv)
-      fname <- paste0(odir, ds, "-results.csv")
-    else
-      fname <- paste0(odir, ds, "_", pkgname, "_", pkgfun, "_", method, "-results.csv")
-    
+    if(appendcsv) {
+      dsres <- paste0(ds, "-results.csv")
+      fname <- file.path(odir, dsres)       # corrected 2021-06-05 BR+PK
+    } else {   
+      dsres2 <- paste0(ds, "_", pkgname, "_", pkgfun, "_", method, "-results.csv")
+      fname  <- file.path(odir, dsres2)     # corrected 2021-06-05 BR+PK
+    }
     add2csv(csvsummary, file = fname)
   }
   #outputs to rda files
-  if(rdafile)
-  {
-    descr <- paste0(ds, "_", pkgname, "_", pkgfun, "_", method)
-    myfile <- paste0(odir, descr, ".RData")
+  if(rdafile)  {
+    descr   <- paste0(ds, "_", pkgname, "_", pkgfun, "_", method)
+    descrda <- paste0(ds, "_", pkgname, "_", pkgfun, "_", method, ".RData")
+    myfile  <- file.path(odir, descrda)    # corrected 2021-06-05 BR+PK
     save(Ypred, allsummary, file=myfile)
   }
   
   #plot
-  if(doplot)
-  {
+  if(doplot) {
     #shorter description
     descr  <- paste0(ds, "_", pkgname, "::", pkgfun, "_", method)
     if(nrep == 1) {
@@ -276,10 +277,12 @@ trainPredict_1mth1data <- function(dset, method, trainFUN, hyperparamFUN, predic
 
 #' @export
 #' @rdname NNtrainPredict
-trainPredict_1data <- function(dset, methodlist, trainFUN, hyperparamFUN, predictFUN, summaryFUN, 
-                                closeFUN, startNN=NA, prepareZZ.arg=list(),
-                                nrep=5, doplot=FALSE, plot.arg=list(),
-                                pkgname="pkg", pkgfun="train", csvfile = FALSE, rdafile=FALSE, odir="~/", echo=FALSE, ...)
+trainPredict_1data <- function(
+            dset, methodlist, trainFUN, hyperparamFUN, predictFUN, summaryFUN, 
+            closeFUN, startNN=NA, prepareZZ.arg=list(),
+            nrep=5, doplot=FALSE, plot.arg=list(),
+            pkgname="pkg", pkgfun="train", csvfile = FALSE, rdafile=FALSE, 
+            odir=".", echo=FALSE, ...)
 {
   nbpkg <- length(pkgname)
   #sanity check
@@ -331,11 +334,13 @@ trainPredict_1data <- function(dset, methodlist, trainFUN, hyperparamFUN, predic
     }
     
     resallmethod <- sapply(1:length(methodlist), function(i)
-      trainPredict_1mth1data(dset=dset, method=methodlist[i], trainFUN=trainFUN, hyperparamFUN=hyperparamFUN, 
-                                   predictFUN=predictFUN, summaryFUN=summaryFUN, 
-                                   prepareZZ.arg=prepareZZ.arg, nrep=nrep, doplot=doplot,
-                                   pkgname=pkgname, pkgfun=pkgfun, csvfile=csvfile, rdafile=rdafile, odir=odir, 
-                                   echo=echo, ...))
+      trainPredict_1mth1data(
+        dset=dset, method=methodlist[i], trainFUN=trainFUN, hyperparamFUN=hyperparamFUN, 
+        predictFUN=predictFUN, summaryFUN=summaryFUN, 
+        prepareZZ.arg=prepareZZ.arg, nrep=nrep, doplot=doplot,
+        pkgname=pkgname, pkgfun=pkgfun, csvfile=csvfile, rdafile=rdafile, 
+        odir=odir, echo=echo, ...)
+    )
     
     if(!exists(closeFUN))
       stop(paste("function", closeFUN, "does not exist"))
@@ -370,12 +375,13 @@ trainPredict_1data <- function(dset, methodlist, trainFUN, hyperparamFUN, predic
         require(pkgname[j], character.only = TRUE)
       
       resallmethod <- sapply(1:length(mymethod), function(i)
-        trainPredict_1mth1data(dset=dset, method=mymethod[i], trainFUN=trainFUN[j], hyperparamFUN=hyperparamFUN[j], 
-                                     predictFUN=predictFUN[j], 
-                                     summaryFUN=summaryFUN, prepareZZ.arg=prepareZZ.arg[[j]], 
-                                     nrep=nrep, doplot=doplot, pkgname=pkgname[j], pkgfun=pkgfun[j], 
-                                     csvfile = csvfile, rdafile=rdafile, 
-                                     odir=odir, echo=echo, ...))
+        trainPredict_1mth1data(
+                 dset=dset, method=mymethod[i], trainFUN=trainFUN[j], hyperparamFUN=hyperparamFUN[j], 
+                 predictFUN=predictFUN[j], 
+                 summaryFUN=summaryFUN, prepareZZ.arg=prepareZZ.arg[[j]], 
+                 nrep=nrep, doplot=doplot, pkgname=pkgname[j], pkgfun=pkgfun[j], 
+                 csvfile = csvfile, rdafile=rdafile, 
+                 odir=odir, echo=echo, ...))
       
       if(!exists(closeFUN[j]))
         stop(paste("function", closeFUN[j], "does not exist"))
@@ -393,10 +399,11 @@ trainPredict_1data <- function(dset, methodlist, trainFUN, hyperparamFUN, predic
 
 #' @export
 #' @rdname NNtrainPredict
-trainPredict_1pkg <- function(dsetnum, pkgname="pkg", pkgfun="train", methodvect, prepareZZ.arg=list(),
-                              summaryFUN, nrep=5, doplot=FALSE, plot.arg=list(),
-                              csvfile = FALSE, rdafile=FALSE, odir="~/", echo=FALSE, 
-                              appendcsv=TRUE, ...)
+trainPredict_1pkg <- function(
+              dsetnum, pkgname="pkg", pkgfun="train", methodvect, prepareZZ.arg=list(),
+              summaryFUN, nrep=5, doplot=FALSE, plot.arg=list(),
+              csvfile = FALSE, rdafile=FALSE, odir=".", echo=FALSE, 
+              appendcsv=TRUE, ...)
 {
   #sanity check
   if(length(pkgname) != 1 )
@@ -441,11 +448,12 @@ trainPredict_1pkg <- function(dsetnum, pkgname="pkg", pkgfun="train", methodvect
   resallmethod <- function(j)
   {
     res <- lapply(1:length(methodvect), function(i)
-      trainPredict_1mth1data(dset=dsetnum[j], method=methodvect[i], trainFUN=trainFUN, hyperparamFUN=hyperparamFUN, 
-                           predictFUN=predictFUN, summaryFUN=summaryFUN, 
-                           prepareZZ.arg=prepareZZ.arg, nrep=nrep, doplot=doplot,
-                           pkgname=pkgname, pkgfun=pkgfun, csvfile=csvfile, rdafile=rdafile, odir=odir, 
-                           echo=echo, appendcsv=appendcsv, ...))
+      trainPredict_1mth1data(
+           dset=dsetnum[j], method=methodvect[i], trainFUN=trainFUN, hyperparamFUN=hyperparamFUN, 
+           predictFUN=predictFUN, summaryFUN=summaryFUN, 
+           prepareZZ.arg=prepareZZ.arg, nrep=nrep, doplot=doplot,
+           pkgname=pkgname, pkgfun=pkgfun, csvfile=csvfile, rdafile=rdafile, odir=odir, 
+           echo=echo, appendcsv=appendcsv, ...))
     if(is.list(res))
     {
       names(res) <- methodvect

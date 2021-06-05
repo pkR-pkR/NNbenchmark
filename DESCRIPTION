@@ -4,8 +4,8 @@ Description: Datasets and functions to benchmark (convergence, speed, ease of us
 Depends: R (>= 3.5.0)
 Imports: R6, pkgload
 Suggests: brnn, validann
-Version: 3.1.9
-Date: 2021-03-09
+Version: 3.2.0
+Date: 2021-06-05
 Author: Patrice Kiener [aut, cre] (<https://orcid.org/0000-0002-0505-9920>),
   Christophe Dutang [aut] (<https://orcid.org/0000-0001-6732-1501>),
   Salsabila Mahdi [aut] (<https://orcid.org/0000-0002-2559-4154>),

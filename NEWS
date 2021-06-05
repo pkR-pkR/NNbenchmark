@@ -4,6 +4,14 @@
 
 
 
+NNbenchmark 3.2.0 - 2021-05-06 - Submitted to CRAN
+==================================================
+- NNpredict.R:  
+- trainPredict_1mth1data(..., odir = "."). Before was "~/" which is incorrect 
+- trainPredict_1data(..., odir = ".")      (as path have no final slash in R)
+- trainPredict_1pkg(..., odir = ".")
+- trainPredict_1mth1data() file.path(odir, ...) replaces paste0(odir, ...)
+
 NNbenchmark 3.1.9 - 2021-03-09 - Submitted to CRAN
 ==================================================
 - All URLs tested with the new package urlchecker_1.0.0 published on 2021-03-04
