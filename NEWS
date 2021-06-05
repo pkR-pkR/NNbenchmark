@@ -4,7 +4,7 @@
 
 
 
-NNbenchmark 3.2.0 - 2021-05-06 - Submitted to CRAN
+NNbenchmark 3.2.0 - 2021-06-05 - Submitted to CRAN
 ==================================================
 - NNpredict.R:  
 - trainPredict_1mth1data(..., odir = "."). Before was "~/" which is incorrect 

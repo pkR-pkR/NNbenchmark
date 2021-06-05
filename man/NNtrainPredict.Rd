@@ -10,17 +10,17 @@
 trainPredict_1mth1data(dset, method, trainFUN, hyperparamFUN, predictFUN,
   summaryFUN, prepareZZ.arg = list(), nrep = 5, doplot = FALSE,
   plot.arg = list(col1 = 1:nrep, lwd1 = 1, col2 = 4, lwd2 = 3), pkgname,
-  pkgfun, csvfile = FALSE, rdafile = FALSE, odir = "~/", echo = FALSE,
+  pkgfun, csvfile = FALSE, rdafile = FALSE, odir = ".", echo = FALSE,
   echoreport = FALSE, appendcsv = TRUE, ...)
 
 trainPredict_1data(dset, methodlist, trainFUN, hyperparamFUN, predictFUN,
   summaryFUN, closeFUN, startNN = NA, prepareZZ.arg = list(), nrep = 5,
   doplot = FALSE, plot.arg = list(), pkgname = "pkg", pkgfun = "train",
-  csvfile = FALSE, rdafile = FALSE, odir = "~/", echo = FALSE, ...)
+  csvfile = FALSE, rdafile = FALSE, odir = ".", echo = FALSE, ...)
 
 trainPredict_1pkg(dsetnum, pkgname = "pkg", pkgfun = "train", methodvect,
   prepareZZ.arg = list(), summaryFUN, nrep = 5, doplot = FALSE,
-  plot.arg = list(), csvfile = FALSE, rdafile = FALSE, odir = "~/",
+  plot.arg = list(), csvfile = FALSE, rdafile = FALSE, odir = ".",
   echo = FALSE, appendcsv = TRUE, ...)
 }
 \arguments{
