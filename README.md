@@ -7,30 +7,32 @@ The purpose of this project is to verify the quality of the training algorithms 
 one normalized layer, one output output layer) for regression purpose i.e. NN(X1, ..., Xn) = E[Y].
 
 
+## Installation
 
-# Packages Tested  
+```
+install.packages('NNbenchmark')
+```
+
+## Documentation
+
+[Reference manual on CRAN](https://cran.r-project.org/web/packages/NNbenchmark/NNbenchmark.pdf).
+
+
+## Packages Tested  
 
 This GSoC project will conduct a comprehensive survey of all packages that have the “neural network” keyword in thepackage title or in the package description. There are currently 69 packages on CRAN with this keyword.  
 
-
-|    Packages   |               |               |               |               |               |
+|    []()       |               |               |               |               |               |
 |:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|:-------------:| 
-|   AMORE       |    ANN2       |  appnn        | autoencoder   | automl        | BNN           |
-|   brnn        |    Buddle     |  CaDENCE      |   cld2        | cld3          | condmixt      |
-|   DALEX2      |    DamiaNN    |  deepnet      |   deepNN      | DNMF          | elmNNrcpp     |
-|   ELMR        | EnsembleBase  |  evclass      | gamlss.add    | gcForest      | GMDH          |
-|   GMDH2       |    GMDHreg    |  grnn         |   h2o         | hybridEnsemble|  isingLenzMC  |
-|   keras       | kerasformula  |  kerasR       |   leabRa      | learNN        |  LilRhino     |
-|   monmlp      | neural        |  neuralnet    |NeuralNetTools | NlinTS        |  nnet         |
-| nnetpredint   | nnfor         |  onnx         |OptimClassifier|  OSTSC        |  pnn          |
-|   polyreg     | predictoR     |  qrnn         |   QuantumOps  | quarrint      | radiant.model |
-|   rasclass    | rcane         |  rminer       |   rmn         | RSNNS         |  ruta         |
-| simpleNeural  | snnr          |  softmaxreg   | Sojourn.Data  | spnn          |  TeachNet     |
-|  tensorflow   | tfestimators  |  trackdem     | TrafficBDE    | validann      |               |
+|   AMORE       |    ANN2       |  appnn        |   automl      |  brnn         |  CaDENCE      |
+|   DALEX2      |    DamiaNN    |  deepnet      |   elmNNrcpp   |   ELMR        | EnsembleBase  |                
+|   h2o         |   keras       |  MachineShop  |   minpack.lm  |  monmlp       |  neuralnet    |
+|  nlsr         |  nnet         |  qrnn         | radiant.model | rminer        | RSNNS         | 
+| snnR          |  TraineR      | validann      |
 
 
 
-# Evaluation Criteria
+## Evaluation Criteria
 ***
 The algorithms were tested on 12 regression datasets (both univariate and multivariate) of varying complexity.  
 
@@ -45,15 +47,91 @@ The score for each package was based on the following parameters:
 To obtain the final rating, we take a weighted average of these 4 columns (giving more weight to ConvergenceQuality and ConvergenceTime).
 
 
+## Example Usage
 
-# Authors  
+An example usage using the `nnet` package.
 
-## Selected Students:
+### Load packages
+
+```
+library(NNbenchmark)
+library(kableExtra)
+options(scipen = 999)
+```
+
+### Datasets to test
+
+```
+NNdataSummary(NNdatasets)
+```
+
+### nnet trainPredict arguments - inputs x, y
+
+```
+if(dir.exists("D:/GSoC2020/Results/2020run03/"))
+{  
+  odir <- "D:/GSoC2020/Results/2020run03/"
+}else if(dir.exists("~/Documents/recherche-enseignement/code/R/NNbenchmark-project/NNtempresult/"))
+{  
+  odir <- "~/Documents/recherche-enseignement/code/R/NNbenchmark-project/NNtempresult/"
+}else
+  odir <- "~"
+
+nrep <- 10
+maxit2ndorder  <-    200
+maxit1storderA <-   1000
+maxit1storderB <-  10000
+maxit1storderC <- 100000
+
+#library(nnet)
+nnet.method <- "none"
+hyperParams.nnet <- function(...) {
+    return (list(iter=maxit2ndorder, trace=FALSE))
+}
+NNtrain.nnet <- function(x, y, dataxy, formula, neur, method, hyperParams, ...) {
+    
+    hyper_params <- do.call(hyperParams, list(...))
+    
+    NNreg <- nnet::nnet(x, y, size = neur, linout = TRUE, maxit = hyper_params$iter, trace=hyper_params$trace)
+    return(NNreg)
+}
+NNpredict.nnet <- function(object, x, ...)
+    predict(object, newdata=x)
+NNclose.nnet <- function()
+  if("package:nnet" %in% search())
+    detach("package:nnet", unload=TRUE)
+nnet.prepareZZ <- list(xdmv = "d", ydmv = "v", zdm = "d", scale = TRUE)
+if(FALSE)
+res <- trainPredict_1data(1, nnet.method, "NNtrain.nnet", "hyperParams.nnet", "NNpredict.nnet", 
+                               NNsummary, "NNclose.nnet", NA, nnet.prepareZZ, nrep=5, echo=TRUE, doplot=FALSE,
+                               pkgname="nnet", pkgfun="nnet", csvfile=TRUE, rdafile=TRUE, odir=odir)
+```
+
+### Launch package's `trainPredict`
+
+```
+res <- trainPredict_1pkg(1:12, pkgname = "nnet", pkgfun = "nnet", nnet.method,
+  prepareZZ.arg = nnet.prepareZZ, nrep = nrep, doplot = TRUE,
+  csvfile = TRUE, rdafile = TRUE, odir = odir, echo = FALSE)
+```
+
+
+### Result
+
+```
+kable(t(apply(res, c(1,4), min)))%>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
+```
+
+
+## Authors  
+
+### Selected Students:
 
 - Akshaj Verma
 - Salsabila Mahdi
 
-## Mentors:
+### Mentors:
 
 - Patrice Kiener  
 - Christophe Dutang
