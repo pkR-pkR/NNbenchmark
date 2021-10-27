@@ -65,9 +65,18 @@ options(scipen = 999)
 NNdataSummary(NNdatasets)
 ```
 
-### nnet trainPredict arguments - inputs x, y
+### Setup nnet `trainPredict` arguments
+
+The trainPredict functions of NNbenchmark were made to be generic so they could accomodate the many different formats (with regards to data preparation, training functions, etc) of neural network packages in R. 
+There are 3 versions of trainPredict available.  
+* In trainPredict_1mth1data, a neural network is trained on one dataset and then used for predictions, with several functionalities. Then, the performance of the neural network is summarized.
+* trainPredict_1data is a wrapper function of trainPredict_1mth1data for multiple methods/algorithms.
+* trainPredict_1pkg is a wrapper function of trainPredict_1mth1data for multiple datasets.
+
+The following example shows how to use trainPredict_1pkg to benchmark the nnet package against 12 datasets.
 
 ```
+## Setup directory
 if(dir.exists("D:/GSoC2020/Results/2020run03/"))
 {  
   odir <- "D:/GSoC2020/Results/2020run03/"
@@ -77,17 +86,19 @@ if(dir.exists("D:/GSoC2020/Results/2020run03/"))
 }else
   odir <- "~"
 
+## Setup number of repetitions, hyperparameters, and algorithm
 nrep <- 10
 maxit2ndorder  <-    200
 maxit1storderA <-   1000
 maxit1storderB <-  10000
 maxit1storderC <- 100000
 
-#library(nnet)
 nnet.method <- "none"
 hyperParams.nnet <- function(...) {
     return (list(iter=maxit2ndorder, trace=FALSE))
 }
+
+## Setup data preparation (nnet.prepareZZ), training function, prediction function, and close function
 NNtrain.nnet <- function(x, y, dataxy, formula, neur, method, hyperParams, ...) {
     
     hyper_params <- do.call(hyperParams, list(...))
@@ -107,7 +118,7 @@ res <- trainPredict_1data(1, nnet.method, "NNtrain.nnet", "hyperParams.nnet", "N
                                pkgname="nnet", pkgfun="nnet", csvfile=TRUE, rdafile=TRUE, odir=odir)
 ```
 
-### Launch package's `trainPredict`
+### Launch `trainPredict`
 
 ```
 res <- trainPredict_1pkg(1:12, pkgname = "nnet", pkgfun = "nnet", nnet.method,
