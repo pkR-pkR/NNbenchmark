@@ -40,6 +40,9 @@
 #' @param   echo            logical value, separates training between packages with some text and enables echoreport if TRUE
 #' @param   echoreport      logical value, detailed reports are printed (such as model summaries and str(data)) if TRUE, will not work if echo is FALSE
 #' @param   appendcsv       logical value, if \code{TRUE}, the csv output is appended to the csv file. 
+#' @param   parallel        The type of parallel operation to be used (if any). If missing, the default is \code{"no"}.
+#' @param   ncpus           integer: number of processes to be used in parallel operation: typically one would chose this to the number of available CPUs.
+#' @param   cl              An optional parallel or snow cluster for use if \code{parallel = "snow"}. If not supplied, a cluster on the local machine is created for the duration of the call.
 #' @param   ...             additional arguments
 #' @return  
 #' An array with values as in NNsummary including each repetition, with options for plots and output files
@@ -111,11 +114,11 @@
 #' @export
 #' @name NNtrainPredict
 trainPredict_1mth1data <- function(
-           dset, method, trainFUN, hyperparamFUN, predictFUN, summaryFUN,
-           prepareZZ.arg=list(),
-           nrep=5, doplot=FALSE, plot.arg=list(col1=1:nrep, lwd1=1, col2=4, lwd2=3),
-           pkgname, pkgfun, csvfile=FALSE, rdafile=FALSE, odir=".", 
-           echo=FALSE, echoreport=FALSE, appendcsv=TRUE, ...)
+    dset, method, trainFUN, hyperparamFUN, predictFUN, summaryFUN,
+    prepareZZ.arg=list(),
+    nrep=5, doplot=FALSE, plot.arg=list(col1=1:nrep, lwd1=1, col2=4, lwd2=3),
+    pkgname, pkgfun, csvfile=FALSE, rdafile=FALSE, odir=".", 
+    echo=FALSE, echoreport=FALSE, appendcsv=TRUE, ...)
 {
   method <- method[1]
   if(!is.list(plot.arg) || any(!names(plot.arg) %in% c("col1", "lwd1", "col2", "lwd2")))
@@ -278,11 +281,11 @@ trainPredict_1mth1data <- function(
 #' @export
 #' @rdname NNtrainPredict
 trainPredict_1data <- function(
-            dset, methodlist, trainFUN, hyperparamFUN, predictFUN, summaryFUN, 
-            closeFUN, startNN=NA, prepareZZ.arg=list(),
-            nrep=5, doplot=FALSE, plot.arg=list(),
-            pkgname="pkg", pkgfun="train", csvfile = FALSE, rdafile=FALSE, 
-            odir=".", echo=FALSE, ...)
+    dset, methodlist, trainFUN, hyperparamFUN, predictFUN, summaryFUN, 
+    closeFUN, startNN=NA, prepareZZ.arg=list(),
+    nrep=5, doplot=FALSE, plot.arg=list(),
+    pkgname="pkg", pkgfun="train", csvfile = FALSE, rdafile=FALSE, 
+    odir=".", echo=FALSE, ...)
 {
   nbpkg <- length(pkgname)
   #sanity check
@@ -376,12 +379,12 @@ trainPredict_1data <- function(
       
       resallmethod <- sapply(1:length(mymethod), function(i)
         trainPredict_1mth1data(
-                 dset=dset, method=mymethod[i], trainFUN=trainFUN[j], hyperparamFUN=hyperparamFUN[j], 
-                 predictFUN=predictFUN[j], 
-                 summaryFUN=summaryFUN, prepareZZ.arg=prepareZZ.arg[[j]], 
-                 nrep=nrep, doplot=doplot, pkgname=pkgname[j], pkgfun=pkgfun[j], 
-                 csvfile = csvfile, rdafile=rdafile, 
-                 odir=odir, echo=echo, ...))
+          dset=dset, method=mymethod[i], trainFUN=trainFUN[j], hyperparamFUN=hyperparamFUN[j], 
+          predictFUN=predictFUN[j], 
+          summaryFUN=summaryFUN, prepareZZ.arg=prepareZZ.arg[[j]], 
+          nrep=nrep, doplot=doplot, pkgname=pkgname[j], pkgfun=pkgfun[j], 
+          csvfile = csvfile, rdafile=rdafile, 
+          odir=odir, echo=echo, ...))
       
       if(!exists(closeFUN[j]))
         stop(paste("function", closeFUN[j], "does not exist"))
@@ -400,10 +403,11 @@ trainPredict_1data <- function(
 #' @export
 #' @rdname NNtrainPredict
 trainPredict_1pkg <- function(
-              dsetnum, pkgname="pkg", pkgfun="train", methodvect, prepareZZ.arg=list(),
-              summaryFUN, nrep=5, doplot=FALSE, plot.arg=list(),
-              csvfile = FALSE, rdafile=FALSE, odir=".", echo=FALSE, 
-              appendcsv=TRUE, ...)
+    dsetnum, pkgname="pkg", pkgfun="train", methodvect, prepareZZ.arg=list(),
+    summaryFUN, nrep=5, doplot=FALSE, plot.arg=list(),
+    csvfile = FALSE, rdafile=FALSE, odir=".", echo=FALSE, 
+    appendcsv=TRUE, parallel = "no",
+    ncpus = 1, cl = NULL, ...)
 {
   #sanity check
   if(length(pkgname) != 1 )
@@ -416,7 +420,7 @@ trainPredict_1pkg <- function(
   startNN <- paste("NNstart", pkgname, sep=".")
   if(missing(summaryFUN))
     summaryFUN <- NNsummary
-
+  
   if(!exists(trainFUN))
     stop(paste(trainFUN, "does not exist"))
   if(!exists(hyperparamFUN))
@@ -425,35 +429,44 @@ trainPredict_1pkg <- function(
     stop(paste(predictFUN, "does not exist"))
   if(!exists(startNN))
     startNN <- NA
-  if(!is.na(startNN))
-  {
-    if(!exists(startNN))
-      stop(paste("function", startNN, "does not exist"))
-    do.call(startNN, list())
-  }else
-  {
-    #print(search())
-    x <- require(pkgname[1], character.only = TRUE)
-    #print(search())
-    #print(x)
-  }
-  if(!exists(closeFUN))
-    stop(paste("function", closeFUN, "does not exist"))
-  
   nbdata <- length(dsetnum)
   #sanity check 
   if(nbdata <= 0)
     stop("no dataset to be tested")
   
+  if(!is.na(startNN))
+  {
+    if(!exists(startNN))
+      stop(paste("function", startNN, "does not exist"))
+  }
+  if(!exists(closeFUN))
+    stop(paste("function", closeFUN, "does not exist"))
+  
+  #taken from boot() from boot pkg
+  parallel <- match.arg(parallel, c("no", "snow", "multicore"))
+  have_mc <- have_snow <- FALSE
+  stopifnot(length(ncpus) == 1)
+  if (parallel != "no" && ncpus > 1L) 
+  {
+    if (parallel == "multicore") 
+      have_mc <- .Platform$OS.type != "windows"
+    else if (parallel == "snow") 
+      have_snow <- TRUE
+    if (!have_mc && !have_snow) 
+      ncpus <- 1L
+    loadNamespace("parallel")
+  }
+  
   resallmethod <- function(j)
   {
     res <- lapply(1:length(methodvect), function(i)
       trainPredict_1mth1data(
-           dset=dsetnum[j], method=methodvect[i], trainFUN=trainFUN, hyperparamFUN=hyperparamFUN, 
-           predictFUN=predictFUN, summaryFUN=summaryFUN, 
-           prepareZZ.arg=prepareZZ.arg, nrep=nrep, doplot=doplot,
-           pkgname=pkgname, pkgfun=pkgfun, csvfile=csvfile, rdafile=rdafile, odir=odir, 
-           echo=echo, appendcsv=appendcsv, ...))
+        dset=dsetnum[j], method=methodvect[i], trainFUN=trainFUN, 
+        hyperparamFUN=hyperparamFUN, 
+        predictFUN=predictFUN, summaryFUN=summaryFUN, 
+        prepareZZ.arg=prepareZZ.arg, nrep=nrep, doplot=doplot,
+        pkgname=pkgname, pkgfun=pkgfun, csvfile=csvfile, rdafile=rdafile, 
+        odir=odir, echo=echo, appendcsv=appendcsv, ...))
     if(is.list(res))
     {
       names(res) <- methodvect
@@ -461,15 +474,83 @@ trainPredict_1pkg <- function(
     }
     return(res)
   }
-  res <- lapply(1:nbdata, resallmethod)
+  # parallel or sequential computation, taken from boot() of boot pkg
+  if ( (have_mc || have_snow) && ncpus > 1L) 
+  {
+    if (have_mc) #FORK 
+    {
+      res <- parallel::mclapply(1:nbdata, resallmethod, mc.cores = ncpus)
+    }else if (have_snow) #PSOCK
+    {
+      list(...) # evaluate any promises
+      if (is.null(cl)) 
+      {
+        stop("not yet implemented")
+        cat("ls()\n")
+        print(ls())
+        cat("ls(1)\n")
+        print(ls(1))
+        
+        
+        cl <- parallel::makePSOCKcluster(rep("localhost", ncpus))
+        if(RNGkind()[1L] == "L'Ecuyer-CMRG")
+          try(parallel::clusterSetRNGStream(cl))
+        try(parallel::clusterExport(cl, ls(1)))
+        
+        #call startNN() or require(NNpkg)
+        if(!is.na(startNN))
+        { 
+          try(parallel::clusterExport(cl, "startNN"))
+          try(parallel::clusterEvalQ(cl, do.call(startNN, list())))
+        }else
+        {
+          #parallel::clusterEvalQ(cl, pkgname <- "brnn")
+          #print(mget("pkgname"))
+          try(parallel::clusterExport(cl, mget("pkgname")))
+          
+          try(parallel::clusterEvalQ(cl, require(pkgname[1], character.only = TRUE)))
+        }
+        #iterate overdatasets
+        res <- try(parallel::parLapply(cl, 1:nbdata, resallmethod))
+        #call closeNN()
+        try(parallel::clusterEvalQ(cl, do.call(closeFUN, list())))
+        parallel::stopCluster(cl)
+      }else 
+      {
+        try(parallel::clusterExport(cl, ls(1)))
+        #call startNN() or require(NNpkg)
+        if(!is.na(startNN))
+          try(parallel::clusterEvalQ(cl, do.call(startNN, list())))
+        else
+          try(parallel::clusterEvalQ(cl, require(pkgname[1], character.only = TRUE)))
+        #iterate overdatasets
+        res <- try(parallel::parLapply(cl, 1:nbdata, resallmethod))
+        #call closeNN()
+        try(parallel::clusterEvalQ(cl, do.call(closeFUN, list())))
+      }
+    }
+  }else #sequential call
+  {
+    if(!is.na(startNN))
+    {
+      do.call(startNN, list())
+    }else
+    {
+      x <- require(pkgname[1], character.only = TRUE)
+    }
+    
+    res <- lapply(1:nbdata, resallmethod)
+    do.call(closeFUN, list())
+  }
+  
   mydatanames <- c("mDette","mFriedman","mIshigami","mRef153","uDmod1",   
-    "uDmod2","uDreyfus1","uDreyfus2","uGauss1","uGauss2","uGauss3","uNeuroOne","bWoodN1")
-  names(res) <- mydatanames[dsetnum]
+                   "uDmod2","uDreyfus1","uDreyfus2","uGauss1","uGauss2",
+                   "uGauss3","uNeuroOne","bWoodN1")
+  if(length(res) == length(dsetnum))
+    names(res) <- mydatanames[dsetnum]
   res <- simplify2array(res)
   if(is.list(res))
     res <- simplify2array(res)
-    
-  do.call(closeFUN, list())
   
   return(res)
 }
