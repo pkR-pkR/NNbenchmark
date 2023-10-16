@@ -1,4 +1,4 @@
-## NNTrain_Predict 2020-07-03 | 08-09 added large datasets | 2021-06-05 file.path + odir
+## NNTrain_Predict 2020-07-03 | 08-09 added large datasets | 2021-06-05 file.path + odir | 2023-09-16 add parallelization
 
 
 #' @title Generic Functions for Training and Predicting
@@ -485,12 +485,11 @@ trainPredict_1pkg <- function(
       list(...) # evaluate any promises
       if (is.null(cl)) 
       {
-        stop("not yet implemented")
-        cat("ls()\n")
-        print(ls())
-        cat("ls(1)\n")
-        print(ls(1))
-        
+        warning("not yet implemented")
+        #cat("ls()\n")
+        #print(ls())
+        #cat("ls(1)\n")
+        #print(ls(1))
         
         cl <- parallel::makePSOCKcluster(rep("localhost", ncpus))
         if(RNGkind()[1L] == "L'Ecuyer-CMRG")

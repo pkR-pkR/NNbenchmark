@@ -116,28 +116,28 @@ timer$getEvent("event1")
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{timeR$new()}}
-\item \href{#method-start}{\code{timeR$start()}}
-\item \href{#method-stop}{\code{timeR$stop()}}
-\item \href{#method-getTimer}{\code{timeR$getTimer()}}
-\item \href{#method-removeEvent}{\code{timeR$removeEvent()}}
-\item \href{#method-toggleVerbose}{\code{timeR$toggleVerbose()}}
-\item \href{#method-getStartTime}{\code{timeR$getStartTime()}}
-\item \href{#method-getStopTime}{\code{timeR$getStopTime()}}
-\item \href{#method-getDuration}{\code{timeR$getDuration()}}
-\item \href{#method-getRMSE}{\code{timeR$getRMSE()}}
-\item \href{#method-getMAE}{\code{timeR$getMAE()}}
-\item \href{#method-getStars}{\code{timeR$getStars()}}
-\item \href{#method-getParams}{\code{timeR$getParams()}}
-\item \href{#method-getComment}{\code{timeR$getComment()}}
-\item \href{#method-getEvent}{\code{timeR$getEvent()}}
-\item \href{#method-print}{\code{timeR$print()}}
-\item \href{#method-clone}{\code{timeR$clone()}}
+\item \href{#method-timeR-new}{\code{timeR$new()}}
+\item \href{#method-timeR-start}{\code{timeR$start()}}
+\item \href{#method-timeR-stop}{\code{timeR$stop()}}
+\item \href{#method-timeR-getTimer}{\code{timeR$getTimer()}}
+\item \href{#method-timeR-removeEvent}{\code{timeR$removeEvent()}}
+\item \href{#method-timeR-toggleVerbose}{\code{timeR$toggleVerbose()}}
+\item \href{#method-timeR-getStartTime}{\code{timeR$getStartTime()}}
+\item \href{#method-timeR-getStopTime}{\code{timeR$getStopTime()}}
+\item \href{#method-timeR-getDuration}{\code{timeR$getDuration()}}
+\item \href{#method-timeR-getRMSE}{\code{timeR$getRMSE()}}
+\item \href{#method-timeR-getMAE}{\code{timeR$getMAE()}}
+\item \href{#method-timeR-getStars}{\code{timeR$getStars()}}
+\item \href{#method-timeR-getParams}{\code{timeR$getParams()}}
+\item \href{#method-timeR-getComment}{\code{timeR$getComment()}}
+\item \href{#method-timeR-getEvent}{\code{timeR$getEvent()}}
+\item \href{#method-timeR-print}{\code{timeR$print()}}
+\item \href{#method-timeR-clone}{\code{timeR$clone()}}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-timeR-new"></a>}}
+\if{latex}{\out{\hypertarget{method-timeR-new}{}}}
 \subsection{Method \code{new()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{timeR$new(verbose = TRUE)}\if{html}{\out{</div>}}
@@ -145,8 +145,8 @@ timer$getEvent("event1")
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-start"></a>}}
-\if{latex}{\out{\hypertarget{method-start}{}}}
+\if{html}{\out{<a id="method-timeR-start"></a>}}
+\if{latex}{\out{\hypertarget{method-timeR-start}{}}}
 \subsection{Method \code{start()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{timeR$start(eventName)}\if{html}{\out{</div>}}
@@ -154,8 +154,8 @@ timer$getEvent("event1")
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-stop"></a>}}
-\if{latex}{\out{\hypertarget{method-stop}{}}}
+\if{html}{\out{<a id="method-timeR-stop"></a>}}
+\if{latex}{\out{\hypertarget{method-timeR-stop}{}}}
 \subsection{Method \code{stop()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{timeR$stop(eventName, RMSE = NA_real_, MAE = NA_real_,
@@ -165,8 +165,8 @@ timer$getEvent("event1")
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getTimer"></a>}}
-\if{latex}{\out{\hypertarget{method-getTimer}{}}}
+\if{html}{\out{<a id="method-timeR-getTimer"></a>}}
+\if{latex}{\out{\hypertarget{method-timeR-getTimer}{}}}
 \subsection{Method \code{getTimer()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{timeR$getTimer(...)}\if{html}{\out{</div>}}
@@ -174,8 +174,8 @@ timer$getEvent("event1")
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-removeEvent"></a>}}
-\if{latex}{\out{\hypertarget{method-removeEvent}{}}}
+\if{html}{\out{<a id="method-timeR-removeEvent"></a>}}
+\if{latex}{\out{\hypertarget{method-timeR-removeEvent}{}}}
 \subsection{Method \code{removeEvent()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{timeR$removeEvent(eventName)}\if{html}{\out{</div>}}
@@ -183,8 +183,8 @@ timer$getEvent("event1")
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-toggleVerbose"></a>}}
-\if{latex}{\out{\hypertarget{method-toggleVerbose}{}}}
+\if{html}{\out{<a id="method-timeR-toggleVerbose"></a>}}
+\if{latex}{\out{\hypertarget{method-timeR-toggleVerbose}{}}}
 \subsection{Method \code{toggleVerbose()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{timeR$toggleVerbose(...)}\if{html}{\out{</div>}}
@@ -192,8 +192,8 @@ timer$getEvent("event1")
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getStartTime"></a>}}
-\if{latex}{\out{\hypertarget{method-getStartTime}{}}}
+\if{html}{\out{<a id="method-timeR-getStartTime"></a>}}
+\if{latex}{\out{\hypertarget{method-timeR-getStartTime}{}}}
 \subsection{Method \code{getStartTime()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{timeR$getStartTime(eventName)}\if{html}{\out{</div>}}
@@ -201,8 +201,8 @@ timer$getEvent("event1")
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getStopTime"></a>}}
-\if{latex}{\out{\hypertarget{method-getStopTime}{}}}
+\if{html}{\out{<a id="method-timeR-getStopTime"></a>}}
+\if{latex}{\out{\hypertarget{method-timeR-getStopTime}{}}}
 \subsection{Method \code{getStopTime()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{timeR$getStopTime(eventName)}\if{html}{\out{</div>}}
@@ -210,8 +210,8 @@ timer$getEvent("event1")
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getDuration"></a>}}
-\if{latex}{\out{\hypertarget{method-getDuration}{}}}
+\if{html}{\out{<a id="method-timeR-getDuration"></a>}}
+\if{latex}{\out{\hypertarget{method-timeR-getDuration}{}}}
 \subsection{Method \code{getDuration()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{timeR$getDuration(eventName)}\if{html}{\out{</div>}}
@@ -219,8 +219,8 @@ timer$getEvent("event1")
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getRMSE"></a>}}
-\if{latex}{\out{\hypertarget{method-getRMSE}{}}}
+\if{html}{\out{<a id="method-timeR-getRMSE"></a>}}
+\if{latex}{\out{\hypertarget{method-timeR-getRMSE}{}}}
 \subsection{Method \code{getRMSE()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{timeR$getRMSE(eventName)}\if{html}{\out{</div>}}
@@ -228,8 +228,8 @@ timer$getEvent("event1")
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getMAE"></a>}}
-\if{latex}{\out{\hypertarget{method-getMAE}{}}}
+\if{html}{\out{<a id="method-timeR-getMAE"></a>}}
+\if{latex}{\out{\hypertarget{method-timeR-getMAE}{}}}
 \subsection{Method \code{getMAE()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{timeR$getMAE(eventName)}\if{html}{\out{</div>}}
@@ -237,8 +237,8 @@ timer$getEvent("event1")
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getStars"></a>}}
-\if{latex}{\out{\hypertarget{method-getStars}{}}}
+\if{html}{\out{<a id="method-timeR-getStars"></a>}}
+\if{latex}{\out{\hypertarget{method-timeR-getStars}{}}}
 \subsection{Method \code{getStars()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{timeR$getStars(eventName)}\if{html}{\out{</div>}}
@@ -246,8 +246,8 @@ timer$getEvent("event1")
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getParams"></a>}}
-\if{latex}{\out{\hypertarget{method-getParams}{}}}
+\if{html}{\out{<a id="method-timeR-getParams"></a>}}
+\if{latex}{\out{\hypertarget{method-timeR-getParams}{}}}
 \subsection{Method \code{getParams()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{timeR$getParams(eventName)}\if{html}{\out{</div>}}
@@ -255,8 +255,8 @@ timer$getEvent("event1")
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getComment"></a>}}
-\if{latex}{\out{\hypertarget{method-getComment}{}}}
+\if{html}{\out{<a id="method-timeR-getComment"></a>}}
+\if{latex}{\out{\hypertarget{method-timeR-getComment}{}}}
 \subsection{Method \code{getComment()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{timeR$getComment(eventName)}\if{html}{\out{</div>}}
@@ -264,8 +264,8 @@ timer$getEvent("event1")
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getEvent"></a>}}
-\if{latex}{\out{\hypertarget{method-getEvent}{}}}
+\if{html}{\out{<a id="method-timeR-getEvent"></a>}}
+\if{latex}{\out{\hypertarget{method-timeR-getEvent}{}}}
 \subsection{Method \code{getEvent()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{timeR$getEvent(eventName)}\if{html}{\out{</div>}}
@@ -273,8 +273,8 @@ timer$getEvent("event1")
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-print"></a>}}
-\if{latex}{\out{\hypertarget{method-print}{}}}
+\if{html}{\out{<a id="method-timeR-print"></a>}}
+\if{latex}{\out{\hypertarget{method-timeR-print}{}}}
 \subsection{Method \code{print()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{timeR$print(...)}\if{html}{\out{</div>}}
@@ -282,8 +282,8 @@ timer$getEvent("event1")
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-timeR-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-timeR-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

@@ -21,7 +21,8 @@ trainPredict_1data(dset, methodlist, trainFUN, hyperparamFUN, predictFUN,
 trainPredict_1pkg(dsetnum, pkgname = "pkg", pkgfun = "train", methodvect,
   prepareZZ.arg = list(), summaryFUN, nrep = 5, doplot = FALSE,
   plot.arg = list(), csvfile = FALSE, rdafile = FALSE, odir = ".",
-  echo = FALSE, appendcsv = TRUE, ...)
+  echo = FALSE, appendcsv = TRUE, parallel = "no", ncpus = 1,
+  cl = NULL, ...)
 }
 \arguments{
 \item{dset}{a number or string indicating which dataset to use, see \code{\link{NNdataSummary}}}
@@ -71,6 +72,12 @@ trainPredict_1pkg(dsetnum, pkgname = "pkg", pkgfun = "train", methodvect,
 \item{dsetnum}{a vector of numbers indicating which dataset to use in \code{\link{NNdataSummary}}}
 
 \item{methodvect}{vector of methods per package/function}
+
+\item{parallel}{The type of parallel operation to be used (if any). If missing, the default is \code{"no"}.}
+
+\item{ncpus}{integer: number of processes to be used in parallel operation: typically one would chose this to the number of available CPUs.}
+
+\item{cl}{An optional parallel or snow cluster for use if \code{parallel = "snow"}. If not supplied, a cluster on the local machine is created for the duration of the call.}
 }
 \value{
 An array with values as in NNsummary including each repetition, with options for plots and output files
