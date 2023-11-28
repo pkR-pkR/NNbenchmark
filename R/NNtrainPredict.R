@@ -43,6 +43,7 @@
 #' @param   parallel        The type of parallel operation to be used (if any). If missing, the default is \code{"no"}.
 #' @param   ncpus           integer: number of processes to be used in parallel operation: typically one would chose this to the number of available CPUs.
 #' @param   cl              An optional parallel or snow cluster for use if \code{parallel = "snow"}. If not supplied, a cluster on the local machine is created for the duration of the call.
+#' @param   lib.loc         A character vector describing the location of R library trees to search through, or \code{NULL}. The default value of \code{NULL} corresponds to all libraries currently known to \code{\link[base]{.libPaths}()}. Non-existent library trees are silently ignored.
 #' @param   ...             additional arguments
 #' @return  
 #' An array with values as in NNsummary including each repetition, with options for plots and output files
@@ -285,7 +286,7 @@ trainPredict_1data <- function(
     closeFUN, startNN=NA, prepareZZ.arg=list(),
     nrep=5, doplot=FALSE, plot.arg=list(),
     pkgname="pkg", pkgfun="train", csvfile = FALSE, rdafile=FALSE, 
-    odir=".", echo=FALSE, ...)
+    odir=".", echo=FALSE, lib.loc=NULL, ...)
 {
   nbpkg <- length(pkgname)
   #sanity check
@@ -331,7 +332,7 @@ trainPredict_1data <- function(
     }else
     {
       #print(search())
-      x <- require(pkgname[1], character.only = TRUE)
+      x <- require(pkgname[1], character.only = TRUE, lib.loc=lib.loc)
       #print(search())
       #print(x)
     }
@@ -375,7 +376,7 @@ trainPredict_1data <- function(
           stop(paste("function", startNN[j], "does not exist"))
         do.call(startNN[j], list())
       }else
-        require(pkgname[j], character.only = TRUE)
+        require(pkgname[j], character.only = TRUE, lib.loc=lib.loc)
       
       resallmethod <- sapply(1:length(mymethod), function(i)
         trainPredict_1mth1data(
@@ -407,7 +408,7 @@ trainPredict_1pkg <- function(
     summaryFUN, nrep=5, doplot=FALSE, plot.arg=list(),
     csvfile = FALSE, rdafile=FALSE, odir=".", echo=FALSE, 
     appendcsv=TRUE, parallel = "no",
-    ncpus = 1, cl = NULL, ...)
+    ncpus = 1, cl = NULL, lib.loc=NULL, ...)
 {
   #sanity check
   if(length(pkgname) != 1 )
@@ -507,7 +508,7 @@ trainPredict_1pkg <- function(
           #print(mget("pkgname"))
           try(parallel::clusterExport(cl, mget("pkgname")))
           
-          try(parallel::clusterEvalQ(cl, require(pkgname[1], character.only = TRUE)))
+          try(parallel::clusterEvalQ(cl, require(pkgname[1], character.only = TRUE, lib.loc=lib.loc)))
         }
         #iterate overdatasets
         res <- try(parallel::parLapply(cl, 1:nbdata, resallmethod))
@@ -521,7 +522,7 @@ trainPredict_1pkg <- function(
         if(!is.na(startNN))
           try(parallel::clusterEvalQ(cl, do.call(startNN, list())))
         else
-          try(parallel::clusterEvalQ(cl, require(pkgname[1], character.only = TRUE)))
+          try(parallel::clusterEvalQ(cl, require(pkgname[1], character.only = TRUE, lib.loc=lib.loc)))
         #iterate overdatasets
         res <- try(parallel::parLapply(cl, 1:nbdata, resallmethod))
         #call closeNN()
@@ -535,7 +536,7 @@ trainPredict_1pkg <- function(
       do.call(startNN, list())
     }else
     {
-      x <- require(pkgname[1], character.only = TRUE)
+      x <- require(pkgname[1], character.only = TRUE, lib.loc=lib.loc)
     }
     
     res <- lapply(1:nbdata, resallmethod)

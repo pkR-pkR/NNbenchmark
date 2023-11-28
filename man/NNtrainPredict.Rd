@@ -16,13 +16,14 @@ trainPredict_1mth1data(dset, method, trainFUN, hyperparamFUN, predictFUN,
 trainPredict_1data(dset, methodlist, trainFUN, hyperparamFUN, predictFUN,
   summaryFUN, closeFUN, startNN = NA, prepareZZ.arg = list(), nrep = 5,
   doplot = FALSE, plot.arg = list(), pkgname = "pkg", pkgfun = "train",
-  csvfile = FALSE, rdafile = FALSE, odir = ".", echo = FALSE, ...)
+  csvfile = FALSE, rdafile = FALSE, odir = ".", echo = FALSE,
+  lib.loc = NULL, ...)
 
 trainPredict_1pkg(dsetnum, pkgname = "pkg", pkgfun = "train", methodvect,
   prepareZZ.arg = list(), summaryFUN, nrep = 5, doplot = FALSE,
   plot.arg = list(), csvfile = FALSE, rdafile = FALSE, odir = ".",
   echo = FALSE, appendcsv = TRUE, parallel = "no", ncpus = 1,
-  cl = NULL, ...)
+  cl = NULL, lib.loc = NULL, ...)
 }
 \arguments{
 \item{dset}{a number or string indicating which dataset to use, see \code{\link{NNdataSummary}}}
@@ -68,6 +69,8 @@ trainPredict_1pkg(dsetnum, pkgname = "pkg", pkgfun = "train", methodvect,
 \item{closeFUN}{a function to detach packages or other necessary environment clearing}
 
 \item{startNN}{a function to start needed outside libraries, for example, h2o}
+
+\item{lib.loc}{A character vector describing the location of R library trees to search through, or \code{NULL}. The default value of \code{NULL} corresponds to all libraries currently known to \code{\link[base]{.libPaths}()}. Non-existent library trees are silently ignored.}
 
 \item{dsetnum}{a vector of numbers indicating which dataset to use in \code{\link{NNdataSummary}}}
 

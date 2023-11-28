@@ -2,6 +2,10 @@
 - Akshaj Verma, Salabila Mahdi, Patrice Kiener
 - Christophe Dutang, John Nash 
 
+NNbenchmark 3.2.1 - 2023-09-
+==================================================
+- start parallelization for trainPredict_1pkg() (inspired from boot pkg)
+- add extra-argument lib.loc in trainPredict_1pkg() and trainPredict_1data()
 
 
 NNbenchmark 3.2.0 - 2021-06-05 - Submitted to CRAN

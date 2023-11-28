@@ -1,11 +1,10 @@
 Package: NNbenchmark
 Title: Datasets and Functions to Benchmark Neural Network Packages
 Description: Datasets and functions to benchmark (convergence, speed, ease of use) R packages dedicated to regression with neural networks (no classification in this version). The templates for the tested packages are available in the R, R Markdown and HTML formats at <https://github.com/pkR-pkR/NNbenchmarkTemplates> and <https://theairbend3r.github.io/NNbenchmarkWeb/index.html>. The submitted article to the R-Journal can be read at <https://www.inmodelia.com/gsoc2020.html>.
-Depends: R (>= 3.5.0), parallel
-Imports: R6, pkgload
+Depends: R (>= 3.5.0)
+Imports: R6, pkgload, parallel
 Suggests: brnn, validann
-Version: 3.2.0
-Date: 2021-06-05
+Version: 3.2.1
 Author: Patrice Kiener [aut, cre] (<https://orcid.org/0000-0002-0505-9920>),
   Christophe Dutang [aut] (<https://orcid.org/0000-0001-6732-1501>),
   Salsabila Mahdi [aut] (<https://orcid.org/0000-0002-2559-4154>),
